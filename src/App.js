@@ -1,26 +1,54 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {Component} from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import StoreManager from './components/storemanager.component';
+import Edit from './components/edit.component';
+import Admin from './components/admin.component';
+import Guest from "./components/guest.component";
+import User from "./components/user.component";
+
+class App extends Component{
+    render(){
+        return(
+            <Router>
+
+                <div className="container">
+
+                    <nav className="navbar navbar-expand-lg navbar-light bg-light">
+                        <Link to={'/'} className="navbar-brand"> Online Fashion Store </Link>
+                        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+
+                            <ul className="navbar-nav mr-auto">
+                                <li className="nav-item">
+                                    <Link to={'/guest'} className="nav-link">Guest</Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link to={'/user'} className="nav-link">User</Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link to={'/storemanager'} className="nav-link">Store Manager</Link>
+                                </li>
+                                <li className="nav-item">
+                                    <Link to={'/admin'} className="nav-link">Admin</Link>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav><br/>
+
+                    {/*<h2>Welcome to REACT CRUD by Haritha</h2><br/>*/}
+
+                    <Switch>
+                        <Route exact path = '/guest' component={Guest} />
+                        <Route exact path = '/user' component={User} />
+                        <Route exact path = '/storemanager' component = {StoreManager} />
+                        <Route exact path = '/admin' component={Admin} />
+                        <Route exact path = '/edit/:id' component={Edit} />
+                    </Switch>
+                </div>
+            </Router>
+        );
+    }
 }
 
 export default App;
