@@ -22,6 +22,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 app.use('/business', businessRoute);
+app.use('/product', require('./routes/product.route'));
 
 app.listen(PORT, function () {
     console.log('Server is running on port : ', PORT);
