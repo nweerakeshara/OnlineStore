@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 //To keep connectivity between frontend 'ReactJS' and backend 'NodeJS', we import axios
 import axios from 'axios';
 
-export default class Edit extends Component{
+export default class EditBusiness extends Component{
     constructor(props) {
         super(props);
         this.onChangePersonName = this.onChangePersonName.bind(this);
