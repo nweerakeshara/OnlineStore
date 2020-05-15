@@ -4,6 +4,7 @@ import { CartContext } from "./CartContext";
 export default function Product(props) {
   const [cart, setCart] = useContext(CartContext);
 
+  //Handle add to cart click
   const addToCart = () => {
     const product = {
       name: props.name,
