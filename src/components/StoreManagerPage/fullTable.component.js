@@ -42,6 +42,7 @@ export default class FullTable extends Component{
                         <th>Product Name</th>
                         <th>Product Price</th>
                         <th>Product Discount</th>
+                        <th>Product Category</th>
                         <th colSpan="2">Change Discount</th>
                     </tr>
                     </thead>

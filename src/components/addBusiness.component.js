@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 
-export default class StoreManager extends Component{
+export default class AddBusiness extends Component{
     constructor(props) {
         super(props);
         this.onChangePersonName = this.onChangePersonName.bind(this);

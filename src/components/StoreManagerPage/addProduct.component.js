@@ -1,6 +1,16 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 
+const Categories = [
+    { key: 1, value: "Mens wear" },
+    { key: 2, value: "Kids wear" },
+    { key: 3, value: "Ladies wear" },
+    { key: 4, value: "Trouser" },
+    { key: 5, value: "Skirt" },
+    { key: 6, value: "Blouse" },
+    { key: 7, value: "TShirt" }
+]
+
 export default class AddProduct extends Component{
     constructor(props) {
         super(props);
@@ -14,7 +24,8 @@ export default class AddProduct extends Component{
             product_id : '',
             product_name : '',
             product_price : '',
-            product_discount : ''
+            product_discount : '',
+            product_category : ''
         }
     }
 
@@ -48,19 +59,31 @@ export default class AddProduct extends Component{
             product_id : this.state.product_id,
             product_name : this.state.product_name,
             product_price : this.state.product_price,
-            product_discount : this.state.product_discount
+            product_discount : this.state.product_discount,
+            product_category : this.state.product_category
         };
 
-        axios.post('http://localhost:4000/product/add', obj).then(res => console.log(res.data));
+        axios.post('http://localhost:4000/product/add', obj)
+            .then(res => {
+                if(res.data.success){
+                    console.log(res.data)
+                    alert('Product added successfully')
+                }
+            });
 
         this.setState({
             product_id : '',
             product_name : '',
             product_price : '',
-            product_discount : ''
+            product_discount : '',
+            product_category : ''
         })
 
         this.props.history.push('/guest');
+    }
+
+    handleChangeCategory = (event) => {
+        this.setState({ product_category: event.currentTarget.value })
     }
 
     render() {
@@ -98,6 +121,15 @@ export default class AddProduct extends Component{
                                value={this.state.product_discount}
                                onChange={this.onChangeProductDiscount}
                         />
+                    </div>
+
+                    <div className="form-group">
+                        <label>Select Category :</label>
+                        <select onChange={this.handleChangeCategory}>
+                            {Categories.map(item => (
+                                <option key={item.key} value={item.value}>{item.value}</option>
+                            ))}
+                        </select>
                     </div>
 
                     <div className="form-group">

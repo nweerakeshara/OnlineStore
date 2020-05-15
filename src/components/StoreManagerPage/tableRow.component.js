@@ -18,6 +18,9 @@ class ProductTableRow extends Component {
                     {this.props.obj.product_discount}
                 </td>
                 <td>
+                    {this.props.obj.product_category}
+                </td>
+                <td>
                     {/*When clicks this, it goes to 'edit.component.js' file*/}
                     <Link to={"/edit/" +this.props.obj._id} className="btn btn-primary"> Change discount </Link>
                 </td>

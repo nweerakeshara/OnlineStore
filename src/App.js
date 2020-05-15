@@ -2,9 +2,9 @@ import React, {Component} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {BrowserRouter as Router, Switch, Route, Link} from 'react-router-dom';
 
-import StoreManager from './components/addBusiness.component';
-import Edit from './components/edit.component';
-import Admin from './components/viewBusiness.component';
+import AddBusiness from './components/addBusiness.component';
+import EditBusiness from './components/edit.component';
+import ViewFullTable from './components/viewBusiness.component';
 import Guest from "./components/GuestPage/guest.component";
 import User from "./components/UserPage/user.component";
 import AddProduct from "./components/StoreManagerPage/addProduct.component";

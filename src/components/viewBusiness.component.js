@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import TableRow from './TableRow';
 
-export default class Admin extends Component{
+export default class ViewFullTable extends Component{
 
     constructor(props){
         super(props);

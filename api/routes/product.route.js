@@ -8,10 +8,12 @@ productRoutes.route('/add').post(function(req, res){
     let product = new Product(req.body);
     product.save()
         .then(product => {
-            res.status(200).json({'product': 'product is added successfully'});
+            // res.status(200).json({'product': 'product is added successfully'});
+            res.status(200).json({success: true});
         })
         .catch(err => {
-            res.status(400).send("unable to save product to database");
+            // res.status(400).send("unable to save product to database");
+            res.status(400).json({success: false},err);
         });
 });
 

@@ -13,6 +13,10 @@ let Product = new Schema({
     },
     product_discount : {
         type : Number
+    },
+    product_category: {
+        type: String,
+        default: 'No category'
     }
 },{
     collection : 'product'
