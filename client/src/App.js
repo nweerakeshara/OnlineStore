@@ -13,6 +13,7 @@ import AddProduct from "./components/StoreManagerPage/addProduct.component";
 import FullTable from "./components/StoreManagerPage/fullTable.component";
 import Admin2 from "./components/AdminPage/admin2.component";
 import EditProduct from "./components/StoreManagerPage/editProduct.component";
+import AddStoreManager from "./components/AdminPage/addStoreManager.component";
 
 function App() {
   return (
@@ -22,7 +23,7 @@ function App() {
             <CartProvider>
             <div className="container">
                 <nav className="navbar navbar-expand-lg navbar-light bg-light">
-                    <Link to={'/'} className="navbar-brand">React Crud Example</Link>
+                    <Link to={'/'} className="navbar-brand">Online Fashion Store</Link>
                     <div className="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul className="navbar-nav mr-auto">
                             <li className="nav-item">
@@ -68,12 +69,12 @@ function App() {
                     <Route exact path="/addProduct" component={AddProduct} />
                     <Route exact path="/admin" component={Admin2} />
                     <Route exact path="/edit/:id" component={EditProduct} />
+                    <Route exact path="/addStoreManager" component={AddStoreManager} />
 
                 </Switch>
             </div>
             </CartProvider>
         </Router>
-
     </div>
   );
 }

@@ -15,6 +15,7 @@ app.use(cookieParser());
 
 app.use('/api/cus', require('./routes/cus'));
 app.use('/product', require('./routes/product.route'));
+app.use('/api/storemanager', require('./routes/storemanager.route'));
 
 
 app.get('/', (req,res) =>{
