@@ -46,6 +46,7 @@ productRoutes.route('/update/:id').post(function(req, res){
             product.product_name = req.body.product_name;
             product.product_price = req.body.product_price;
             product.product_discount = req.body.product_discount;
+            product.product_category = req.body.product_category;
 
             product.save().then(product => {
                 res.json("Update complete");
