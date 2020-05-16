@@ -7,7 +7,7 @@ export default class User extends Component {
     return (
       <div>
         <h3 align="center"> This is User page </h3>
-        <Cart />
+        <Cart buttonLabel="Items in Cart" />
         <ProductList />
       </div>
     );
