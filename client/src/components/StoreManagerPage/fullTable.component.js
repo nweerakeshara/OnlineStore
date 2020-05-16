@@ -15,7 +15,7 @@ export default class FullTable extends Component{
 
     componentDidMount() {
         //type of request is 'get'
-        axios.get('http://localhost:4000/product')
+        axios.get('http://localhost:5000/product')
             .then(response => {
                 this.setState({products : response.data});
             })

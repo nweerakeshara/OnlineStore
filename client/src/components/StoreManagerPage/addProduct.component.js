@@ -63,7 +63,7 @@ export default class AddProduct extends Component{
             product_category : this.state.product_category
         };
 
-        axios.post('http://localhost:4000/product/add', obj)
+        axios.post('http://localhost:5000/product/add', obj)
             .then(res => {
                 if(res.data.success){
                     console.log(res.data)
