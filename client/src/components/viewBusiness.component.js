@@ -12,7 +12,7 @@ export default class ViewFullTable extends Component{
 
     componentDidMount() {
         //type of request is 'get'
-        axios.get('http://localhost:4000/business')
+        axios.get('http://localhost:5000/business')
             .then(response => {
                 this.setState({business : response.data});
             })
