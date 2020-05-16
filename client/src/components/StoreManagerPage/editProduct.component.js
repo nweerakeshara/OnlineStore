@@ -20,7 +20,7 @@ export default class EditProduct extends Component{
     }
 
     componentDidMount() {
-        axios.get('http://localhost:4000/product/edit/' +this.props.match.params.id)
+        axios.get('http://localhost:5000/product/edit/' +this.props.match.params.id)
             .then(response => {
                 this.setState({
                     product_id : response.data.product_id,
@@ -67,7 +67,7 @@ export default class EditProduct extends Component{
             product_discount : this.state.product_discount
         };
 
-        axios.post('http://localhost:4000/product/update/' +this.props.match.params.id, obj)
+        axios.post('http://localhost:5000/product/update/' +this.props.match.params.id, obj)
             .then(res => console.log(res.data));
 
         this.props.history.push('/guest');
