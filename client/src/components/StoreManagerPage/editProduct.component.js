@@ -2,6 +2,16 @@ import React, {Component} from 'react';
 //To keep connectivity between frontend 'ReactJS' and backend 'NodeJS', we import axios
 import axios from 'axios';
 
+const Categories = [
+    { key: 1, value: "Mens wear" },
+    { key: 2, value: "Kids wear" },
+    { key: 3, value: "Ladies wear" },
+    { key: 4, value: "Trouser" },
+    { key: 5, value: "Skirt" },
+    { key: 6, value: "Blouse" },
+    { key: 7, value: "TShirt" }
+]
+
 export default class EditProduct extends Component{
     constructor(props) {
         super(props);
@@ -26,7 +36,8 @@ export default class EditProduct extends Component{
                     product_id : response.data.product_id,
                     product_name : response.data.product_name,
                     product_price : response.data.product_price,
-                    product_discount : response.data.product_discount
+                    product_discount : response.data.product_discount,
+                    product_category : response.data.product_category
                 });
             })
             .catch(function (error) {
@@ -64,13 +75,18 @@ export default class EditProduct extends Component{
             product_id : this.state.product_id,
             product_name : this.state.product_name,
             product_price : this.state.product_price,
-            product_discount : this.state.product_discount
+            product_discount : this.state.product_discount,
+            product_category : this.state.product_category
         };
 
         axios.post('http://localhost:5000/product/update/' +this.props.match.params.id, obj)
             .then(res => console.log(res.data));
 
         this.props.history.push('/guest');
+    }
+
+    handleChangeCategory = (event) => {
+        this.setState({ product_category: event.currentTarget.value })
     }
 
     render() {
@@ -108,6 +124,15 @@ export default class EditProduct extends Component{
                                value={this.state.product_discount}
                                onChange={this.onChangeProductDiscount}
                         />
+                    </div>
+
+                    <div className="form-group">
+                        <label>Select Category :</label>
+                        <select onChange={this.handleChangeCategory}>
+                            {Categories.map(item => (
+                                <option key={item.key} value={item.value}>{item.value}</option>
+                            ))}
+                        </select>
                     </div>
 
                     <div className="form-group">
