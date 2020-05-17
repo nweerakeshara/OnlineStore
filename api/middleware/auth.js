@@ -1,24 +1,28 @@
-const {User} = require('../model/cus');
+const jwt = require('jsonwebtoken');
 
-let auth = (req, res, next) =>{
-    
-    let token = req.cookies.sc_emp_auth;
 
-    User.findByToken(token, (error,user) => {
-        if (error){
-            throw error;
-        }
-        if(!user){
-            return res.json({
-                isAuth: false,
-                error:true
-            });
-        }
+function auth(req, res, next) {
 
-        req.token = token;
-        req.user = user;
+    const token = req.header('cus_auth');
+
+    if(!token){
+        res.status(401).json({ msg : "No Token, Access Denied"});
+    }
+
+    try {
+
+        //verify token
+        const decoded = jwt.verify(token, "secret");
+
+        //add customer
+        req.user = decoded;
         next();
-    });
+
+
+    } catch (e) {
+        res.status(400).json({ msg : "Token Invalid"})
+    }
 
 }
-module.exports ={auth};
+
+module.exports = auth;

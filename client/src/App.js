@@ -15,92 +15,48 @@ import Admin2 from "./components/AdminPage/admin2.component";
 import EditProduct from "./components/StoreManagerPage/editProduct.component";
 import AddStoreManager from "./components/AdminPage/addStoreManager.component";
 import Carousel from "./components/UI/Carousel";
+import NavbarComponent from "./customer_components/navbar.component";
+import ItemListComponent from "./customer_components/itemList.component";
+import {Provider} from 'react-redux';
+import store from './store';
+
 
 function App() {
   return (
+
+
     <div>
-      <Router>
-        <CartProvider>
-          <div className="container">
-            <nav className="navbar navbar-expand-lg navbar-light bg-light">
-              <Link to={"/"} className="navbar-brand">
-                Online Fashion Store
-              </Link>
-              <div
-                className="collapse navbar-collapse"
-                id="navbarSupportedContent"
-              >
-                <ul className="navbar-nav mr-auto">
-                  <li className="nav-item">
-                    <Link to={"/"} className="nav-link">
-                      Home
-                    </Link>
-                  </li>
 
-                  <li className="nav-item">
-                    <Link to={"/guest"} className="nav-link">
-                      Guest
-                    </Link>
-                  </li>
-                  <li className="nav-item">
-                    <Link to={"/user"} className="nav-link">
-                      User
-                    </Link>
-                  </li>
-                  <li className="nav-item">
-                    <Link to={"/storemanager"} className="nav-link">
-                      Store Manager
-                    </Link>
-                  </li>
-                  <li className="nav-item">
-                    <Link to={"/admin"} className="nav-link">
-                      Admin
-                    </Link>
-                  </li>
 
-                  <li className="nav-item">
-                    <Link to={"/registerCus"} className="nav-link">
-                      Customer Sign Up
-                    </Link>
-                  </li>
-                  <li className="nav-item">
-                    <Link to={"/loginCus"} className="nav-link">
-                      Customer Sign In
-                    </Link>
-                  </li>
-                  <li className="nav-item">
-                    <Link to={"/editCus"} className="nav-link">
-                      {" "}
-                      Customer Edit
-                    </Link>
-                  </li>
-                </ul>
-              </div>
-            </nav>
-            <br />
-            <h2>Welcome To HINT - Fashion For You</h2>
+        <Router>
+            <Provider store={store}>
+            <CartProvider>
+                <NavbarComponent/>
+                <div className="container">
+                    <ItemListComponent/>
+                    <br/>
 
-            <Switch>
-              <Route exact path="/registerCus" component={RegisterCustomer} />
-              <Route exact path="/loginCus" component={LoginCustomer} />
-              <Route exact path="/editCus" component={EditCustomer} />
+                    <Switch>
+                        <Route exact path ='/registerCus' component={RegisterCustomer}/>
+                        <Route exact path ='/loginCus' component={LoginCustomer}/>
+                        <Route exact path ='/editCus' component={EditCustomer}/>
 
-              <Route exact path="/guest" component={Guest} />
-              <Route exact path="/user" component={User} />
-              <Route exact path="/storemanager" component={FullTable} />
-              <Route exact path="/addProduct" component={AddProduct} />
-              <Route exact path="/admin" component={Admin2} />
-              <Route exact path="/edit/:id" component={EditProduct} />
-              <Route
-                exact
-                path="/addStoreManager"
-                component={AddStoreManager}
-              />
-            </Switch>
-          </div>
-        </CartProvider>
-      </Router>
+                        <Route exact path="/guest" component={Guest} />
+                        <Route exact path="/user" component={User} />
+                        <Route exact path="/storemanager" component={FullTable} />
+                        <Route exact path="/addProduct" component={AddProduct} />
+                        <Route exact path="/admin" component={Admin2} />
+                        <Route exact path="/edit/:id" component={EditProduct} />
+
+                    </Switch>
+                </div>
+            </CartProvider>
+            </Provider>
+        </Router>
+
+
     </div>
+
   );
 }
 

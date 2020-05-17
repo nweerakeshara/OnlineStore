@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
-const saltRounds = 10;
-const jwt = require('jsonwebtoken');
+
+const moment = require('moment');
 
 
 const userSchema = mongoose.Schema({
@@ -23,9 +22,9 @@ const userSchema = mongoose.Schema({
         minlength:5
     },
 
-    role : {
-        type:Number,
-        default:0
+    date : {
+        type:Date,
+        default:Date.now()
     },
 
     token : {
@@ -35,68 +34,6 @@ const userSchema = mongoose.Schema({
 
 })
 
-
-
-userSchema.pre('save', function(next){
-    var user = this;
-    bcrypt.hash(user.cusPw, saltRounds, function(error, hash) {
-        if(error){
-            return next(error);
-        }
-        user.cusPw = hash;
-        next();
-    });
-});
-
-
-
-userSchema.methods.comparePassword = function (plainPassword, call_back) {
-
-    bcrypt.compare(plainPassword, this.cusPw, function(error, result) {
-
-        if(error){
-            return call_back(error);
-
-        }
-        call_back(null,result);
-
-    });
-}
-
-
-
-
-userSchema.methods.generateToken = function (plainPassword, call_back){
-    var user = this;
-    var token = jwt.sign(user._id.toHexString(),'secret');
-    user.token = token;
-    user.cusPw = plainPassword;
-    user.save(function (error, user) {
-        if(error){
-            return call_back(error);
-
-        }
-        call_back(null,user);
-
-    })
-
-}
-
-
-
-
-userSchema.statics.findByToken = function (token, call_back) {
-    var user = this;
-    jwt.verify(token, 'secret', function (error,decode) {
-        user.findOne({"_id": decode, "token" : token}, function (error, user) {
-            if(error){
-                return call_back(error);
-
-            }
-            call_back(null,user);
-        });
-    });
-}
 
 
 
