@@ -19,11 +19,7 @@ export default function Cart({ buttonLabel }) {
 
   return (
     <div>
-      <Button
-        style={{ float: "right", margin: "20px" }}
-        color="danger"
-        onClick={toggle}
-      >
+      <Button color="danger" onClick={toggle}>
         {`${buttonLabel} ${cart.length}`}
       </Button>
       <Modal size="lg" isOpen={modal} toggle={toggle}>
