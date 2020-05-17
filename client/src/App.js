@@ -33,10 +33,11 @@ function App() {
             <CartProvider>
                 <NavbarComponent/>
                 <div className="container">
-                    <ItemListComponent/>
+
                     <br/>
 
                     <Switch>
+                        <Route exact path ='/' component={ItemListComponent}/>
                         <Route exact path ='/registerCus' component={RegisterCustomer}/>
                         <Route exact path ='/loginCus' component={LoginCustomer}/>
                         <Route exact path ='/editCus' component={EditCustomer}/>

@@ -3,7 +3,7 @@ import axios from 'axios';
 
 export const getItems = () => dispatch => {
     dispatch(setItemsLoading());
-    axios.get('/api/items/get').then(res => dispatch({
+    axios.get('http://localhost:5000/api/items/get/all').then(res => dispatch({
         type: GET_ITEMS,
         payload : res.data
     }));

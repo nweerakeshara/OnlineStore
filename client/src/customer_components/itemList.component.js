@@ -24,10 +24,10 @@ class ItemListComponent extends Component {
 
                 <ListGroup>
                     <TransitionGroup className="item-list">
-                        {items.map(({id, name}) => (
-                            <CSSTransition key={id}  className="alert-primary">
+                        {items.map(({_id, product_id, product_name, product_price, product_discount, product_category}) => (
+                            <CSSTransition key={_id}  className="alert-primary">
                                 <ListGroupItem>
-                                    {name} {id}
+                                    {product_id} {product_name} {product_price} {product_discount} {product_category}
                                 </ListGroupItem>
                             </CSSTransition>
                         ))}
