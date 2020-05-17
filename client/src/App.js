@@ -78,8 +78,8 @@ function App() {
               </div>
             </nav>
             <br />
-            {/* <h2>Welcome To HINT - Fashion For You</h2> */}
-            <Carousel></Carousel>
+            <h2>Welcome To HINT - Fashion For You</h2>
+
             <Switch>
               <Route exact path="/registerCus" component={RegisterCustomer} />
               <Route exact path="/loginCus" component={LoginCustomer} />
