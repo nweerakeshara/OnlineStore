@@ -12,6 +12,7 @@ export default function Product(props) {
       id: props.id,
     };
     setCart((currentCart) => [...currentCart, product]);
+    alert(`${product.name} added to cart!`);
   };
 
   return (
