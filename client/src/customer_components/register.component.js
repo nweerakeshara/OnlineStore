@@ -26,8 +26,13 @@ class  RegisterCustomer  extends  Component{
     registerClose = () => {
         this.props.clearErrors();
         this.setState({
-
+            cusUn: "",
+            cusEmail: "",
+            cusPw: "",
+            msg :null
         });
+
+        this.props.history.push('/');
     }
 
     componentDidUpdate =(prevProps) => {
@@ -74,6 +79,13 @@ class  RegisterCustomer  extends  Component{
         }
 
         this.props.register(newUser);
+
+        this.setState({
+            cusUn: "",
+            cusEmail: "",
+            cusPw: "",
+            msg :null
+        });
     }
 
     render() {

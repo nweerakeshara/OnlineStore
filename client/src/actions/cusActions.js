@@ -2,6 +2,8 @@ import {USER_LOADING,USER_LOADED,REGISTER_FAIL,REGISTER_SUCCESS,LOGOUT_SUCCESS,L
 import {returnErrors} from "./errorActions";
 import axios from 'axios';
 
+
+/////////////////////////////////////////////////////////////////////////////////
 export const loadUser = () => (dispatch, getState) => {
     dispatch ({type: USER_LOADING});
 
@@ -16,7 +18,7 @@ export const loadUser = () => (dispatch, getState) => {
     });
 }
 
-
+/////////////////////////////////////////////////////////////////////////////////////////
 export const register = ({cusUn, cusEmail, cusPw}) => dispatch => {
     const config = {
         headers: {
@@ -38,7 +40,17 @@ export const register = ({cusUn, cusEmail, cusPw}) => dispatch => {
     });
 
 }
+/////////////////////////////////////////////////////////////////////
 
+export const logout = () => {
+    return{
+        type : LOGOUT_SUCCESS
+    };
+};
+
+
+
+//////////////////////////////////////////////////////////////////////
 export const tokenConfig = (getState) => {
     const token = getState().cus.token;
     const config = {
