@@ -3,6 +3,8 @@ import axios from "axios";
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import {register} from "../actions/cusActions";
+import {clearErrors} from "../actions/errorActions";
+import {Alert} from 'reactstrap';
 
 class  RegisterCustomer  extends  Component{
 
@@ -15,7 +17,32 @@ class  RegisterCustomer  extends  Component{
 
     static propTypes = {
         isAuthenticated: PropTypes.bool,
-        error : PropTypes.object.isRequired
+        error : PropTypes.object.isRequired,
+        register: PropTypes.func.isRequired,
+        clearErrors : PropTypes.func.isRequired
+
+    }
+
+    registerClose = () => {
+        this.props.clearErrors();
+        this.setState({
+
+        });
+    }
+
+    componentDidUpdate =(prevProps) => {
+        const {error, isAuthenticated} = this.props;
+        if(error !== prevProps.error){
+            if(error.id === 'REGISTER_FAIL'){
+                this.setState({msg : error.msg.msg});
+            }else{
+                this.setState({msg: null });
+            }
+        }
+
+        if(isAuthenticated){
+            this.registerClose();
+        }
     }
 
     onChangeCusUn = (e) => {
@@ -38,18 +65,15 @@ class  RegisterCustomer  extends  Component{
 
     onSubmit = (e) => {
         e.preventDefault();
-        const obj = {
-            cusUn : this.state.cusUn,
-            cusEmail : this.state.cusEmail,
-            cusPw: this.state.cusPw
-        };
-        console.log(axios.post('http://localhost:5000/api/cus/register', obj).then(res => console.log(res.data)));
-        //res.data.loginSuccess,
-        this.setState({
-            cusUn : "",
-            cusEmail : "",
-            cusPw: ""
-        })
+
+        const {cusUn, cusEmail, cusPw } = this.state;
+        const newUser = {
+            cusUn,
+            cusEmail,
+            cusPw
+        }
+
+        this.props.register(newUser);
     }
 
     render() {
@@ -57,7 +81,7 @@ class  RegisterCustomer  extends  Component{
             <div style={{marginTop: 10}}>
                 <h3>Customer Sign Up</h3>
                 <form onSubmit={this.onSubmit}>
-
+                    {this.state.msg ? <Alert color ='danger'>{this.state.msg}</Alert> : null}
                     <div className="form-group">
                         <label>Username :</label>
                         <input type="text" className="form-control" value={this.state.cusUn} onChange={this.onChangeCusUn}/>
@@ -92,4 +116,4 @@ const mapStateToProps = state => ({
    error : state.error
 });
 
-export  default connect(mapStateToProps,{register})
+export  default connect(mapStateToProps,{register, clearErrors})(RegisterCustomer);
