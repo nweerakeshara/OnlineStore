@@ -73,7 +73,7 @@ router.post('/register', (req,res) =>{
 
 router.post('/login', (req,res) =>{
 
-    //To register cus
+    //To login cus
 
     const {cusUn , cusPw} = req.body;
     if(!cusUn || !cusPw){
@@ -119,7 +119,7 @@ router.post('/login', (req,res) =>{
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 
-router.get('/logout', auth, (req, res) => {
+router.get('/get/cus', auth, (req, res) => {
     User.findById(req.user._id).select('-cusPw').then(user => res.json(user));
 });
 

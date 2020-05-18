@@ -1,4 +1,4 @@
-import React from "react";
+import React, {Component} from "react";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
@@ -19,46 +19,56 @@ import NavbarComponent from "./customer_components/navbar.component";
 import ItemListComponent from "./customer_components/itemList.component";
 import {Provider} from 'react-redux';
 import store from './store';
+import {loadUser} from "./actions/cusActions";
 
 
-function App() {
-  return (
+
+class App extends Component {
+
+    componentDidMount() {
+        store.dispatch(loadUser());
+    }
 
 
-    <div>
+    render() {
+     return (
 
 
-        <Router>
-            <Provider store={store}>
-            <CartProvider>
-                <NavbarComponent/>
-                <div className="container">
-
-                    <br/>
-
-                    <Switch>
-                        <Route exact path ='/' component={ItemListComponent}/>
-                        <Route exact path ='/registerCus' component={RegisterCustomer}/>
-                        <Route exact path ='/loginCus' component={LoginCustomer}/>
-                        <Route exact path ='/editCus' component={EditCustomer}/>
-
-                        <Route exact path="/guest" component={Guest} />
-                        <Route exact path="/user" component={User} />
-                        <Route exact path="/storemanager" component={FullTable} />
-                        <Route exact path="/addProduct" component={AddProduct} />
-                        <Route exact path="/admin" component={Admin2} />
-                        <Route exact path="/edit/:id" component={EditProduct} />
-
-                    </Switch>
-                </div>
-            </CartProvider>
-            </Provider>
-        </Router>
+         <div>
 
 
-    </div>
+             <Router>
+                 <Provider store={store}>
+                     <CartProvider>
+                         <NavbarComponent/>
+                         <div className="container">
 
-  );
+                             <br/>
+
+                             <Switch>
+                                 <Route exact path='/' component={ItemListComponent}/>
+                                 <Route exact path='/registerCus' component={RegisterCustomer}/>
+                                 <Route exact path='/loginCus' component={LoginCustomer}/>
+                                 <Route exact path='/editCus' component={EditCustomer}/>
+
+                                 <Route exact path="/guest" component={Guest}/>
+                                 <Route exact path="/user" component={User}/>
+                                 <Route exact path="/storemanager" component={FullTable}/>
+                                 <Route exact path="/addProduct" component={AddProduct}/>
+                                 <Route exact path="/admin" component={Admin2}/>
+                                 <Route exact path="/edit/:id" component={EditProduct}/>
+
+                             </Switch>
+                         </div>
+                     </CartProvider>
+                 </Provider>
+             </Router>
+
+
+         </div>
+
+     );
+ }
 }
 
 export default App;

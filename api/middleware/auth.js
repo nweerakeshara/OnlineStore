@@ -6,7 +6,7 @@ function auth(req, res, next) {
     const token = req.header('cus_auth');
 
     if(!token){
-        res.status(401).json({ msg : "No Token, Access Denied"});
+        return res.status(401).json({ msg : "No Token, Access Denied"});
     }
 
     try {
