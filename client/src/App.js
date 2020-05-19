@@ -2,7 +2,6 @@ import React, {Component} from "react";
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
-import AboutComponent from "./customer_components/about.component";
 import RegisterCustomer from "./customer_components/register.component";
 import EditCustomer from "./customer_components/edit.component";
 import LoginCustomer from "./customer_components/login.component";

@@ -17,6 +17,9 @@ class ItemListComponent extends Component {
         isAuthenticated : PropTypes.bool
     }
 
+
+
+
     render() {
 
 
@@ -49,8 +52,8 @@ class ItemListComponent extends Component {
 
 
 const mapStateToProps = (state) => ({
-   item: state.item,
-   isAuthenticated : state.cus.isAuthenticated
+    item: state.item,
+    isAuthenticated : state.cus.isAuthenticated
 })
 
 export default connect(mapStateToProps, {getItems}) (ItemListComponent);

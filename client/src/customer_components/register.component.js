@@ -12,6 +12,7 @@ class  RegisterCustomer  extends  Component{
         cusUn: "",
         cusEmail: "",
         cusPw: "",
+        cusConfirmPw : "",
         msg :null
     }
 
@@ -29,6 +30,7 @@ class  RegisterCustomer  extends  Component{
             cusUn: "",
             cusEmail: "",
             cusPw: "",
+            cusConfirmPw : "",
             msg :null
         });
 
@@ -68,6 +70,21 @@ class  RegisterCustomer  extends  Component{
         });
     }
 
+    onChangeCusConfirmPw = (e) => {
+        if(e.target.value !== this.state.cusPw) {
+            this.setState({
+                cusConfirmPw: e.target.value,
+                msg: "Confirm Password Does Not Match"
+            });
+        }
+        if(e.target.value === this.state.cusPw) {
+            this.setState({
+                cusConfirmPw: e.target.value,
+                msg: ""
+            });
+        }
+    }
+
     onSubmit = (e) => {
         e.preventDefault();
 
@@ -84,6 +101,7 @@ class  RegisterCustomer  extends  Component{
             cusUn: "",
             cusEmail: "",
             cusPw: "",
+            cusConfirmPw : "",
             msg :null
         });
     }
@@ -96,19 +114,25 @@ class  RegisterCustomer  extends  Component{
                     {this.state.msg ? <Alert color ='danger'>{this.state.msg}</Alert> : null}
                     <div className="form-group">
                         <label>Username :</label>
-                        <input type="text" className="form-control" value={this.state.cusUn} onChange={this.onChangeCusUn}/>
+                        <input type="text" className="form-control" value={this.state.cusUn} onChange={this.onChangeCusUn} maxLength="10"/>
 
                     </div>
 
                     <div className="form-group">
                         <label>Email Address :</label>
-                        <input type="text" className="form-control" value={this.state.cusEmail} onChange={this.onChangeCusEmail}/>
+                        <input type="email" className="form-control" value={this.state.cusEmail} onChange={this.onChangeCusEmail}/>
 
                     </div>
 
                     <div className="form-group">
                         <label>Password :</label>
-                        <input type="password" className="form-control" value={this.state.cusPw} onChange={this.onChangeCusPw}/>
+                        <input type="password" className="form-control" value={this.state.cusPw} onChange={this.onChangeCusPw} minLength="5"/>
+
+                    </div>
+
+                    <div className="form-group">
+                        <label>Confirm Password :</label>
+                        <input type="password" className="form-control" value={this.state.cusConfirmPw} onChange={this.onChangeCusConfirmPw} minLength="5"/>
 
                     </div>
 

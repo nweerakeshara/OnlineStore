@@ -68,7 +68,7 @@ class NavbarComponent extends Component {
             <div>
                 <Navbar color="dark" dark expand="sm" className="mb-5">
                     <Container>
-                        <NavbarBrand href="/">HINT Fashion</NavbarBrand>
+                        <NavbarBrand >HINT Fashion</NavbarBrand>
                         <NavbarToggler onClick={this.toggle}/>
                         <Collapse isExtend={this.state.isExtend} navbar>
 
