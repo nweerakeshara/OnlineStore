@@ -57,6 +57,7 @@ class App extends Component {
                                  <Route exact path="/addProduct" component={AddProduct}/>
                                  <Route exact path="/admin" component={Admin2}/>
                                  <Route exact path="/edit/:id" component={EditProduct}/>
+                                 <Route exact path="/addStoreManager" component={AddStoreManager}/>
 
                              </Switch>
                          </div>
