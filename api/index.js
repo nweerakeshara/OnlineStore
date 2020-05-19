@@ -18,6 +18,9 @@ app.use('/api/items', require('./routes/shoppingItems'));
 app.use('/api/item', require('./routes/shopItems'));
 app.use('/product', require('./routes/product.route'));
 app.use('/api/storemanager', require('./routes/storemanager.route'));
+app.use('/api/product', require('./routes/product.route'));
+
+app.use('/api/wishlist',require('./routes/wishlist.route'));
 
 
 app.get('/', (req,res) =>{
