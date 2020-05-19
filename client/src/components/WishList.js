@@ -14,15 +14,12 @@ export default function WishList({ name, price, id }) {
     axios
       .post("http://localhost:5000/api/wishlist/add", product)
       .then((res) => {
-       
         alert("successfully added");
         console.log(res.data);
-       
-      }).catch( () => {
-        console.log('eer');
-        
       })
-        
+      .catch((res) => {
+        alert("Item is already in the wishlist");
+      });
   };
 
   return (
