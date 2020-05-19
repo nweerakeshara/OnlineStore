@@ -11,6 +11,12 @@ class ItemListComponent extends Component {
         this.props.getItems();
     }
 
+    static propTypes = {
+        getItems : PropTypes.func.isRequired,
+        item : PropTypes.object.isRequired,
+        isAuthenticated : PropTypes.bool
+    }
+
     render() {
 
 
@@ -28,6 +34,7 @@ class ItemListComponent extends Component {
                             <CSSTransition key={_id}  className="alert-primary">
                                 <ListGroupItem>
                                     {product_id} {product_name} {product_price} {product_discount} {product_category}
+                                    {this.props.isAuthenticated ? <button className="alert-danger">Add to Cart</button> : <p className="alert-danger">Login to Continue</p>}
                                 </ListGroupItem>
                             </CSSTransition>
                         ))}
@@ -40,12 +47,10 @@ class ItemListComponent extends Component {
 }
 
 
-ItemListComponent.propTypes = {
-    getItems : PropTypes.func.isRequired,
-    item : PropTypes.object.isRequired
-}
+
 const mapStateToProps = (state) => ({
-   item: state.item
+   item: state.item,
+   isAuthenticated : state.cus.isAuthenticated
 })
 
 export default connect(mapStateToProps, {getItems}) (ItemListComponent);

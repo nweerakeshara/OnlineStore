@@ -1,23 +1,58 @@
-import React, {Component} from 'react';
+import React, {Component} from "react";
 import axios from "axios";
+import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
+import {login} from "../actions/cusActions";
+import {clearErrors} from "../actions/errorActions";
+import {Alert} from 'reactstrap';
 
+class  LoginCustomer  extends  Component{
 
-
-
-class LoginCustomer extends Component {
     state={
         cusUn: "",
         cusPw: "",
+        msg :null
+    }
+
+    static propTypes = {
+        isAuthenticated: PropTypes.bool,
+        error : PropTypes.object.isRequired,
+        login: PropTypes.func.isRequired,
+        clearErrors : PropTypes.func.isRequired
 
     }
 
+    loginClose = () => {
+        this.props.clearErrors();
+        this.setState({
+            cusUn: "",
+            cusPw: "",
+            msg :null
+        });
+
+        this.props.history.push('/');
+    }
+
+    componentDidUpdate =(prevProps) => {
+        const {error, isAuthenticated} = this.props;
+        if(error !== prevProps.error){
+            if(error.id === 'LOGIN_FAIL'){
+                this.setState({msg : error.msg.msg});
+            }else{
+                this.setState({msg: null });
+            }
+        }
+
+        if(isAuthenticated){
+            this.loginClose();
+        }
+    }
 
     onChangeCusUn = (e) => {
         this.setState({
             cusUn: e.target.value
         });
     }
-
 
 
     onChangeCusPw = (e) => {
@@ -28,21 +63,20 @@ class LoginCustomer extends Component {
 
     onSubmit = (e) => {
         e.preventDefault();
-        const obj = {
-            cusUn : this.state.cusUn,
 
-            cusPw: this.state.cusPw
-        };
-        console.log(axios.post('http://localhost:5000/api/cus/login', obj).then(res => {
+        const {cusUn, cusPw } = this.state;
+        const existUser = {
+            cusUn,
+            cusPw
+        }
 
+        this.props.login(existUser);
 
-
-        }));
         this.setState({
-            cusUn : "",
-
-            cusPw: ""
-        })
+            cusUn: "",
+            cusPw: "",
+            msg :null
+        });
     }
 
     render() {
@@ -50,7 +84,7 @@ class LoginCustomer extends Component {
             <div style={{marginTop: 10}}>
                 <h3>Customer Sign In</h3>
                 <form onSubmit={this.onSubmit}>
-
+                    {this.state.msg ? <Alert color ='danger'>{this.state.msg}</Alert> : null}
                     <div className="form-group">
                         <label>Username :</label>
                         <input type="text" className="form-control" value={this.state.cusUn} onChange={this.onChangeCusUn}/>
@@ -58,13 +92,11 @@ class LoginCustomer extends Component {
                     </div>
 
 
-
                     <div className="form-group">
                         <label>Password :</label>
-                        <input type="text" className="form-control" value={this.state.cusPw} onChange={this.onChangeCusPw}/>
+                        <input type="password" className="form-control" value={this.state.cusPw} onChange={this.onChangeCusPw}/>
 
                     </div>
-
 
                     <div className="form-group">
 
@@ -77,4 +109,9 @@ class LoginCustomer extends Component {
     }
 }
 
-export default LoginCustomer;
+const mapStateToProps = state => ({
+    isAuthenticated: state.cus.isAuthenticated,
+    error : state.error
+});
+
+export  default connect(mapStateToProps,{login, clearErrors})(LoginCustomer);

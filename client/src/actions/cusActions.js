@@ -3,6 +3,33 @@ import {returnErrors} from "./errorActions";
 import axios from 'axios';
 
 
+
+
+/////////////////////////////////////////////////////////////////////////////
+
+export const login = ({cusUn , cusPw}) => dispatch => {
+    const config = {
+        headers: {
+            'Content-Type' : 'application/json'
+        }
+    }
+    const body = JSON.stringify({cusUn, cusPw});
+
+
+
+    axios.post('http://localhost:5000/api/cus/login', body, config).then(res => dispatch({
+        type:LOGIN_SUCCESS,
+        payload: res.data
+    })).catch(error => {
+        dispatch(returnErrors(error.response.data, error.response.status, 'LOGIN_FAIL'));
+        dispatch({
+            type: LOGIN_FAIL
+        }) ;
+    });
+
+}
+
+
 /////////////////////////////////////////////////////////////////////////////////
 export const loadUser = () => (dispatch, getState) => {
     dispatch ({type: USER_LOADING});
