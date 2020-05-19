@@ -32,11 +32,11 @@ class ItemListComponent extends Component {
     }
 
     loadPage =() => {
-        // get page of items from api
+        // get page details and items from api
         const params = new URLSearchParams(window.location.search);
         const page = parseInt(params.get('page')) || 1;
         if (page !== this.state.pager.currentPage) {
-            fetch(`http://localhost:5000/api/item/get/all/paginate?page=${page}`, {method: 'GET'})
+            fetch(`http://localhost:5000/api/items/get/all/paginate?page=${page}`, {method: 'GET'})
                 .then(response => response.json())
                 .then(({pager, pageOfItems}) => {
                     this.setState({pager, pageOfItems});

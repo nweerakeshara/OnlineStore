@@ -15,10 +15,8 @@ app.use(cookieParser());
 
 app.use('/api/cus', require('./routes/cus'));
 app.use('/api/items', require('./routes/shoppingItems'));
-app.use('/api/item', require('./routes/shopItems'));
 app.use('/api/storemanager', require('./routes/storemanager.route'));
 app.use('/api/product', require('./routes/product.route'));
-
 app.use('/api/wishlist',require('./routes/wishlist.route'));
 
 
