@@ -23,6 +23,10 @@ export default function WishListView({ buttonLabel }) {
 
   const toggle = () => setModal(!modal);
 
+ const deleteItem = () => {
+
+  }
+
   return (
     <div>
       <button
@@ -45,6 +49,7 @@ export default function WishListView({ buttonLabel }) {
                   <th>#</th>
                   <th>Item</th>
                   <th>Price</th>
+                  <th>Action</th>
                 </tr>
               </thead>
               {wishlist.map((item) => (
@@ -53,6 +58,7 @@ export default function WishListView({ buttonLabel }) {
                     <th scope="row">{item.product_id}</th>
                     <td>{item.product_name}</td>
                     <td>{item.product_price}</td>
+                    <td><button onClick ={deleteItem} type="button" class="btn btn-danger">Delete</button></td>
                   </tr>
                 </tbody>
               ))}
