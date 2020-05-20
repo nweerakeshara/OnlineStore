@@ -7,8 +7,12 @@ let WishList = require('../model/wishlist');
 wishListRoute.route('/add').post(function(req, res){
     let wishList = new WishList(req.body);
     wishList.save()
-        .then(() => res.json({success:true}))
-        .catch(err => res.json({success:false}));
+        .then(data => {
+            res.json({success:true})
+        })
+        .catch(err => {
+            res.json({success : false});
+        });
         
 })
 
@@ -29,6 +33,13 @@ wishListRoute.route('/get/:id').get(function(req,res){
             }).then(wishlist => {
                 res.json(wishlist);
             })
+});
+
+wishListRoute.route('/delete/:id').delete(function(req,res){
+   WishList.remove({product_id:req.params.id},function(err,product){
+       if(err)res.json(err);
+       else res.json('Successfully Removed');
+   })
 });
 
 // //edit

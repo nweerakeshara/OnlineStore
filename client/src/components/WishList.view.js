@@ -1,5 +1,10 @@
 import React, { useContext, useState, useEffect } from "react";
 import axios from "axios";
+import "react-notifications/lib/notifications.css";
+import {
+  NotificationContainer,
+  NotificationManager,
+} from "react-notifications";
 
 import {
   Button,
@@ -23,9 +28,24 @@ export default function WishListView({ buttonLabel }) {
 
   const toggle = () => setModal(!modal);
 
+<<<<<<< HEAD
   const deleteItem = () => {
       
   }
+=======
+  const deleteItem = (e) => {
+    //  wishlist.filter(item => item.person_id !== e.target.value).map(filteredItems => (
+    //     setWishList(filteredItems)
+    //  ));
+    axios
+      .delete(`http://localhost:5000/api/wishlist/delete/${e.target.value}`)
+      .then((res) => {
+        NotificationManager.info("Item Successfully deleted", "",2000);
+        console.log(res.data);
+      })
+      .catch((err) => console.log("Error"));
+  };
+>>>>>>> 9d91aa1a4d3f7b6538acbb4ede10f01fedc58e5c
 
   return (
     <div>
@@ -34,7 +54,7 @@ export default function WishListView({ buttonLabel }) {
         onClick={toggle}
         class="btn btn-outline-secondary"
       >{`${buttonLabel}`}</button>
-
+      <NotificationContainer />
       <Modal size="lg" isOpen={modal} toggle={toggle}>
         <ModalHeader toggle={toggle}>Your Wish List</ModalHeader>
         {wishlist.length === 0 ? (
@@ -53,12 +73,25 @@ export default function WishListView({ buttonLabel }) {
                 </tr>
               </thead>
               {wishlist.map((item) => (
-                <tbody>
+                <tbody key={item.product_id}>
                   <tr>
                     <th scope="row">{item.product_id}</th>
                     <td>{item.product_name}</td>
                     <td>{item.product_price}</td>
+<<<<<<< HEAD
                     <td><button onClick={deleteItem} type="button" class="btn btn-danger">Delete</button></td>
+=======
+                    <td>
+                      <button
+                        value={item.product_id}
+                        onClick={deleteItem}
+                        type="button"
+                        class="btn btn-danger"
+                      >
+                        Delete
+                      </button>
+                    </td>
+>>>>>>> 9d91aa1a4d3f7b6538acbb4ede10f01fedc58e5c
                   </tr>
                 </tbody>
               ))}
