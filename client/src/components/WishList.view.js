@@ -28,11 +28,6 @@ export default function WishListView({ buttonLabel }) {
 
   const toggle = () => setModal(!modal);
 
-<<<<<<< HEAD
-  const deleteItem = () => {
-      
-  }
-=======
   const deleteItem = (e) => {
     //  wishlist.filter(item => item.person_id !== e.target.value).map(filteredItems => (
     //     setWishList(filteredItems)
@@ -40,12 +35,11 @@ export default function WishListView({ buttonLabel }) {
     axios
       .delete(`http://localhost:5000/api/wishlist/delete/${e.target.value}`)
       .then((res) => {
-        NotificationManager.info("Item Successfully deleted", "",2000);
+        NotificationManager.info("Item Successfully deleted", "", 2000);
         console.log(res.data);
       })
       .catch((err) => console.log("Error"));
   };
->>>>>>> 9d91aa1a4d3f7b6538acbb4ede10f01fedc58e5c
 
   return (
     <div>
@@ -78,9 +72,7 @@ export default function WishListView({ buttonLabel }) {
                     <th scope="row">{item.product_id}</th>
                     <td>{item.product_name}</td>
                     <td>{item.product_price}</td>
-<<<<<<< HEAD
-                    <td><button onClick={deleteItem} type="button" class="btn btn-danger">Delete</button></td>
-=======
+
                     <td>
                       <button
                         value={item.product_id}
@@ -91,7 +83,6 @@ export default function WishListView({ buttonLabel }) {
                         Delete
                       </button>
                     </td>
->>>>>>> 9d91aa1a4d3f7b6538acbb4ede10f01fedc58e5c
                   </tr>
                 </tbody>
               ))}
