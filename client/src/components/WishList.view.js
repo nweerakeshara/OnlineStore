@@ -57,7 +57,7 @@ export default function WishListView({ buttonLabel }) {
           </ModalBody>
         ) : (
           <ModalBody>
-            <Table dark>
+            <Table dark striped bordered hover>
               <thead>
                 <tr>
                   <th>#</th>
