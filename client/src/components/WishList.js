@@ -16,6 +16,8 @@ import {
 } from "reactstrap";
 
 export default function WishList({ name, price, id }) {
+
+  //add wishlist items to DB
   const addToWishList = (e) => {
     const product = {
       product_name: name,
@@ -68,10 +70,9 @@ export default function WishList({ name, price, id }) {
 
   const toggle = () => setModal(!modal);
 
+  //deleting an item from the wish list
   const deleteItem = (e) => {
-  //  wishlist.filter(item => item.person_id !== e.target.value).map(filteredItems => (
-  //     setWishList(filteredItems)
-  //  ));
+
     axios
       .delete(`http://localhost:5000/api/wishlist/delete/${e.target.value}`)
       .then((res) => {

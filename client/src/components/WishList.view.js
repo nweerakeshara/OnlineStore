@@ -29,9 +29,7 @@ export default function WishListView({ buttonLabel }) {
   const toggle = () => setModal(!modal);
 
   const deleteItem = (e) => {
-    //  wishlist.filter(item => item.person_id !== e.target.value).map(filteredItems => (
-    //     setWishList(filteredItems)
-    //  ));
+   
     axios
       .delete(`http://localhost:5000/api/wishlist/delete/${e.target.value}`)
       .then((res) => {
