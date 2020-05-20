@@ -95,7 +95,7 @@ export default function WishList({ name, price, id }) {
           </ModalBody>
         ) : (
           <ModalBody>
-            <Table>
+            <Table dark>
               <thead>
                 <tr>
                   <th>#</th>
