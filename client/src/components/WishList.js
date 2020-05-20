@@ -14,6 +14,7 @@ import {
   ModalFooter,
   Table,
 } from "reactstrap";
+import { Spinner } from 'reactstrap';
 
 export default function WishList({ name, price, id }) {
 
@@ -93,6 +94,7 @@ export default function WishList({ name, price, id }) {
         {wishlist.length === 0 ? (
           <ModalBody>
             <p>No Items in Wish List</p>
+            <Spinner color="danger" />
           </ModalBody>
         ) : (
           <ModalBody>
