@@ -38,7 +38,7 @@ export const loadUser = () => (dispatch, getState) => {
         type: USER_LOADED,
         payload: res.data
     })).catch(error => {
-        dispatch(returnErrors(error.response.data, error.response.status));
+       // dispatch(returnErrors(error.response.data, error.response.status));
         dispatch({
             type:AUTH_ERROR
         })

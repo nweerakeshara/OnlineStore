@@ -5,7 +5,7 @@ import {
   NotificationContainer,
   NotificationManager,
 } from "react-notifications";
-import WishListView from "./WishList.view";
+
 import {
   Button,
   Modal,

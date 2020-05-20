@@ -35,7 +35,7 @@ export default function WishListView({ buttonLabel }) {
     axios
       .delete(`http://localhost:5000/api/wishlist/delete/${e.target.value}`)
       .then((res) => {
-        NotificationManager.info("Item Successfully deleted", "",2000);
+        NotificationManager.info("Item Successfully deleted", "", 2000);
         console.log(res.data);
       })
       .catch((err) => console.log("Error"));
@@ -72,6 +72,7 @@ export default function WishListView({ buttonLabel }) {
                     <th scope="row">{item.product_id}</th>
                     <td>{item.product_name}</td>
                     <td>{item.product_price}</td>
+
                     <td>
                       <button
                         value={item.product_id}
