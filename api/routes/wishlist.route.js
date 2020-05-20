@@ -31,6 +31,13 @@ wishListRoute.route('/get/:id').get(function(req,res){
             })
 });
 
+wishListRoute.route('/delete/:id').delete(function(req,res){
+   WishList.remove({product_id:req.params.id},function(err,product){
+       if(err)res.json(err);
+       else res.json('Successfully Removed');
+   })
+});
+
 // //edit
 // productRoutes.route('/edit/:id').get(function(req, res){
 //     let id = req.params.id;

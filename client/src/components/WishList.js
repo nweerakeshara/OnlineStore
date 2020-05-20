@@ -17,7 +17,7 @@ export default function WishList({ name, price, id }) {
         
       
       })
-      .catch((res) => {
+      .catch((error) => {
         alert("Item is already in the wishlist");
       });
   };
