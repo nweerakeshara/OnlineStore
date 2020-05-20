@@ -1,5 +1,10 @@
 import React, { useContext, useState, useEffect } from "react";
 import axios from "axios";
+import "react-notifications/lib/notifications.css";
+import {
+  NotificationContainer,
+  NotificationManager,
+} from "react-notifications";
 
 import {
   Button,
@@ -24,12 +29,13 @@ export default function WishListView({ buttonLabel }) {
   const toggle = () => setModal(!modal);
 
   const deleteItem = (e) => {
-  //  wishlist.filter(item => item.person_id !== e.target.value).map(filteredItems => (
-  //     setWishList(filteredItems)
-  //  ));
+    //  wishlist.filter(item => item.person_id !== e.target.value).map(filteredItems => (
+    //     setWishList(filteredItems)
+    //  ));
     axios
       .delete(`http://localhost:5000/api/wishlist/delete/${e.target.value}`)
       .then((res) => {
+        NotificationManager.info("Item Successfully deleted", "",2000);
         console.log(res.data);
       })
       .catch((err) => console.log("Error"));
@@ -42,7 +48,7 @@ export default function WishListView({ buttonLabel }) {
         onClick={toggle}
         class="btn btn-outline-secondary"
       >{`${buttonLabel}`}</button>
-
+      <NotificationContainer />
       <Modal size="lg" isOpen={modal} toggle={toggle}>
         <ModalHeader toggle={toggle}>Your Wish List</ModalHeader>
         {wishlist.length === 0 ? (
