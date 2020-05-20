@@ -7,8 +7,12 @@ let WishList = require('../model/wishlist');
 wishListRoute.route('/add').post(function(req, res){
     let wishList = new WishList(req.body);
     wishList.save()
-        .then(() => res.json({success:true}))
-        .catch(err => res.json({success:false}));
+        .then(data => {
+            res.json({success:true})
+        })
+        .catch(err => {
+            res.json({success : false});
+        });
         
 })
 
