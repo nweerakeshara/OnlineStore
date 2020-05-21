@@ -3,16 +3,6 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import OptionRow from "./optionRow";
 
-const Categories = [
-    { key: 1, value: "Mens wear" },
-    { key: 2, value: "Kids wear" },
-    { key: 3, value: "Ladies wear" },
-    { key: 4, value: "Trouser" },
-    { key: 5, value: "Skirt" },
-    { key: 6, value: "Blouse" },
-    { key: 7, value: "TShirt" }
-]
-
 export default class EditProduct extends Component{
     constructor(props) {
         super(props);
@@ -145,11 +135,6 @@ export default class EditProduct extends Component{
 
                     <div className="form-group">
                         <label>Select Category :</label>
-
-                            {/*{Categories.map(item => (*/}
-                            {/*    <option key={item.key} value={item.value}>{item.value}</option>*/}
-                            {/*))}*/}
-
                             <select onChange={this.handleChangeCategory}>
                                 {this.optionRow()}
                             </select>
