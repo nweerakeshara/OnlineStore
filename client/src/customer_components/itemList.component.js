@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Container, ListGroup, ListGroupItem, Button } from 'reactstrap';
+import {Container, ListGroup, ListGroupItem, Button, NavItem} from 'reactstrap';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import {connect} from 'react-redux';
 import {getItems} from "../actions/itemActions";
@@ -53,9 +53,50 @@ class ItemListComponent extends Component {
 
             <div className="card text-center m-3">
                 <h3 className="card-header">Clothing List</h3>
-                <div className="card-body">
+                <div className="card-body ">
                     {pageOfItems.map(item =>
-                        <div key={item._id}>{item.product_name}{this.props.isAuthenticated ? <button className="alert-danger">Add to Cart</button> : <p className="alert-danger">Login to Continue</p>}</div>
+
+                        <div key={item._id}>
+                            <div className="container rounded-0 border border-danger ">
+
+
+                               
+
+                            <div className="container ">
+                                <div className="row">
+                                    <div className="col-sm">
+                                        {item.product_name}
+                                    </div>
+                                    <div className="col-sm">
+                                        One of three columns
+                                    </div>
+                                    <div className="col-sm">
+                                        One of three columns
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div className="container " >
+                                <div className="row">
+                                    <div className="col-sm">
+                                        Product ID : {item.product_id}
+                                    </div>
+                                    <div className="col-sm">
+                                        <Link to={'/'}  className="nav-link"> <button className="btn btn-success">View</button></Link>
+                                    </div>
+                                    <div className="col-sm">
+                                        {this.props.isAuthenticated ?
+                                            <Link to={'/'}  className="nav-link"> <button className="btn btn-warning text-light">To Cart</button></Link> :
+                                            <Link to={'/loginCus'}  className="nav-link"> <button className="btn btn-primary">Login</button></Link>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                            <br/>
+
+                        </div>
                     )}
                 </div>
                 <div className="card-footer pb-0 pt-3">
