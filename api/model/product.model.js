@@ -1,7 +1,11 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-let Product = new Schema({
+/*
+    Image Schema for storing images in the
+    mongodb database
+*/
+var ProductSchema = new Schema({
     product_id : {
         type : String
     },
@@ -17,9 +21,20 @@ let Product = new Schema({
     product_category: {
         type: String,
         default: 'No category'
+    },
+    imageName: {
+        type: String,
+        default: "none",
+        required: true
+    },
+    imageData: {
+        type: String,
+        required: true
     }
 },{
-    collection : 'product'
+    collection : 'products'
 });
 
-module.exports = mongoose.model('Product', Product);
+var Product = mongoose.model('Product', ProductSchema);
+
+module.exports = Product;

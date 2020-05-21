@@ -1,5 +1,7 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { CartContext } from "./CartContext";
+import WishList from "./WishList";
+import Ratings, { UserRating } from "../components/UI/Ratings";
 
 export default function Product(props) {
   const [cart, setCart] = useContext(CartContext);
@@ -19,7 +21,16 @@ export default function Product(props) {
     <div>
       <h2>{props.name}</h2>
       <h4>{props.price}</h4>
-      <button onClick={addToCart}>Add To Cart</button>
+      <Ratings></Ratings>
+      <UserRating productId={props.id}></UserRating>
+      <button onClick={addToCart}>Add To Cart</button> <br /> <br />
+      <WishList
+        name={props.name}
+        price={props.price}
+        id={props.id}
+        key={props.key}
+      />
+      <br />
       <hr></hr>
     </div>
   );

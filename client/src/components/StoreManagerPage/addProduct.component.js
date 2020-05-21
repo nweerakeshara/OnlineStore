@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
 import axios from 'axios';
+import './App.css';
+import DefaultImg from './assets/default-img.jpg';
+let imageFormObj = new FormData();
 
 const Categories = [
     { key: 1, value: "Mens wear" },
@@ -25,7 +28,8 @@ export default class AddProduct extends Component{
             product_name : '',
             product_price : '',
             product_discount : '',
-            product_category : ''
+            product_category : '',
+            multerImage: DefaultImg
         }
     }
 
@@ -53,22 +57,73 @@ export default class AddProduct extends Component{
         });
     }
 
+    handleChangeCategory = (event) => {
+        this.setState({ product_category: event.currentTarget.value })
+    }
+
+    setDefaultImage(uploadType) {
+        if (uploadType === "multer") {
+            this.setState({
+                multerImage: DefaultImg
+            });
+        }
+    }
+
+    // function to upload image once it has been captured
+    // includes multer and firebase methods
+
+    setImage(e, method) {
+        //let imageObj = {};
+
+        if (method === "multer") {
+            imageFormObj.append("imageName", "multer-image-" + Date.now());
+            imageFormObj.append("imageData", e.target.files[0]);
+
+            console.log(imageFormObj.get("imageName"));
+            console.log(imageFormObj.get("imageData"));
+
+            // stores a readable instance of
+            // the image being uploaded using multer
+            this.setState({
+                multerImage: URL.createObjectURL(e.target.files[0])
+            });
+        }
+    }
+
     onSubmit(e){
         e.preventDefault();
-        const obj = {
-            product_id : this.state.product_id,
-            product_name : this.state.product_name,
-            product_price : this.state.product_price,
-            product_discount : this.state.product_discount,
-            product_category : this.state.product_category
-        };
 
-        axios.post('http://localhost:5000/product/add', obj)
-            .then(res => {
-                if(res.data.success){
-                    console.log(res.data)
-                    alert('Product added successfully')
+        // const obj = {
+        //     product_id : this.state.product_id,
+        //     product_name : this.state.product_name,
+        //     product_price : this.state.product_price,
+        //     product_discount : this.state.product_discount,
+        //     product_category : this.state.product_category,
+        // };
+        imageFormObj.append("product_id", this.state.product_id);
+        imageFormObj.append("product_name", this.state.product_name);
+        imageFormObj.append("product_price", this.state.product_price);
+        imageFormObj.append("product_discount", this.state.product_discount);
+        imageFormObj.append("product_category", this.state.product_category);
+
+        // axios.post('http://localhost:5000/product/add', obj)
+        //     .then(res => {
+        //         if(res.data.success){
+        //             console.log(res.data)
+        //             alert('Product added successfully')
+        //         }
+        //     });
+
+        axios.post('http://localhost:5000/api/product/add', imageFormObj)
+            .then((data) => {
+                if (data.data.success) {
+                    alert("Image has been successfully uploaded using multer");
+                    this.setDefaultImage("multer");
                 }
+            })
+            .catch((err) => {
+                alert("Error while uploading image using multer");
+                this.setDefaultImage("multer");
             });
 
         this.setState({
@@ -76,14 +131,10 @@ export default class AddProduct extends Component{
             product_name : '',
             product_price : '',
             product_discount : '',
-            product_category : ''
+            product_category : '',
         })
 
         this.props.history.push('/guest');
-    }
-
-    handleChangeCategory = (event) => {
-        this.setState({ product_category: event.currentTarget.value })
     }
 
     render() {
@@ -130,6 +181,18 @@ export default class AddProduct extends Component{
                                 <option key={item.key} value={item.value}>{item.value}</option>
                             ))}
                         </select>
+                    </div>
+
+                    <div className="form-group">
+                        <div className="main-container">
+                            <div className="image-container">
+                                <div className="process">
+                                    {/*onChange={(e) => this.uploadImage(e, "multer")}*/}
+                                    <input type="file" className="process__upload-btn" onChange={(e) => this.setImage(e, "multer")}/>
+                                    <img src={this.state.multerImage} alt="upload-image" className="process__image" />
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <div className="form-group">
