@@ -3,6 +3,8 @@ import axios from 'axios';
 import './App.css';
 import DefaultImg from './assets/default-img.jpg';
 import OptionRow from "./optionRow";
+import SweetAlert from 'react-bootstrap-sweetalert';
+
 let imageFormObj = new FormData();
 
 // const Categories = [
@@ -119,6 +121,11 @@ export default class AddProduct extends Component{
             .then((data) => {
                 if (data.data.success) {
                     alert("Image has been successfully uploaded using multer");
+                    return(
+                        <SweetAlert success title="Good job!" onConfirm={this.onConfirm} onCancel={this.onCancel}>
+                            You clicked the button!
+                        </SweetAlert>
+                    );
                     this.setDefaultImage("multer");
                 }
             })
