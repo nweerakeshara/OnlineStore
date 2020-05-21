@@ -19,6 +19,8 @@ import ItemListComponent from "./customer_components/itemList.component";
 import {Provider} from 'react-redux';
 import store from './store';
 import {loadUser} from "./actions/cusActions";
+import StoreManager from "./components/StoreManagerPage/storemanager.component";
+import ProductCategory from "./components/AdminPage/addProductCategory.component";
 
 
 
@@ -52,11 +54,13 @@ class App extends Component {
 
                                  <Route exact path="/guest" component={Guest}/>
                                  <Route exact path="/user" component={User}/>
-                                 <Route exact path="/storemanager" component={FullTable}/>
-                                 <Route exact path="/addProduct" component={AddProduct}/>
+                                 <Route exact path="/storemanager" component={StoreManager}/>
                                  <Route exact path="/admin" component={Admin2}/>
+                                 <Route exact path="/addProduct" component={AddProduct}/>
                                  <Route exact path="/edit/:id" component={EditProduct}/>
+                                 <Route exact path="/addDiscount" component={FullTable}/>
                                  <Route exact path="/addStoreManager" component={AddStoreManager}/>
+                                 <Route exact path="/addProductCategory" component={ProductCategory}/>
 
                              </Switch>
                          </div>

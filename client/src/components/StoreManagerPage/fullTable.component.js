@@ -33,7 +33,7 @@ export default class FullTable extends Component{
     render(){
         return(
             <div>
-                <Link to={"/addProduct"} className="btn btn-primary"> Add Product </Link>
+                {/*<Link to={"/addProduct"} className="btn btn-primary"> Add Product </Link>*/}
                 <h3 align="center"> Products List </h3>
                 <table className="table table-striped" style={{marginTop:20}}>
                     <thead>
