@@ -43,6 +43,15 @@ export default class EditProduct extends Component{
             .catch(function (error) {
                 console.log(error);
             })
+
+        //type of request is 'get'
+        axios.get('http://localhost:5000/api/productcategory/')
+            .then(response => {
+                this.setState({Categories : response.data});
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
     }
 
     onChangeProductId(e){
