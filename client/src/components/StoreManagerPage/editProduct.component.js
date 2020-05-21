@@ -26,7 +26,8 @@ export default class EditProduct extends Component{
             product_id : '',
             product_name : '',
             product_price : '',
-            product_discount : ''
+            product_discount : '',
+            Categories : []
         }
     }
 
@@ -144,11 +145,15 @@ export default class EditProduct extends Component{
 
                     <div className="form-group">
                         <label>Select Category :</label>
-                        <select onChange={this.handleChangeCategory}>
-                            {Categories.map(item => (
-                                <option key={item.key} value={item.value}>{item.value}</option>
-                            ))}
-                        </select>
+
+                            {/*{Categories.map(item => (*/}
+                            {/*    <option key={item.key} value={item.value}>{item.value}</option>*/}
+                            {/*))}*/}
+
+                            <select onChange={this.handleChangeCategory}>
+                                {this.optionRow()}
+                            </select>
+
                     </div>
 
                     <div className="form-group">
