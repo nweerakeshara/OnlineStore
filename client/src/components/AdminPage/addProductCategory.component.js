@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import axios from 'axios';
+import swal from "sweetalert";
+
 
 export default class ProductCategory extends Component{
     constructor(props) {
@@ -28,10 +30,13 @@ export default class ProductCategory extends Component{
         axios.post('http://localhost:5000/api/productcategory/add', obj)
             .then(res => {
                 if(res.data.success){
-                    console.log(res.data)
-                    alert('Product category added successfully')
+                    swal("Good job!", "Product category successfully added to the database", "success");
                 }
+            })
+            .catch((err) => {
+                swal("Unsuccessful", "Error while adding product category to the database", "error");
             });
+
 
         this.setState({
             productcategory_name : ''

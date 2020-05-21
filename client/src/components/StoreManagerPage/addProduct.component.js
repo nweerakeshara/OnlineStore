@@ -3,7 +3,7 @@ import axios from 'axios';
 import './App.css';
 import DefaultImg from './assets/default-img.jpg';
 import OptionRow from "./optionRow";
-import SweetAlert from 'react-bootstrap-sweetalert';
+import swal from 'sweetalert';
 
 let imageFormObj = new FormData();
 
@@ -120,17 +120,12 @@ export default class AddProduct extends Component{
         axios.post('http://localhost:5000/api/product/add', imageFormObj)
             .then((data) => {
                 if (data.data.success) {
-                    alert("Image has been successfully uploaded using multer");
-                    return(
-                        <SweetAlert success title="Good job!" onConfirm={this.onConfirm} onCancel={this.onCancel}>
-                            You clicked the button!
-                        </SweetAlert>
-                    );
+                    swal("Good job!", "Product successfully added to the database", "success");
                     this.setDefaultImage("multer");
                 }
             })
             .catch((err) => {
-                alert("Error while uploading image using multer");
+                swal("Unsuccessful", "Error while adding product to the database", "error");
                 this.setDefaultImage("multer");
             });
 
