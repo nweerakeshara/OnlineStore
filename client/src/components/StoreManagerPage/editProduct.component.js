@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 //To keep connectivity between frontend 'ReactJS' and backend 'NodeJS', we import axios
 import axios from 'axios';
+import OptionRow from "./optionRow";
 
 const Categories = [
     { key: 1, value: "Mens wear" },
@@ -52,6 +53,12 @@ export default class EditProduct extends Component{
             .catch(function (error) {
                 console.log(error);
             })
+    }
+
+    optionRow(){
+        return this.state.Categories.map(function(object, i){
+            return <OptionRow obj = {object} key = {i}/>;
+        });
     }
 
     onChangeProductId(e){
