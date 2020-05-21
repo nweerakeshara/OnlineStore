@@ -1,91 +1,126 @@
 const express = require('express');
 const router = express.Router();
 const {User} = require('../model/cus');
-const {auth} = require('../middleware/auth');
+const bcrypt = require('bcrypt');
+const saltRounds = 10;
+const jwt = require('jsonwebtoken');
+const auth = require('../middleware/auth');
 
 
-
-
-router.get('/auth', auth, (req,res) =>{
-    //To ensure authentication
-    res.status(200).json({
-        _id : req.user._id,
-        isAuth : true,
-        empUn: req.user.cusUn,
-        empEmail: req.user.cusEmail,
-        role: req.user.role
-
-    });
-
-});
-
-
-
+////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 router.post('/register', (req,res) =>{
-    const emp = new User(req.body);
-    emp.save((error, userData) =>{
-        if(error) {
-            return res.json({success: false, error});
+
+    //To register cus
+
+    const {cusUn , cusEmail, cusPw} = req.body;
+    if(!cusUn || !cusEmail || !cusPw){
+        return res.status(400).json({msg:'Please Fill All Fields'});
+    }
+
+    User.findOne({cusUn}).then(user => {
+        if(user){
+            return res.status(400).json({msg : 'Username Already Exist'})
         }
-        return res.status(200).json({ success: true   });
     });
-    //To register emp
-});
+
+    User.findOne({cusEmail}).then(user => {
+        if(user){
+            return res.status(400).json({msg : 'Email Already Exist'})
+        }
+    });
 
 
+    const user = new User(req.body);
 
-router.post('/api/cus/login', (req,res) =>{
-    //To verify the employee when login
-    User.findOne({cusUn: req.body.cusUn}, (error, user)=> {
-        if(!user){
-            return res.json({
-                loginSuccess: false,
-                message: "Auth Failed, Username incorrect"
+    bcrypt.genSalt(10, (err, salt) => {
+
+        bcrypt.hash(user.cusPw, saltRounds, function(error, hash) {
+            if (error) {
+                throw err;
+            }
+            user.cusPw = hash;
+
+            user.save().then(user  => {
+
+                jwt.sign(
+                    {_id : user._id}, "secret", {expiresIn: 10},
+                    (error, token) =>{
+                        if(error) {
+                            throw error;
+                        }
+                        res.json({
+                            token,
+                            user: {
+                                _id: user._id,
+                                cusUn: user.cusUn,
+                                cusEmail: user.cusEmail
+                            }
+                        });
+                    }
+                );
             });
 
-        }
-        user.comparePassword(req.body.cusPw, (error, result) =>{
+        });
 
+    });
+
+
+
+});
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+
+router.post('/login', (req,res) =>{
+
+    //To login cus
+
+    const {cusUn , cusPw} = req.body;
+    if(!cusUn || !cusPw){
+        return res.status(400).json({msg:'Please Fill All Fields'});
+    }
+
+    User.findOne({cusUn}).then(user => {
+        if(!user){
+            return res.status(400).json({msg : 'Invalid Username'})
+        }
+
+        bcrypt.compare(cusPw, user.cusPw).then(result => {
             if(!result){
-                return res.json({
-                    loginSuccess: false,
-                    message: "Auth Failed, Password incorrect"
+                return res.status(400).json({
+                    msg:'Invalid Credentials'
                 });
+
             }
 
-            user.generateToken (req.body.cusPw,(error, user) =>{
-
-                if(error){
-                    return res.status(400).send(error);
+            jwt.sign(
+                {_id : user._id}, "secret", {expiresIn: 3500},
+                (error, token) =>{
+                    if(error) {
+                        throw error;
+                    }
+                    res.json({
+                        token,
+                        user: {
+                            _id: user._id,
+                            cusUn: user.cusUn,
+                            cusEmail: user.cusEmail
+                        }
+                    });
                 }
-                res.cookie("sc_emp_auth", user.token).status(200).json({
-                    loginSuccess: true,
-                    userId: user._id
-                })
-
-            });
-
+            );
         });
 
 
-
     });
+
 
 });
 
+/////////////////////////////////////////////////////////////////////////////////////////////////
 
-router.get('/api/cus/logout', auth, (req,res) =>{
-
-    User.findOneAndUpdate({_id: req.user._id}, {token:""}, (error, doc) =>{
-        if(error){
-            return res.json({success: false, error});
-        }
-        return res.status(200).send({
-            success: true
-        });
-    });
-
+router.get('/get/cus', auth, (req, res) => {
+    User.findById(req.user._id).select('-cusPw').then(user => res.json(user));
 });
 
 module.exports = router;

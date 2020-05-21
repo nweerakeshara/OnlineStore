@@ -1,10 +1,14 @@
 import React, {Component} from 'react';
 import axios from "axios";
 
+
+
+
 class LoginCustomer extends Component {
     state={
         cusUn: "",
-        cusPw: ""
+        cusPw: "",
+
     }
 
 
@@ -29,7 +33,11 @@ class LoginCustomer extends Component {
 
             cusPw: this.state.cusPw
         };
-        console.log(axios.post('http://localhost:5000/api/cus/login', obj).then(res => console.log(res.data)));
+        console.log(axios.post('http://localhost:5000/api/cus/login', obj).then(res => {
+
+
+
+        }));
         this.setState({
             cusUn : "",
 
@@ -57,9 +65,10 @@ class LoginCustomer extends Component {
 
                     </div>
 
+
                     <div className="form-group">
 
-                        <input type="submit" value="Register" className="btn btn-primary"/>
+                        <input type="submit" value="Login" className="btn btn-primary"/>
 
                     </div>
                 </form>

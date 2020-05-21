@@ -1,13 +1,22 @@
 import React, {Component} from "react";
 import axios from "axios";
-export  default  class  RegisterCustomer  extends  Component{
+import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
+import {register} from "../actions/cusActions";
+
+class  RegisterCustomer  extends  Component{
 
     state={
         cusUn: "",
         cusEmail: "",
-        cusPw: ""
+        cusPw: "",
+        msg :null
     }
 
+    static propTypes = {
+        isAuthenticated: PropTypes.bool,
+        error : PropTypes.object.isRequired
+    }
 
     onChangeCusUn = (e) => {
         this.setState({
@@ -63,7 +72,7 @@ export  default  class  RegisterCustomer  extends  Component{
 
                     <div className="form-group">
                         <label>Password :</label>
-                        <input type="text" className="form-control" value={this.state.cusPw} onChange={this.onChangeCusPw}/>
+                        <input type="password" className="form-control" value={this.state.cusPw} onChange={this.onChangeCusPw}/>
 
                     </div>
 
@@ -77,3 +86,10 @@ export  default  class  RegisterCustomer  extends  Component{
         );
     }
 }
+
+const mapStateToProps = state => ({
+   isAuthenticated: state.cus.isAuthenticated,
+   error : state.error
+});
+
+export  default connect(mapStateToProps,{register})
