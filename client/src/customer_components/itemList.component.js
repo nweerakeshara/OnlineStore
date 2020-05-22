@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import {Link} from "react-router-dom";
 import {NotificationContainer, NotificationManager} from "react-notifications";
 import "react-notifications/lib/notifications.css";
-//import imgproduct from "../uploads/samplechk.png"
+
 
 class ItemListComponent extends Component {
 
@@ -54,7 +54,7 @@ class ItemListComponent extends Component {
         return (
 
             <div className="card text-center m-3">
-                <h3 className="card-header">Clothing List</h3>
+                <h3 className="card-header font-weight-bold">Clothing List</h3>
                 <NotificationContainer />
                 <div className="card-body ">
                     {pageOfItems.map(item =>
@@ -65,17 +65,19 @@ class ItemListComponent extends Component {
                             <div className="container ">
                                 <div className="row">
                                     <div className="col-sm">
-                                        {/*<img src={imgproduct}/>*/}
+                                        <br/>
+                                        <img height="80%" width="100%" src="/uploads/demo1.jpg"/>
+                                        <br/>
                                     </div>
                                     <div className="col-sm">
-                                        <br/><br/><br/><br/><br/>
+                                        <br/><br/><br/>
                                         <h5 className="font-weight-bold text-center">{item.product_name}</h5>
                                         <h4 className="font-weight-bold text-center text-danger">Price : Rs.{item.product_price}.00</h4>
                                         <h5 className="font-weight-bold text-center text-danger">Discount : Rs.{item.product_discount}.00</h5>
-
+                                        <br/><br/>
                                     </div>
                                     <div className="col-sm">
-                                        <br/><br/><br/><br/>
+                                        <br/><br/>
                                         <Link to={'/'}  className="nav-link"> <button className="btn btn-success">View</button></Link>
                                         {this.props.isAuthenticated ?
                                             <Link to={'/'}  className="nav-link"> <button className="btn btn-warning text-light">To Cart</button></Link> :
@@ -86,7 +88,7 @@ class ItemListComponent extends Component {
                                             <Link className="nav-link"> <button className="btn btn-info text-light" onClick={ () => NotificationManager.error('Login to Continue',"",2000)}>To WishList</button></Link>
                                         }
 
-
+                                        <br/><br/>
                                     </div>
                                 </div>
                             </div>
