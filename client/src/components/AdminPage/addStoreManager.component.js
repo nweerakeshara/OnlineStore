@@ -79,7 +79,7 @@ export default class AddStoreManager extends Component{
             sm_pnumber : ''
         })
 
-        this.props.history.push('/guest');
+        //this.props.history.push('/guest');
     }
 
     render() {

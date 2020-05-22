@@ -42,7 +42,7 @@ export default class ProductCategory extends Component{
             productcategory_name : ''
         })
 
-        this.props.history.push('/guest');
+        //this.props.history.push('/guest');
     }
 
     render() {
