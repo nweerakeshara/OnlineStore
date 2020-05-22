@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import {login} from "../actions/cusActions";
 import {clearErrors} from "../actions/errorActions";
 import {Alert} from 'reactstrap';
+import swal from "sweetalert";
 
 class  LoginCustomer  extends  Component{
 
@@ -38,9 +39,17 @@ class  LoginCustomer  extends  Component{
         if(error !== prevProps.error){
             if(error.id === 'LOGIN_FAIL'){
                 this.setState({msg : error.msg.msg});
+
+
             }else{
                 this.setState({msg: null });
             }
+        }
+
+
+        if(this.state.msg){
+            swal("Unsuccessful", this.state.msg, "error");
+            this.setState({msg: null });
         }
 
         if(isAuthenticated){
@@ -84,7 +93,7 @@ class  LoginCustomer  extends  Component{
             <div style={{marginTop: 10}}>
                 <h3>Customer Sign In</h3>
                 <form onSubmit={this.onSubmit}>
-                    {this.state.msg ? <Alert color ='danger'>{this.state.msg}</Alert> : null}
+
                     <div className="form-group">
                         <label>Username :</label>
                         <input type="text" className="form-control" value={this.state.cusUn} onChange={this.onChangeCusUn}/>

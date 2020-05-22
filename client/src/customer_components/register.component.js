@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import {register} from "../actions/cusActions";
 import {clearErrors} from "../actions/errorActions";
 import {Alert} from 'reactstrap';
+import swal from "sweetalert";
 
 class  RegisterCustomer  extends  Component{
 
@@ -31,7 +32,8 @@ class  RegisterCustomer  extends  Component{
             cusEmail: "",
             cusPw: "",
             cusConfirmPw : "",
-            msg :null
+            msg :null,
+            msgtop: null
         });
 
         this.props.history.push('/');
@@ -45,6 +47,11 @@ class  RegisterCustomer  extends  Component{
             }else{
                 this.setState({msg: null });
             }
+        }
+
+        if(this.state.msg){
+            swal("Unsuccessful", this.state.msg, "error");
+            this.setState({msg: null });
         }
 
         if(isAuthenticated){
@@ -74,13 +81,13 @@ class  RegisterCustomer  extends  Component{
         if(e.target.value !== this.state.cusPw) {
             this.setState({
                 cusConfirmPw: e.target.value,
-                msg: "Confirm Password Does Not Match"
+                msgtop: "Confirm Password Does Not Match"
             });
         }
         if(e.target.value === this.state.cusPw) {
             this.setState({
                 cusConfirmPw: e.target.value,
-                msg: ""
+                msgtop: ""
             });
         }
     }
@@ -102,7 +109,8 @@ class  RegisterCustomer  extends  Component{
             cusEmail: "",
             cusPw: "",
             cusConfirmPw : "",
-            msg :null
+            msg :null,
+            msgtop : null
         });
     }
 
@@ -111,7 +119,7 @@ class  RegisterCustomer  extends  Component{
             <div style={{marginTop: 10}}>
                 <h3>Customer Sign Up</h3>
                 <form onSubmit={this.onSubmit}>
-                    {this.state.msg ? <Alert color ='danger'>{this.state.msg}</Alert> : null}
+                    {this.state.msgtop ? <Alert color ='danger'>{this.state.msgtop}</Alert> : null}
                     <div className="form-group">
                         <label>Username :</label>
                         <input type="text" className="form-control" value={this.state.cusUn} onChange={this.onChangeCusUn} maxLength="10"/>
