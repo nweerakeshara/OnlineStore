@@ -152,4 +152,4 @@ const mapStateToProps = (state) => ({
     isAuthenticated : state.cus.isAuthenticated
 })
 
-export default connect(mapStateToProps, {getItems}) (ItemListComponent);
+export default connect(mapStateToProps) (ItemListComponent);
