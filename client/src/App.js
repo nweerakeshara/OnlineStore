@@ -15,7 +15,7 @@ import EditProduct from "./components/StoreManagerPage/editProduct.component";
 import AddStoreManager from "./components/AdminPage/addStoreManager.component";
 import Carousel from "./components/UI/Carousel";
 import NavbarComponent from "./customer_components/navbar.component";
-import ItemListComponent from "./customer_components/itemList.component";
+import ItemListFunc from "./customer_components/itemListFunc.component";
 import {Provider} from 'react-redux';
 import store from './store';
 import {loadUser} from "./actions/cusActions";
@@ -47,7 +47,7 @@ class App extends Component {
                              <br/>
 
                              <Switch>
-                                 <Route exact path='/' component={ItemListComponent}/>
+                                 <Route exact path='/' component={ItemListFunc}/>
                                  <Route exact path='/registerCus' component={RegisterCustomer}/>
                                  <Route exact path='/loginCus' component={LoginCustomer}/>
                                  <Route exact path='/editCus' component={EditCustomer}/>
