@@ -58,6 +58,7 @@ class App extends Component {
                                  <Route exact path="/admin" component={Admin2}/>
                                  <Route exact path="/addProduct" component={AddProduct}/>
                                  <Route exact path="/edit/:id" component={EditProduct}/>
+                                 {/*<Route exact path="/view/:id" component={ViewProduct}/>*/}
                                  <Route exact path="/addDiscount" component={FullTable}/>
                                  <Route exact path="/addStoreManager" component={AddStoreManager}/>
                                  <Route exact path="/addProductCategory" component={ProductCategory}/>

@@ -78,14 +78,14 @@ class ItemListComponent extends Component {
                                     </div>
                                     <div className="col-sm">
                                         <br/><br/>
-                                        <Link to={"/view/" +item._id}  className="nav-link"> <button className="btn btn-success">View</button></Link>
+                                        <Link to={"/view/" +item._id}  className="nav-link"> <button className="btn btn-success"> View This Item </button></Link>
                                         {this.props.isAuthenticated ?
-                                            <Link to={'/'}  className="nav-link"> <button className="btn btn-warning text-light">To Cart</button></Link> :
-                                            <Link className="nav-link"> <button className="btn btn-danger" onClick={ () => NotificationManager.error('Login to Continue',"",2000)}>To Cart</button></Link>
+                                            <Link to={'/'}  className="nav-link"> <button className="btn btn-warning text-light">Add To Shopping Cart</button></Link> :
+                                            <Link className="nav-link"> <button className="btn btn-danger" onClick={ () => NotificationManager.error('Login to Continue',"",2000)}>Add To Shopping Cart</button></Link>
                                         }
                                         {this.props.isAuthenticated ?
-                                            <Link to={'/'}  className="nav-link"> <button className="btn btn-info text-light">To WishList</button></Link> :
-                                            <Link className="nav-link"> <button className="btn btn-info text-light" onClick={ () => NotificationManager.error('Login to Continue',"",2000)}>To WishList</button></Link>
+                                            <Link to={'/'}  className="nav-link"> <button className="btn btn-info text-light">Add To Wish List</button></Link> :
+                                            <Link className="nav-link"> <button className="btn btn-info text-light" onClick={ () => NotificationManager.error('Login to Continue',"",2000)}>Add To Wish List</button></Link>
                                         }
 
                                         <br/><br/>
