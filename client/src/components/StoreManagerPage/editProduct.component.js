@@ -1,16 +1,7 @@
 import React, {Component} from 'react';
 //To keep connectivity between frontend 'ReactJS' and backend 'NodeJS', we import axios
 import axios from 'axios';
-
-const Categories = [
-    { key: 1, value: "Mens wear" },
-    { key: 2, value: "Kids wear" },
-    { key: 3, value: "Ladies wear" },
-    { key: 4, value: "Trouser" },
-    { key: 5, value: "Skirt" },
-    { key: 6, value: "Blouse" },
-    { key: 7, value: "TShirt" }
-]
+import OptionRow from "./optionRow";
 
 export default class EditProduct extends Component{
     constructor(props) {
@@ -25,7 +16,8 @@ export default class EditProduct extends Component{
             product_id : '',
             product_name : '',
             product_price : '',
-            product_discount : ''
+            product_discount : '',
+            Categories : []
         }
     }
 
@@ -43,6 +35,21 @@ export default class EditProduct extends Component{
             .catch(function (error) {
                 console.log(error);
             })
+
+        //type of request is 'get'
+        axios.get('http://localhost:5000/api/productcategory/')
+            .then(response => {
+                this.setState({Categories : response.data});
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
+    }
+
+    optionRow(){
+        return this.state.Categories.map(function(object, i){
+            return <OptionRow obj = {object} key = {i}/>;
+        });
     }
 
     onChangeProductId(e){
@@ -128,11 +135,10 @@ export default class EditProduct extends Component{
 
                     <div className="form-group">
                         <label>Select Category :</label>
-                        <select onChange={this.handleChangeCategory}>
-                            {Categories.map(item => (
-                                <option key={item.key} value={item.value}>{item.value}</option>
-                            ))}
-                        </select>
+                            <select onChange={this.handleChangeCategory}>
+                                {this.optionRow()}
+                            </select>
+
                     </div>
 
                     <div className="form-group">

@@ -7,16 +7,16 @@ import {Link} from "react-router-dom";
 
 const images = [
     {
-        url: '/images/adminpage/sm1.jpg',
-        title: 'Add Store Manager',
+        url: '/images/storemanagerpage/cloth.jpg',
+        title: 'Add Product',
         width: '50%',
-        navigate: '/addStoreManager'
+        navigate: '/addProduct'
     },
     {
-        url: '/images/adminpage/pc.png',
-        title: 'Add Product Category',
+        url: '/images/storemanagerpage/discount.png',
+        title: 'Add Discount',
         width: '50%',
-        navigate: '/addProductCategory'
+        navigate: '/addDiscount'
     }
 ];
 
@@ -110,10 +110,10 @@ function ButtonRow() {
                     }}
                 >
                     <span
-                      className={classes.imageSrc}
-                      style={{
-                          backgroundImage: `url(${image.url})`,
-                      }}
+                        className={classes.imageSrc}
+                        style={{
+                            backgroundImage: `url(${image.url})`,
+                        }}
                     />
                     <span className={classes.imageBackdrop} />
                     <Link to ={image.navigate} >
@@ -125,7 +125,7 @@ function ButtonRow() {
                                 className={classes.imageTitle}
                             >
                              {image.title}
-                            <span className={classes.imageMarked} />
+                                <span className={classes.imageMarked} />
                             </Typography>
                         </span>
                     </Link>

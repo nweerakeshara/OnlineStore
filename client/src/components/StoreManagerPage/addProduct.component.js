@@ -2,17 +2,20 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import './App.css';
 import DefaultImg from './assets/default-img.jpg';
+import OptionRow from "./optionRow";
+import swal from 'sweetalert';
+
 let imageFormObj = new FormData();
 
-const Categories = [
-    { key: 1, value: "Mens wear" },
-    { key: 2, value: "Kids wear" },
-    { key: 3, value: "Ladies wear" },
-    { key: 4, value: "Trouser" },
-    { key: 5, value: "Skirt" },
-    { key: 6, value: "Blouse" },
-    { key: 7, value: "TShirt" }
-]
+// const Categories = [
+//     { key: 1, value: "Mens wear" },
+//     { key: 2, value: "Kids wear" },
+//     { key: 3, value: "Ladies wear" },
+//     { key: 4, value: "Trouser" },
+//     { key: 5, value: "Skirt" },
+//     { key: 6, value: "Blouse" },
+//     { key: 7, value: "TShirt" }
+// ]
 
 export default class AddProduct extends Component{
     constructor(props) {
@@ -29,8 +32,26 @@ export default class AddProduct extends Component{
             product_price : '',
             product_discount : '',
             product_category : '',
-            multerImage: DefaultImg
+            multerImage: DefaultImg,
+            Categories : []
         }
+    }
+
+    componentDidMount() {
+        //type of request is 'get'
+        axios.get('http://localhost:5000/api/productcategory/')
+            .then(response => {
+                this.setState({Categories : response.data});
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
+    }
+
+    optionRow(){
+        return this.state.Categories.map(function(object, i){
+            return <OptionRow obj = {object} key = {i}/>;
+        });
     }
 
     onChangeProductId(e){
@@ -70,11 +91,8 @@ export default class AddProduct extends Component{
     }
 
     // function to upload image once it has been captured
-    // includes multer and firebase methods
-
+    // includes multer method
     setImage(e, method) {
-        //let imageObj = {};
-
         if (method === "multer") {
             imageFormObj.append("imageName", "multer-image-" + Date.now());
             imageFormObj.append("imageData", e.target.files[0]);
@@ -93,36 +111,21 @@ export default class AddProduct extends Component{
     onSubmit(e){
         e.preventDefault();
 
-        // const obj = {
-        //     product_id : this.state.product_id,
-        //     product_name : this.state.product_name,
-        //     product_price : this.state.product_price,
-        //     product_discount : this.state.product_discount,
-        //     product_category : this.state.product_category,
-        // };
         imageFormObj.append("product_id", this.state.product_id);
         imageFormObj.append("product_name", this.state.product_name);
         imageFormObj.append("product_price", this.state.product_price);
         imageFormObj.append("product_discount", this.state.product_discount);
         imageFormObj.append("product_category", this.state.product_category);
 
-        // axios.post('http://localhost:5000/product/add', obj)
-        //     .then(res => {
-        //         if(res.data.success){
-        //             console.log(res.data)
-        //             alert('Product added successfully')
-        //         }
-        //     });
-
         axios.post('http://localhost:5000/api/product/add', imageFormObj)
             .then((data) => {
                 if (data.data.success) {
-                    alert("Image has been successfully uploaded using multer");
+                    swal("Good job!", "Product successfully added to the database", "success");
                     this.setDefaultImage("multer");
                 }
             })
             .catch((err) => {
-                alert("Error while uploading image using multer");
+                swal("Unsuccessful", "Error while adding product to the database", "error");
                 this.setDefaultImage("multer");
             });
 
@@ -176,14 +179,20 @@ export default class AddProduct extends Component{
 
                     <div className="form-group">
                         <label>Select Category :</label>
+                        {/*<select onChange={this.handleChangeCategory}>*/}
+                        {/*    {Categories.map(item => (*/}
+                        {/*        <option key={item.key} value={item.value}>{item.value}</option>*/}
+                        {/*    ))}*/}
+                        {/*</select>*/}
                         <select onChange={this.handleChangeCategory}>
-                            {Categories.map(item => (
-                                <option key={item.key} value={item.value}>{item.value}</option>
-                            ))}
+                            {this.optionRow()}
                         </select>
+
+
                     </div>
 
                     <div className="form-group">
+                        <label>Add Product Photo :</label>
                         <div className="main-container">
                             <div className="image-container">
                                 <div className="process">

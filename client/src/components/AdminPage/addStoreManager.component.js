@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
+import swal from "sweetalert";
 
 export default class AddStoreManager extends Component{
     constructor(props) {
@@ -63,9 +64,11 @@ export default class AddStoreManager extends Component{
         axios.post('http://localhost:5000/api/storemanager/add', obj)
             .then(res => {
                 if(res.data.success){
-                    console.log(res.data)
-                    alert('Store manager details added successfully')
+                    swal("Good job!", "Store manager details successfully added to the database", "success");
                 }
+            })
+            .catch((err) => {
+                swal("Unsuccessful", "Error while adding store manager details to the database", "error");
             });
 
         this.setState({
