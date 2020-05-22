@@ -1,5 +1,6 @@
 import React, { useContext, useState } from "react";
 import { CartContext } from "./CartContext";
+import axios from "axios";
 import {
   Button,
   Modal,
@@ -9,13 +10,31 @@ import {
   Table,
 } from "reactstrap";
 
-export default function Cart({ buttonLabel }) {
+export default function Cart({ buttonLabel, history }) {
   const [cart, setCart] = useContext(CartContext);
   const totalPrice = cart.reduce((acc, curr) => acc + curr.price, 0);
 
   const [modal, setModal] = useState(false);
 
   const toggle = () => setModal(!modal);
+
+  const saveOrder = () => {
+    const order = {
+      total_price: totalPrice.toPrecision(4),
+      items: cart,
+    };
+
+    axios.post("http://localhost:5000/product/add", order).then((res) => {
+      if (res.data.success) {
+        console.log(res.data);
+        alert("Order Successful");
+
+        setCart([]);
+
+        toggle();
+      }
+    });
+  };
 
   return (
     <div>
@@ -57,7 +76,7 @@ export default function Cart({ buttonLabel }) {
             Continue Shopping
           </Button>
           {cart.length !== 0 ? (
-            <Button color="primary" onClick={toggle}>
+            <Button color="primary" onClick={saveOrder}>
               Checkout
             </Button>
           ) : null}
