@@ -57,7 +57,7 @@ export default class AdminLogin extends Component{
 
                     <div className="form-group">
                         <label>Password :</label>
-                        <input type="text" className="form-control"
+                        <input type="password" className="form-control"
                                value={this.state.admin_password}
                                onChange={this.onChangePassword}
                         />
