@@ -94,6 +94,7 @@ export default class AddProduct extends Component{
     // includes multer method
     setImage(e, method) {
         if (method === "multer") {
+            // imageFormObj.append("imageName", "multer-image-" + Date.now());
             imageFormObj.append("imageName", "multer-image-" + Date.now());
             imageFormObj.append("imageData", e.target.files[0]);
 
@@ -137,7 +138,7 @@ export default class AddProduct extends Component{
             product_category : '',
         })
 
-        this.props.history.push('/guest');
+        //this.props.history.push('/guest');
     }
 
     render() {
