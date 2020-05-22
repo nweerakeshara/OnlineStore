@@ -2,12 +2,14 @@ import React, {Component} from 'react';
 import {Container, ListGroup, ListGroupItem, Button, NavItem} from 'reactstrap';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import {connect} from 'react-redux';
-import {getItems} from "../actions/itemActions";
+
 import PropTypes from 'prop-types';
 import {Link} from "react-router-dom";
 import {NotificationContainer, NotificationManager} from "react-notifications";
 import "react-notifications/lib/notifications.css";
 import disableBrowserBackButton from 'disable-browser-back-navigation';
+//import ItemListFunc from "./itemListFunc.component";
+
 
 
 class ItemListComponent extends Component {
@@ -18,7 +20,7 @@ class ItemListComponent extends Component {
     };
 
     componentDidMount() {
-        this.props.getItems();
+
         this.loadPage();
         disableBrowserBackButton();
     };
@@ -30,8 +32,8 @@ class ItemListComponent extends Component {
     };
 
     static propTypes = {
-        getItems : PropTypes.func.isRequired,
-        item : PropTypes.object.isRequired,
+
+
         isAuthenticated : PropTypes.bool
     }
 
@@ -54,7 +56,21 @@ class ItemListComponent extends Component {
         const { pager, pageOfItems } = this.state;
 
         return (
+            <div>
 
+
+
+            {/*this.props.isAuthenticated ?
+
+              <ItemListFunc
+
+              >
+
+              </ItemListFunc>
+
+                :
+
+               */}
             <div className="card text-center m-3">
                 <h3 className="card-header font-weight-bold">Clothing List</h3>
                 <NotificationContainer />
@@ -68,7 +84,7 @@ class ItemListComponent extends Component {
                                 <div className="row">
                                     <div className="col-sm">
                                         <br/>
-                                        <img height="80%" width="100%" src="/uploads/demo1.jpg"/>
+                                        <img height="80%" width="100%" src=""/>
                                         <br/>
                                     </div>
                                     <div className="col-sm">
@@ -124,7 +140,11 @@ class ItemListComponent extends Component {
                     </ul>
                     }
                 </div>
-            </div>
+            </div> 
+
+
+
+                </div>
         );
     }
 }
@@ -136,4 +156,4 @@ const mapStateToProps = (state) => ({
     isAuthenticated : state.cus.isAuthenticated
 })
 
-export default connect(mapStateToProps, {getItems}) (ItemListComponent);
+export default connect(mapStateToProps) (ItemListComponent);
