@@ -5,7 +5,8 @@ const multer = require("multer");
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "api/uploads/");
+    // cb(null, 'api/uploads/');
+    cb(null, "client/public/uploads/");
   },
   filename: function (req, file, cb) {
     cb(null, Date.now() + file.originalname);
@@ -40,7 +41,8 @@ ProductRouter.route("/add").post(
     console.log(req.body);
     const newProduct = new Product({
       imageName: req.body.imageName,
-      imageData: req.file.path,
+      // imageData: req.file.path,
+      imageData: req.file.path.substr(14),
       product_id: req.body.product_id,
       product_name: req.body.product_name,
       product_price: req.body.product_price,
@@ -96,7 +98,7 @@ ProductRouter.route("/update/:id").post(function (req, res) {
           res.json("Update complete");
         })
         .catch((err) => {
-          res.status(400).send("unable to update database");
+          res.status(400).send("Unable to update database");
         });
     }
   });

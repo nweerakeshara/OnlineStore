@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
-import { Container, ListGroup, ListGroupItem, Button } from 'reactstrap';
+import {Container, ListGroup, ListGroupItem, Button, NavItem} from 'reactstrap';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
 import {connect} from 'react-redux';
 import {getItems} from "../actions/itemActions";
 import PropTypes from 'prop-types';
 import {Link} from "react-router-dom";
+import {NotificationContainer, NotificationManager} from "react-notifications";
+import "react-notifications/lib/notifications.css";
 
 
 class ItemListComponent extends Component {
@@ -52,10 +54,49 @@ class ItemListComponent extends Component {
         return (
 
             <div className="card text-center m-3">
-                <h3 className="card-header">Clothing List</h3>
-                <div className="card-body">
+                <h3 className="card-header font-weight-bold">Clothing List</h3>
+                <NotificationContainer />
+                <div className="card-body ">
                     {pageOfItems.map(item =>
-                        <div key={item._id}>{item.product_name}{this.props.isAuthenticated ? <button className="alert-danger">Add to Cart</button> : <p className="alert-danger">Login to Continue</p>}</div>
+
+                        <div key={item._id}>
+                            <div className="container rounded-0 border border-info ">
+
+                            <div className="container ">
+                                <div className="row">
+                                    <div className="col-sm">
+                                        <br/>
+                                        <img height="80%" width="100%" src="/uploads/demo1.jpg"/>
+                                        <br/>
+                                    </div>
+                                    <div className="col-sm">
+                                        <br/><br/><br/>
+                                        <h5 className="font-weight-bold text-center">{item.product_name}</h5>
+                                        <h4 className="font-weight-bold text-center text-danger">Price : Rs.{item.product_price}.00</h4>
+                                        <h5 className="font-weight-bold text-center text-danger">Discount : Rs.{item.product_discount}.00</h5>
+                                        <br/><br/>
+                                    </div>
+                                    <div className="col-sm">
+                                        <br/><br/>
+                                        <Link to={"/view/" +item._id}  className="nav-link"> <button className="btn btn-success">View</button></Link>
+                                        {this.props.isAuthenticated ?
+                                            <Link to={'/'}  className="nav-link"> <button className="btn btn-warning text-light">To Cart</button></Link> :
+                                            <Link className="nav-link"> <button className="btn btn-danger" onClick={ () => NotificationManager.error('Login to Continue',"",2000)}>To Cart</button></Link>
+                                        }
+                                        {this.props.isAuthenticated ?
+                                            <Link to={'/'}  className="nav-link"> <button className="btn btn-info text-light">To WishList</button></Link> :
+                                            <Link className="nav-link"> <button className="btn btn-info text-light" onClick={ () => NotificationManager.error('Login to Continue',"",2000)}>To WishList</button></Link>
+                                        }
+
+                                        <br/><br/>
+                                    </div>
+                                </div>
+                            </div>
+
+                            </div>
+                            <br/>
+
+                        </div>
                     )}
                 </div>
                 <div className="card-footer pb-0 pt-3">
