@@ -80,7 +80,7 @@ class ItemListComponent extends Component {
                                 <div className="row">
                                     <div className="col-sm">
                                         <br/>
-                                        <img height="80%" width="100%" src={`${item.imageData}`}/>
+                                        <img height="80%" width="100%" src={`/uploads/${item.imageData}`}/>
                                         <br/>
                                     </div>
                                     <div className="col-sm">

@@ -40,7 +40,7 @@ ProductRouter.route("/add").post(upload.single('imageData'), (req, res, next) =>
         const newProduct = new Product({
             imageName : req.body.imageName,
             // imageData: req.file.path,
-            imageData: req.file.path.substr(14),
+            imageData: req.file.path.substr(22),
             product_id : req.body.product_id,
             product_name : req.body.product_name,
             product_price : req.body.product_price,
