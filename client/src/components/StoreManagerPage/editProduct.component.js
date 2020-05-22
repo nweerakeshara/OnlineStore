@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 //To keep connectivity between frontend 'ReactJS' and backend 'NodeJS', we import axios
 import axios from 'axios';
 import OptionRow from "./optionRow";
+import swal from "sweetalert";
 
 export default class EditProduct extends Component{
     constructor(props) {
@@ -89,7 +90,8 @@ export default class EditProduct extends Component{
         axios.post('http://localhost:5000/api/product/update/' +this.props.match.params.id, obj)
             .then(res => console.log(res.data));
 
-        this.props.history.push('/guest');
+        this.props.history.push('/addDiscount');
+
     }
 
     handleChangeCategory = (event) => {
