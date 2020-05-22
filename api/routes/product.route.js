@@ -5,7 +5,8 @@ const multer = require('multer');
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, 'api/uploads/');
+        // cb(null, 'api/uploads/');
+        cb(null, 'client/public/uploads/');
     },
     filename: function (req, file, cb) {
         cb(null, Date.now() + file.originalname);
@@ -91,9 +92,9 @@ ProductRouter.route('/update/:id').post(function(req, res){
             product.save().then(product => {
                 res.json("Update complete");
             })
-                .catch(err => {
-                    res.status(400).send("unable to update database");
-                });
+            .catch(err => {
+                res.status(400).send("Unable to update database");
+            });
         }
     });
 });

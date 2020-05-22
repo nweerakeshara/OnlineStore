@@ -18,13 +18,16 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cookieParser());
 
+
 app.use("/api/cus", require("./routes/cus"));
 app.use("/api/items", require("./routes/shoppingItems"));
 app.use("/product", require("./routes/product.route"));
+app.use('/api/productcategory', require('./routes/productCategory.route'));
 app.use("/api/storemanager", require("./routes/storemanager.route"));
 app.use("/api/order", require("./routes/OrderRoute"));
 app.use("/api/wishlist", require("./routes/wishlist.route"));
 app.use("/api/rating", require("./routes/RatingsRoute"));
+
 
 app.get("/", (req, res) => {
   res.send("Running on port 5000");
