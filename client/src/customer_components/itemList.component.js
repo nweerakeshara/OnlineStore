@@ -74,8 +74,8 @@ class ItemListComponent extends Component {
                                     <div className="col-sm">
                                         <br/><br/><br/>
                                         <h5 className="font-weight-bold text-center">{item.product_name}</h5>
-                                        <h4 className="font-weight-bold text-center text-danger">Price : Rs.{item.product_price}.00</h4>
-                                        <h5 className="font-weight-bold text-center text-danger">Discount : Rs.{item.product_discount}.00</h5>
+                                        <h4 className="font-weight-bold text-center text-danger">Price : Rs {item.product_price}.00</h4>
+                                        <h5 className="font-weight-bold text-center text-danger">Discount : Rs {item.product_discount}.00</h5>
                                         <br/><br/>
                                     </div>
                                     <div className="col-sm">

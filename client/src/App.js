@@ -33,51 +33,6 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Router>
-          <Provider store={store}>
-            <CartProvider>
-              <NavbarComponent />
-              <div className="container">
-                <br />
-
-                <Switch>
-                  <Route exact path="/" component={ItemListComponent} />
-                  <Route
-                    exact
-                    path="/registerCus"
-                    component={RegisterCustomer}
-                  />
-                  <Route exact path="/loginCus" component={LoginCustomer} />
-                  <Route exact path="/editCus" component={EditCustomer} />
-
-                  <Route exact path="/guest" component={Guest} />
-                  <Route exact path="/user" component={User} />
-                  <Route exact path="/storemanager" component={StoreManager} />
-                  <Route exact path="/admin" component={Admin2} />
-                  <Route exact path="/addProduct" component={AddProduct} />
-                  <Route exact path="/edit/:id" component={EditProduct} />
-                  <Route exact path="/addDiscount" component={FullTable} />
-                  <Route
-                    exact
-                    path="/addStoreManager"
-                    component={AddStoreManager}
-                  />
-                  <Route
-                    exact
-                    path="/addProductCategory"
-                    component={ProductCategory}
-                  />
-                </Switch>
-              </div>
-            </CartProvider>
-          </Provider>
-        </Router>
-      </div>
-    );
-  }
-
-         <div>
-
 
              <Router>
                  <Provider store={store}>
