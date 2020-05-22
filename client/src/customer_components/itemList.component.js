@@ -78,7 +78,7 @@ class ItemListComponent extends Component {
                                     </div>
                                     <div className="col-sm">
                                         <br/><br/>
-                                        <Link to={'/'}  className="nav-link"> <button className="btn btn-success">View</button></Link>
+                                        <Link to={"/view/" +item._id}  className="nav-link"> <button className="btn btn-success">View</button></Link>
                                         {this.props.isAuthenticated ?
                                             <Link to={'/'}  className="nav-link"> <button className="btn btn-warning text-light">To Cart</button></Link> :
                                             <Link className="nav-link"> <button className="btn btn-danger" onClick={ () => NotificationManager.error('Login to Continue',"",2000)}>To Cart</button></Link>
