@@ -27,7 +27,6 @@ class ItemListComponent extends Component {
 
 
     componentDidUpdate()  {
-
         this.loadPage();
     };
 
@@ -48,13 +47,10 @@ class ItemListComponent extends Component {
                     this.setState({pager, pageOfItems});
                 });
         }
-
     }
+
     render() {
-
-
         const { pager, pageOfItems } = this.state;
-
         return (
             <div>
 
@@ -156,4 +152,4 @@ const mapStateToProps = (state) => ({
     isAuthenticated : state.cus.isAuthenticated
 })
 
-export default connect(mapStateToProps) (ItemListComponent);
+export default connect(mapStateToProps, {getItems}) (ItemListComponent);
