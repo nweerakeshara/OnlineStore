@@ -23,7 +23,6 @@ class ItemListComponent extends Component {
 
 
     componentDidUpdate()  {
-
         this.loadPage();
     };
 
@@ -44,13 +43,10 @@ class ItemListComponent extends Component {
                     this.setState({pager, pageOfItems});
                 });
         }
-
     }
+
     render() {
-
-
         const { pager, pageOfItems } = this.state;
-
         return (
 
             <div className="card text-center m-3">
