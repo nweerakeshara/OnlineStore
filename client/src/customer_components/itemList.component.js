@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 import {Link} from "react-router-dom";
 import {NotificationContainer, NotificationManager} from "react-notifications";
 import "react-notifications/lib/notifications.css";
+import disableBrowserBackButton from 'disable-browser-back-navigation';
 
 
 class ItemListComponent extends Component {
@@ -19,6 +20,7 @@ class ItemListComponent extends Component {
     componentDidMount() {
         this.props.getItems();
         this.loadPage();
+        disableBrowserBackButton();
     };
 
 
@@ -68,20 +70,20 @@ class ItemListComponent extends Component {
                                     <div className="col-sm">
                                         <br/><br/><br/>
                                         <h5 className="font-weight-bold text-center">{item.product_name}</h5>
-                                        <h4 className="font-weight-bold text-center text-danger">Price : Rs.{item.product_price}.00</h4>
-                                        <h5 className="font-weight-bold text-center text-danger">Discount : Rs.{item.product_discount}.00</h5>
+                                        <h4 className="font-weight-bold text-center text-danger">Price : Rs {item.product_price}.00</h4>
+                                        <h5 className="font-weight-bold text-center text-danger">Discount : Rs {item.product_discount}.00</h5>
                                         <br/><br/>
                                     </div>
                                     <div className="col-sm">
                                         <br/><br/>
-                                        <Link to={"/view/" +item._id}  className="nav-link"> <button className="btn btn-success">View</button></Link>
+                                        <Link to={"/view/" +item._id}  className="nav-link"> <button className="btn btn-success"> View This Item </button></Link>
                                         {this.props.isAuthenticated ?
-                                            <Link to={'/'}  className="nav-link"> <button className="btn btn-warning text-light">To Cart</button></Link> :
-                                            <Link className="nav-link"> <button className="btn btn-danger" onClick={ () => NotificationManager.error('Login to Continue',"",2000)}>To Cart</button></Link>
+                                            <Link to={'/'}  className="nav-link"> <button className="btn btn-warning text-light">Add To Shopping Cart</button></Link> :
+                                            <Link className="nav-link"> <button className="btn btn-danger" onClick={ () => NotificationManager.error('Login to Continue',"",2000)}>Add To Shopping Cart</button></Link>
                                         }
                                         {this.props.isAuthenticated ?
-                                            <Link to={'/'}  className="nav-link"> <button className="btn btn-info text-light">To WishList</button></Link> :
-                                            <Link className="nav-link"> <button className="btn btn-info text-light" onClick={ () => NotificationManager.error('Login to Continue',"",2000)}>To WishList</button></Link>
+                                            <Link to={'/'}  className="nav-link"> <button className="btn btn-info text-light">Add To Wish List</button></Link> :
+                                            <Link className="nav-link"> <button className="btn btn-info text-light" onClick={ () => NotificationManager.error('Login to Continue',"",2000)}>Add To Wish List</button></Link>
                                         }
 
                                         <br/><br/>
