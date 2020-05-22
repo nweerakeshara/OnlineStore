@@ -24,6 +24,7 @@ import ProductCategory from "./components/AdminPage/addProductCategory.component
 import disableBrowserBackButton from 'disable-browser-back-navigation';
 
 class App extends Component {
+
   componentDidMount() {
     store.dispatch(loadUser());
     disableBrowserBackButton();
@@ -74,6 +75,7 @@ class App extends Component {
       </div>
     );
   }
+
 }
 
 export default App;
