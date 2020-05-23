@@ -44,4 +44,16 @@ ratingRoutes.route("/get_one/:uid/:pid").get(function (req, res) {
   });
 });
 
+//get avg product rating
+ratingRoutes.route("/get_one/:pid").get(function (req, res) {
+  const pid = req.params.pid;
+
+  Rating.find({ product_id: pid }, function (err, ratings) {
+    if (err) console.log(err);
+    else {
+      res.json(ratings);
+    }
+  });
+});
+
 module.exports = ratingRoutes;
