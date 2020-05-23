@@ -8,6 +8,7 @@ import {NotificationContainer, NotificationManager} from "react-notifications";
 import "react-notifications/lib/notifications.css";
 import disableBrowserBackButton from 'disable-browser-back-navigation';
 import axios from 'axios';
+import Ratings, {UserRating} from "../components/UI/Ratings";
 
 
 
@@ -19,7 +20,8 @@ class ItemViewComponent extends Component {
         itemName : '',
         itemPrice : '',
         itemDiscount : '',
-        itemCategory : ''
+        item_id : '',
+        imageData : ''
     }
 
     componentDidMount() {
@@ -31,7 +33,9 @@ class ItemViewComponent extends Component {
                     itemName : response.data.product_name,
                     itemPrice : response.data.product_price,
                     itemDiscount : response.data.product_discount,
-                    itemCategory : response.data.product_category
+                    item_id :  response.data._id,
+                    imageData : response.data.imageData
+
                 });
             })
             .catch(function (error) {
@@ -57,26 +61,47 @@ class ItemViewComponent extends Component {
             <div>
                 <NotificationContainer />
                 <div className="row">
-                    <div className="col-sm-8">col-sm-8</div>
+                    <div className="col-sm-8">
+
+                        <img  height="100%"   width="100%" src={`/uploads/${this.state.imageData}`}  />
+
+                    </div>
                     <div className="col-sm-4">
 
                         <h5 className="font-weight-bold text-center">{this.state.itemName}</h5>
                         <h4 className="font-weight-bold text-center text-danger">Price : Rs {this.state.itemPrice}.00</h4>
                         <h5 className="font-weight-bold text-center text-danger">Discount : Rs {this.state.itemDiscount}.00</h5>
                         <br/>
-                        <h6 className="font-weight-bold text-center">{this.state.itemCategory}</h6>
-                        <h6 className="font-weight-bold text-center">{this.state.itemId}</h6>
+
+                        <h6 className="font-weight-bold text-center">Product ID : {this.state.itemId}</h6>
+                        <p className="font-weight-bold text-center text-muted">ID :{this.state.item_id}</p>
                         <br/>
 
                         {this.props.isAuthenticated ?
-                            <Link to={'/'}  className="nav-link"> <button className="btn btn-warning text-light">Add To Shopping Cart</button></Link> :
-                            <Link className="nav-link"> <button className="btn btn-danger" onClick={ () => NotificationManager.error('Login to Continue',"",2000)}>Add To Shopping Cart</button></Link>
+                            <Link to={'/'}  className="nav-link text-center"> <button className="btn btn-warning text-light">Add To Shopping Cart</button></Link> :
+                            <Link className="nav-link text-center"> <button className="btn btn-danger" onClick={ () => NotificationManager.error('Login to Continue',"",2000)}>Add To Shopping Cart</button></Link>
                         }
                         {this.props.isAuthenticated ?
-                            <Link to={'/'}  className="nav-link"> <button className="btn btn-info text-light" onClick={ () => NotificationManager.error(`Hi ${user._id}`,"",2000)}>Add To Wish List</button></Link> :
-                            <Link className="nav-link"> <button className="btn btn-info text-light" onClick={ () => NotificationManager.error('Login to Continue',"",2000)}>Add To Wish List</button></Link>
+                            <Link to={'/'}  className="nav-link text-center"> <button className="btn btn-info text-light" onClick={ () => NotificationManager.error(`Hi ${user._id}`,"",2000)}>Add To Wish List</button></Link> :
+                            <Link className="nav-link text-center"> <button className="btn btn-info text-light" onClick={ () => NotificationManager.error('Login to Continue',"",2000)}>Add To Wish List</button></Link>
                         }
 
+                        <br/>
+                        <div className="text-center">
+                        {!(this.props.isAuthenticated) ?
+
+                            <Ratings> </Ratings>
+
+                            :
+
+                            <div>
+
+                                <Ratings/>
+                                <UserRating id={this.state.item_id}> </UserRating>
+
+                            </div>
+                        }
+                        </div>
 
                     </div>
                 </div>
@@ -84,9 +109,15 @@ class ItemViewComponent extends Component {
 
 
                 <div className="row">
-                    <div className="col-sm">col-sm</div>
-                    <div className="col-sm">col-sm</div>
-                    <div className="col-sm">col-sm</div>
+
+                    <div className="col-sm"> <br/><br/>
+
+
+
+
+
+                    </div>
+
                 </div>
 
 
