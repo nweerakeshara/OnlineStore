@@ -29,7 +29,7 @@ export default function ModalPrompt({ id, name, price }) {
 
   return (
     <div>
-      <Button color="danger" onClick={toggle}>
+      <Button className="btn btn-warning text-light" onClick={toggle}>
         {`Add to cart`}
       </Button>
       <Modal size="sm" isOpen={modal} toggle={toggle}>
