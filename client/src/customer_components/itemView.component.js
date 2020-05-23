@@ -138,10 +138,10 @@ class ItemViewComponent extends Component {
             <br />
             <div className="text-center">
               {!this.props.isAuthenticated ? (
-                <Ratings> </Ratings>
+                <Ratings pid={this.state.item_id}> </Ratings>
               ) : (
                 <div>
-                  <Ratings />
+                  <Ratings pid={this.state.item_id} />
                   <UserRating cusId={user._id} id={this.state.item_id}>
                     {" "}
                   </UserRating>
