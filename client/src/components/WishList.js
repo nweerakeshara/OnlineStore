@@ -113,7 +113,6 @@ export default function WishList({ name, price, id, usr_id, img_id }) {
                 <tbody key={item.product_id}>
                   <tr>
                     <th scope="row">
-                      {" "}
                       <img
                         height="30%"
                         width="30%"
