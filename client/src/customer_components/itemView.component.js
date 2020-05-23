@@ -78,12 +78,12 @@ class ItemViewComponent extends Component {
                         <br/>
 
                         {this.props.isAuthenticated ?
-                            <Link to={'/'}  className="nav-link text-center"> <button className="btn btn-warning text-light">Add To Shopping Cart</button></Link> :
-                            <Link className="nav-link text-center"> <button className="btn btn-danger" onClick={ () => NotificationManager.error('Login to Continue',"",2000)}>Add To Shopping Cart</button></Link>
+                            <Link to={'/'}  className="nav-link text-center"> <button className="btn btn-warning text-light btn-block">Add To Shopping Cart</button></Link> :
+                            <Link className="nav-link text-center"> <button className="btn btn-danger btn-block" onClick={ () => NotificationManager.error('Login to Continue',"",2000)}>Add To Shopping Cart</button></Link>
                         }
                         {this.props.isAuthenticated ?
-                            <Link to={'/'}  className="nav-link text-center"> <button className="btn btn-info text-light" onClick={ () => NotificationManager.error(`Hi ${user._id}`,"",2000)}>Add To Wish List</button></Link> :
-                            <Link className="nav-link text-center"> <button className="btn btn-info text-light" onClick={ () => NotificationManager.error('Login to Continue',"",2000)}>Add To Wish List</button></Link>
+                            <Link to={'/'}  className="nav-link text-center"> <button className="btn btn-info btn-block text-light" onClick={ () => NotificationManager.error(`Hi ${user._id}`,"",2000)}>Add To Wish List</button></Link> :
+                            <Link className="nav-link text-center"> <button className="btn btn-info btn-block text-light" onClick={ () => NotificationManager.error('Login to Continue',"",2000)}>Add To Wish List</button></Link>
                         }
 
                         <br/>

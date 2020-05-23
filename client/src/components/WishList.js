@@ -88,7 +88,7 @@ export default function WishList({ name, price, id, usr_id }) {
 
   return (
     <div>
-      <button onClick={addToWishList} type="button" class="btn btn-secondary">
+      <button onClick={addToWishList} type="button" className="btn btn-info ">
         Add to Wish List
       </button>
       <NotificationContainer />

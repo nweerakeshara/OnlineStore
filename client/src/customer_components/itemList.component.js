@@ -57,28 +57,7 @@ class ItemListComponent extends Component {
       <div>
 
 
-        {this.props.isAuthenticated ? (
-                          //    <Link to={'/'}  className="nav-link"> <button className="btn btn-info text-light" onClick={ () => NotificationManager.error(`Hi ${user._id}`,2000)}>Add To Wish List</button></Link> :
-                          <WishListView usr_id = {user._id}                          
-                          />
-                        ) : (
-                        //   <Link className="nav-link">
-                        //     {" "}
-                        //     <button
-                        //       className="btn btn-info text-light"
-                        //       onClick={() =>
-                        //         NotificationManager.error(
-                        //           "Login to Continue",
-                        //           "",
-                        //           2000
-                        //         )
-                        //       }
-                        //     >
-                        //       Wish List
-                        //     </button>
-                        //   </Link>
-                        ""
-                        )}
+        {this.props.isAuthenticated ? (  <WishListView usr_id = {user._id}  />    ) :  null }
 
         <div className="card text-center m-3">
           <h3 className="card-header font-weight-bold">Clothing List</h3>
@@ -100,11 +79,7 @@ class ItemListComponent extends Component {
                     <div className="row">
                       <div className="col-sm">
                         <br />
-                        <img
-                          height="80%"
-                          width="100%"
-                          src={`/uploads/${item.imageData}`}
-                        />
+                        <img height="80%"  width="100%"  src={`/uploads/${item.imageData}`} />
                         <br />
                       </div>
                       <div className="col-sm">
@@ -128,13 +103,15 @@ class ItemListComponent extends Component {
                         <br />
                         <br />
                         <Link to={"/view/" + item._id} className="nav-link">
-                          <button className="btn btn-success">
-                            {" "}
-                            View This Item{" "}
+                          <button className="btn btn-success btn-block">
+
+                            View This Item
                           </button>
                         </Link>
 
                         {this.props.isAuthenticated ? (
+
+
                           <ModalPrompt
                             id={item._id}
                             name={item.product_name}
@@ -143,7 +120,7 @@ class ItemListComponent extends Component {
                         ) : (
                           <Link className="nav-link">
                             <button
-                              className="btn btn-danger"
+                              className="btn btn-danger btn-block"
                               onClick={() =>
                                 NotificationManager.error(
                                   "Login to Continue",
@@ -167,7 +144,7 @@ class ItemListComponent extends Component {
                         ) : (
                           <Link className="nav-link">
                             <button
-                              className="btn btn-info text-light"
+                              className="btn btn-info text-light btn-block"
                               onClick={() =>
                                 NotificationManager.error(
                                   "Login to Continue",
