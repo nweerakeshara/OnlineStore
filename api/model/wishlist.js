@@ -12,6 +12,9 @@ let Wishlist = new Schema({
     },
     product_price : {
         type : Number
+    },
+    user_ID : {
+        type : String
     }
 },{
     collection : 'wishlist'
