@@ -30,6 +30,7 @@ app.use("/api/rating", require("./routes/RatingsRoute"));
 app.use("/api/comments", require("./routes/comments"));
 
 
+
 app.get("/", (req, res) => {
   res.send("Running ");
   //default
