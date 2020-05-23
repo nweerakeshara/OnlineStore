@@ -23,10 +23,9 @@ export default function WishList({ name, price, id, usr_id, img_id }) {
       product_name: name,
       product_price: price,
 
-      product_id: id+usr_id,
-      user_ID : usr_id,
-      img_ID : img_id
-
+      product_id: id + usr_id,
+      user_ID: usr_id,
+      img_ID: img_id,
     };
 
     axios
@@ -38,42 +37,37 @@ export default function WishList({ name, price, id, usr_id, img_id }) {
             "Item Added to the Wish List",
             10000,
             () => {
-              toggle();
+
+              toggle(); // calling the toggle function
             }
           );
-          console.log(res.data);
+
         } else {
           NotificationManager.error(
-            "",
+            "Click Here to view the Wish List",
             "Item is already in the Wish List",
             10000,
             () => {
               toggle();
             }
           );
-
-          console.log(res.data);
         }
       })
       .catch((error) => {
-        NotificationManager.error(
-          "Click Here to view the Wish List!",
-          "Item is already in the Wish List",
-          10000,
-          () => {
-            toggle();
-          }
-        );
+        console.log(error);
       });
   };
 
   const [wishlist, setWishList] = useState([]);
 
+  //fires everytime when the component is mounted
   useEffect(() => {
     axios
-      .get(`http://localhost:5000/api/wishlist/get/${usr_id}`)
+
+      .get(`http://localhost:5000/api/wishlist/get/${usr_id}`) //get data from userID
       .then((res) => {
-        setWishList(res.data);
+        setWishList(res.data); //save retrieved data to the hook
+
       });
   });
 
@@ -88,13 +82,17 @@ export default function WishList({ name, price, id, usr_id, img_id }) {
         `http://localhost:5000/api/wishlist/delete/${e.target.value}/${usr_id}`
       )
       .then((res) => {
-        NotificationManager.info("Item Successfully deleted", "", 2000);
+
+        NotificationManager.info("Item is Successfully deleted", "", 2000);
+
         console.log(res.data);
       })
       .catch((err) => console.log("Error"));
   };
 
   return (
+    //used a react strap component (modal) in order to have a popup windows to show the data
+    //inside a table
     <div>
       <button
         onClick={addToWishList}
@@ -127,7 +125,7 @@ export default function WishList({ name, price, id, usr_id, img_id }) {
                   <tr>
 
                     <th scope="row">
-                      {" "}
+
                       <img
                         height="30%"
                         width="30%"
