@@ -22,6 +22,7 @@ export default function WishList({ name, price, id, usr_id, img_id }) {
     const product = {
       product_name: name,
       product_price: price,
+
       product_id: id + usr_id,
       user_ID: usr_id,
       img_ID: img_id,
@@ -36,9 +37,11 @@ export default function WishList({ name, price, id, usr_id, img_id }) {
             "Item Added to the Wish List",
             10000,
             () => {
+
               toggle(); // calling the toggle function
             }
           );
+
         } else {
           NotificationManager.error(
             "Click Here to view the Wish List",
@@ -60,9 +63,11 @@ export default function WishList({ name, price, id, usr_id, img_id }) {
   //fires everytime when the component is mounted
   useEffect(() => {
     axios
+
       .get(`http://localhost:5000/api/wishlist/get/${usr_id}`) //get data from userID
       .then((res) => {
         setWishList(res.data); //save retrieved data to the hook
+
       });
   });
 
@@ -77,7 +82,9 @@ export default function WishList({ name, price, id, usr_id, img_id }) {
         `http://localhost:5000/api/wishlist/delete/${e.target.value}/${usr_id}`
       )
       .then((res) => {
+
         NotificationManager.info("Item is Successfully deleted", "", 2000);
+
         console.log(res.data);
       })
       .catch((err) => console.log("Error"));
@@ -90,8 +97,7 @@ export default function WishList({ name, price, id, usr_id, img_id }) {
       <button
         onClick={addToWishList}
         type="button"
-        class="btn btn-secondary"    
-        style={{ marginLeft: "14px" , border : "2px solid black",marginTop: "6px" }}    
+        className="btn btn-info btn-block "
       >
         Add to Wish List
       </button>
@@ -117,13 +123,16 @@ export default function WishList({ name, price, id, usr_id, img_id }) {
               {wishlist.map((item) => (
                 <tbody key={item.product_id}>
                   <tr>
+
                     <th scope="row">
+
                       <img
                         height="110px"
                         width="130px"
                         src={`/uploads/${item.img_ID}`}
                       />
                     </th>
+
                     <td>{item.product_name}</td>
                     <td>{item.product_price}</td>
                     <td>
