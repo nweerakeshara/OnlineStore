@@ -55,7 +55,7 @@ class ItemListComponent extends Component {
     const { pager, pageOfItems } = this.state;
     return (
       <div>
-        
+
         {this.props.isAuthenticated ? (  <WishListView usr_id = {user._id}  />    ) :  null }
 
         <div className="card text-center m-3">
@@ -110,12 +110,12 @@ class ItemListComponent extends Component {
 
                         {this.props.isAuthenticated ? (
 
+                          <div className="btn-block" ><ModalPrompt
+                              id={item._id}
+                              name={item.product_name}
+                              price={item.product_price}
+                          ></ModalPrompt></div>
 
-                          <ModalPrompt
-                            id={item._id}
-                            name={item.product_name}
-                            price={item.product_price}
-                          ></ModalPrompt>
                         ) : (
                           <Link className="nav-link">
                             <button
@@ -134,13 +134,15 @@ class ItemListComponent extends Component {
                         )}
 
                         {this.props.isAuthenticated ? (
-                          <WishList
+                            <div className="btn-block">
+                            <WishList
                             name={item.product_name}
                             price={item.product_price}
                             id={item._id}
                             usr_id={user._id}
                             img_id={item.imageData}
                           />
+                            </div>
                         ) : (
                           <Link className="nav-link">
                             <button

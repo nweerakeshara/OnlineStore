@@ -18,6 +18,7 @@ import "react-notifications/lib/notifications.css";
 import disableBrowserBackButton from "disable-browser-back-navigation";
 import axios from "axios";
 import Ratings, { UserRating } from "../components/UI/Ratings";
+import CommentsView from "./commentsView.component";
 
 class ItemViewComponent extends Component {
   state = {
@@ -91,7 +92,7 @@ class ItemViewComponent extends Component {
             {this.props.isAuthenticated ? (
               <Link to={"/"} className="nav-link text-center">
                 {" "}
-                <button className="btn btn-warning text-light">
+                <button className="btn btn-warning text-light btn-block">
                   Add To Shopping Cart
                 </button>
               </Link>
@@ -99,7 +100,7 @@ class ItemViewComponent extends Component {
               <Link className="nav-link text-center">
                 {" "}
                 <button
-                  className="btn btn-danger"
+                  className="btn btn-danger btn-block"
                   onClick={() =>
                     NotificationManager.error("Login to Continue", "", 2000)
                   }
@@ -112,7 +113,7 @@ class ItemViewComponent extends Component {
               <Link to={"/"} className="nav-link text-center">
                 {" "}
                 <button
-                  className="btn btn-info text-light"
+                  className="btn btn-info text-light btn-block"
                   onClick={() =>
                     NotificationManager.error(`Hi ${user._id}`, "", 2000)
                   }
@@ -124,7 +125,7 @@ class ItemViewComponent extends Component {
               <Link className="nav-link text-center">
                 {" "}
                 <button
-                  className="btn btn-info text-light"
+                  className="btn btn-info text-light btn-block"
                   onClick={() =>
                     NotificationManager.error("Login to Continue", "", 2000)
                   }
@@ -152,9 +153,14 @@ class ItemViewComponent extends Component {
 
         <div className="row">
           <div className="col-sm">
-            {" "}
+
             <br />
             <br />
+
+
+
+            <CommentsView productid={this.state.item_id}  > </CommentsView>
+
           </div>
         </div>
       </div>
