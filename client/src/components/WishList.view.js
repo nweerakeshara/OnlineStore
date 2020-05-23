@@ -60,7 +60,7 @@ export default function WishListView({ usr_id }) {
         <ModalHeader toggle={toggle}>Your Wish List</ModalHeader>
         {wishlist.length === 0 ? (
           <ModalBody>
-            <p>No Items in Wish List</p>
+            <p>You haven’t added any items to your Wish List yet</p>
             <Spinner color="success" />
           </ModalBody>
         ) : (
@@ -107,7 +107,7 @@ export default function WishListView({ usr_id }) {
 
         <ModalFooter>
           <Button color="warning" onClick={toggle}>
-            Continue Shopping
+            Shop Now
           </Button>
         </ModalFooter>
       </Modal>
