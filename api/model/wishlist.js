@@ -1,4 +1,4 @@
-///wish list database schema
+///Wish List Database Schema
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
