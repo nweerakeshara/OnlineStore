@@ -31,7 +31,7 @@ storemanagerRoutes.route('/add').post(function(req, res){
 
             transporter.sendMail(mailOption, function (error, info) {
                 if (error) {
-                    // console.log(error);
+                     console.log(error);
                 } else {
                     // console.log("Email sent: " + info.response);
                  }
@@ -43,5 +43,14 @@ storemanagerRoutes.route('/add').post(function(req, res){
             res.status(400).json({success: false},err);
         });
 });
+
+//login
+storemanagerRoutes.route("/login").post(function (req, res) {
+    StoreManager.find({sm_email : req.body.sm_email, sm_password : req.body.sm_password}, function (err, storemanager) {
+        if (err) console.log(err);
+        res.json(storemanager);
+    })
+});
+
 
 module.exports = storemanagerRoutes;

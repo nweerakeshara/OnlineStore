@@ -24,6 +24,7 @@ import ProductCategory from "./components/AdminPage/addProductCategory.component
 import disableBrowserBackButton from 'disable-browser-back-navigation';
 import AdminLogin from "./components/AdminPage/adminLogin";
 import ItemViewComponent from "./customer_components/itemView.component";
+import StoreManagerLogin from "./components/StoreManagerPage/storeManagerLogin";
 
 
 class App extends Component {
@@ -52,7 +53,7 @@ class App extends Component {
                                  <Route exact path='/editCus' component={EditCustomer}/>
                                  <Route exact path="/guest" component={Guest}/>
                                  <Route exact path="/user" component={User}/>
-                                 <Route exact path="/storemanager" component={StoreManager}/>
+                                 <Route exact path="/storemanager" component={StoreManagerLogin}/>
                                  <Route exact path="/admin2" component={Admin2}/>
                                  <Route exact path="/addProduct" component={AddProduct}/>
                                  <Route exact path="/edit/:id" component={EditProduct}/>
@@ -61,6 +62,7 @@ class App extends Component {
                                  <Route exact path="/addStoreManager" component={AddStoreManager}/>
                                  <Route exact path="/addProductCategory" component={ProductCategory}/>
                                  <Route exact path="/admin" component={AdminLogin}/>
+                                 <Route exact path="/storemanager2" component={StoreManager}/>
 
                              </Switch>
                          </div>

@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import swal from "sweetalert";
+import axios from "axios";
 
 export default class StoreManagerLogin extends Component{
     constructor(props) {
@@ -9,14 +10,14 @@ export default class StoreManagerLogin extends Component{
         this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
-            sm_username : '',
+            sm_email : '',
             sm_password : ''
         }
     }
 
     onChangeUsername(e){
         this.setState({
-            sm_username: e.target.value
+            sm_email: e.target.value
         });
     }
 
@@ -29,15 +30,25 @@ export default class StoreManagerLogin extends Component{
     onSubmit(e){
         e.preventDefault();
 
-        if(this.state.sm_username == 'admin' && this.state.sm_password == 'admin'){
-            swal("Successful", "Login Granted", "success");
-            this.props.history.push('/admin2');
-        }else{
-            swal("Unsuccessful", "Incorrect username or password", "error");
-        }
+        const obj = {
+            sm_email : this.state.sm_email,
+            sm_password : this.state.sm_password
+        };
+
+        axios.post('http://localhost:5000/api/storemanager/login', obj)
+            .then((res) => {
+                // console.log(res.data)
+                if(res.data.length != 0){
+                    swal("Successful", "Login Granted", "success");
+                    this.props.history.push('/storemanager2');
+                }
+                else{
+                    swal("Unsuccessful", "Incorrect username or password", "error");
+                }
+            })
 
         this.setState({
-            sm_username : '',
+            sm_email : '',
             sm_password : ''
         })
     }
@@ -50,7 +61,7 @@ export default class StoreManagerLogin extends Component{
                     <div className="form-group">
                         <label>Username :</label>
                         <input type="text" className="form-control"
-                               value={this.state.sm_username}
+                               value={this.state.sm_email}
                                onChange={this.onChangeUsername}
                         />
                     </div>
