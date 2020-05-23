@@ -32,8 +32,9 @@ export function UserRating({ cusId, id }) {
   return (
     <div>
       <Box component="fieldset" mb={3} borderColor="transparent">
-        <Typography component="legend">Controlled</Typography>
+        <Typography component="legend">Add you rating!</Typography>
         <Rating
+          color="blue"
           value={value}
           onChange={(event, newValue) => {
             setValue(newValue);
