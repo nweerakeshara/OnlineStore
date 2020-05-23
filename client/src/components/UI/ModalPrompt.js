@@ -1,5 +1,11 @@
 import React, { useContext, useState } from "react";
 import { CartContext } from "../CartContext";
+import "react-notifications/lib/notifications.css";
+import Home from "../../customer_components/itemList.component";
+import {
+  NotificationContainer,
+  NotificationManager,
+} from "react-notifications";
 
 import {
   Button,
@@ -25,6 +31,7 @@ export default function ModalPrompt({ id, name, price }) {
     };
     setCart((currentCart) => [...currentCart, product]);
     toggle();
+    NotificationManager.success("", "Item Added to Cart Successfully", 10000);
   };
 
   return (
