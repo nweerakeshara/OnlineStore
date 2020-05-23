@@ -80,9 +80,8 @@ export default function WishListView({ usr_id }) {
                     <th scope="row">                     
                       <img
                         height="30%"
-                        width="30%"
-                        //src={`/uploads/${item.imageData}`}
-                        src={`${item.img_ID}`}
+                        width="30%"                        
+                        src={`/uploads/${item.img_ID}`}
                       />
                       
                     </th>

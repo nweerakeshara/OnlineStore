@@ -55,30 +55,7 @@ class ItemListComponent extends Component {
     const { pager, pageOfItems } = this.state;
     return (
       <div>
-
-
-        {this.props.isAuthenticated ? (
-                          //    <Link to={'/'}  className="nav-link"> <button className="btn btn-info text-light" onClick={ () => NotificationManager.error(`Hi ${user._id}`,2000)}>Add To Wish List</button></Link> :
-                          <WishListView usr_id = {user._id}                       
-                          />
-                        ) : (
-                        //   <Link className="nav-link">
-                        //     {" "}
-                        //     <button
-                        //       className="btn btn-info text-light"
-                        //       onClick={() =>
-                        //         NotificationManager.error(
-                        //           "Login to Continue",
-                        //           "",
-                        //           2000
-                        //         )
-                        //       }
-                        //     >
-                        //       Wish List
-                        //     </button>
-                        //   </Link>
-                        ""
-                        )}
+        {this.props.isAuthenticated ? <WishListView usr_id={user._id} /> : ""}
 
         <div className="card text-center m-3">
           <h3 className="card-header font-weight-bold">Clothing List</h3>

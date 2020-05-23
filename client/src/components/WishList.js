@@ -117,7 +117,7 @@ export default function WishList({ name, price, id, usr_id,img_id }) {
                     <th scope="row"> <img
                           height="30%"
                           width="30%"
-                          src={`${item.img_ID}`}
+                          src={`/uploads/${item.img_ID}`}
                         /></th>
                     <td>{item.product_name}</td>
                     <td>{item.product_price}</td>
