@@ -36,6 +36,12 @@ export default function Cart({ buttonLabel, history }) {
     });
   };
 
+  //Handle delete
+  const handleDelete = (e) => {
+    console.log(e.target.id);
+    setCart(cart.filter((item) => item.id !== e.target.id));
+  };
+
   return (
     <div>
       <Button color="danger" onClick={toggle}>
@@ -63,6 +69,11 @@ export default function Cart({ buttonLabel, history }) {
                     <th scope="row">{item.id.toUpperCase().substring(0, 4)}</th>
                     <td>{item.name}</td>
                     <td>{item.price}</td>
+                    <td>
+                      <Button id={item.id} onClick={handleDelete}>
+                        Delete
+                      </Button>
+                    </td>
                   </tr>
                 </tbody>
               ))}
