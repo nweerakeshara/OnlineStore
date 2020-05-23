@@ -12,6 +12,7 @@ export default class EditProduct extends Component{
         this.onChangeProductPrice = this.onChangeProductPrice.bind(this);
         this.onChangeProductDiscount = this.onChangeProductDiscount.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
+        this.deleteProduct = this.deleteProduct.bind(this);
 
         this.state = {
             product_id : '',
@@ -88,20 +89,54 @@ export default class EditProduct extends Component{
         };
 
         axios.post('http://localhost:5000/api/product/update/' +this.props.match.params.id, obj)
-            .then(res => console.log(res.data));
+            .then((res) => {
+                if(res.data == 'Update complete'){
+                    swal("Successful", "Product discount added", "success");
+                }else{
+                    swal("Unsuccessful", "Error while adding discount", "error");
+                }
+            });
 
-        this.props.history.push('/addDiscount');
+        //this.props.history.push('/addDiscount');
 
+        this.setState({
+            product_id : '',
+            product_name : '',
+            product_price : '',
+            product_discount : '',
+            product_category : '',
+        })
     }
 
     handleChangeCategory = (event) => {
         this.setState({ product_category: event.currentTarget.value })
     }
 
+    deleteProduct(){
+        axios.get('http://localhost:5000/api/product/delete/' +this.props.match.params.id)
+            .then((res) => {
+                if(res.data == 'Successfully removed'){
+                    swal("Successful", "Product details removed", "success");
+                }else{
+                    swal("Unsuccessful", "Error while deleting product", "error");
+                }
+            });
+
+        //this.props.history.push('/addDiscount');
+
+        this.setState({
+            product_id : '',
+            product_name : '',
+            product_price : '',
+            product_discount : '',
+            product_category : '',
+        })
+    }
+
     render() {
         return(
             <div style={{marginTop: 10}}>
-                <h3>Add New Product</h3>
+                <h3>Edit Product</h3>
                 <form onSubmit={this.onSubmit}>
                     <div className="form-group">
                         <label>Add Product ID :</label>
@@ -137,14 +172,17 @@ export default class EditProduct extends Component{
 
                     <div className="form-group">
                         <label>Select Category :</label>
-                            <select onChange={this.handleChangeCategory}>
-                                {this.optionRow()}
-                            </select>
+                        <div style={{width:"25px", display:"inline-block"}} />
+                        <select onChange={this.handleChangeCategory}>
+                            {this.optionRow()}
+                        </select>
 
                     </div>
 
                     <div className="form-group">
                         <input type="submit" value="Add Discount" className= "btn btn-primary"/>
+                        <div style={{width:"25px", display:"inline-block"}} />
+                        <input type="button" value="Delete Product" className= "btn btn-danger" onClick={this.deleteProduct}/>
                     </div>
                 </form>
             </div>

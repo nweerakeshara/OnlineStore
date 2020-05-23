@@ -7,16 +7,6 @@ import swal from 'sweetalert';
 
 let imageFormObj = new FormData();
 
-// const Categories = [
-//     { key: 1, value: "Mens wear" },
-//     { key: 2, value: "Kids wear" },
-//     { key: 3, value: "Ladies wear" },
-//     { key: 4, value: "Trouser" },
-//     { key: 5, value: "Skirt" },
-//     { key: 6, value: "Blouse" },
-//     { key: 7, value: "TShirt" }
-// ]
-
 export default class AddProduct extends Component{
     constructor(props) {
         super(props);
@@ -180,11 +170,7 @@ export default class AddProduct extends Component{
 
                     <div className="form-group">
                         <label>Select Category :</label>
-                        {/*<select onChange={this.handleChangeCategory}>*/}
-                        {/*    {Categories.map(item => (*/}
-                        {/*        <option key={item.key} value={item.value}>{item.value}</option>*/}
-                        {/*    ))}*/}
-                        {/*</select>*/}
+                        <div style={{width:"25px", display:"inline-block"}} />
                         <select onChange={this.handleChangeCategory}>
                             {this.optionRow()}
                         </select>

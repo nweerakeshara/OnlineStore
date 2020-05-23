@@ -104,4 +104,12 @@ ProductRouter.route("/update/:id").post(function (req, res) {
   });
 });
 
+//delete
+ProductRouter.route('/delete/:id').get(function(req, res){
+  Product.findByIdAndRemove({_id:req.params.id}, function(err, business){
+    if(err)res.json(err);
+    else res.json('Successfully removed');
+  });
+});
+
 module.exports = ProductRouter;

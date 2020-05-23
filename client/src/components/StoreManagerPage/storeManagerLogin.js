@@ -56,7 +56,7 @@ export default class StoreManagerLogin extends Component{
     render() {
         return(
             <div style={{marginTop: 10}}>
-                <h3>Store Manager Login</h3>
+                <h3>Sign In</h3>
                 <form onSubmit={this.onSubmit}>
                     <div className="form-group">
                         <label>Username :</label>
