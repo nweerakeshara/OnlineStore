@@ -1,12 +1,5 @@
 import React, { Component } from "react";
-import {
-  Container,
-  ListGroup,
-  ListGroupItem,
-  Button,
-  NavItem,
-} from "reactstrap";
-import { CSSTransition, TransitionGroup } from "react-transition-group";
+
 import { connect } from "react-redux";
 
 import PropTypes from "prop-types";
@@ -38,6 +31,7 @@ class ItemListComponent extends Component {
 
   static propTypes = {
     isAuthenticated: PropTypes.bool,
+    cus: PropTypes.object.isRequired,
   };
 
   loadPage = () => {
@@ -56,15 +50,10 @@ class ItemListComponent extends Component {
   };
 
   render() {
+    const { user } = this.props.cus;
     const { pager, pageOfItems } = this.state;
     return (
       <div>
-        {/*this.props.isAuthenticated ?
-              <ItemListFunc
-              >
-              </ItemListFunc>
-                :
-               */}
         <div className="card text-center m-3">
           <h3 className="card-header font-weight-bold">Clothing List</h3>
           <Cart></Cart>
@@ -111,12 +100,6 @@ class ItemListComponent extends Component {
                           </button>
                         </Link>
                         {this.props.isAuthenticated ? (
-                          // <Link to={"/"} className="nav-link">
-                          //   {" "}
-                          //   <button className="btn btn-warning text-light">
-                          //     Add To Shopping Cart
-                          //   </button>
-                          // </Link>
                           <ModalPrompt
                             id={item._id}
                             name={item.product_name}
@@ -142,7 +125,15 @@ class ItemListComponent extends Component {
                         {this.props.isAuthenticated ? (
                           <Link to={"/"} className="nav-link">
                             {" "}
-                            <button className="btn btn-info text-light">
+                            <button
+                              className="btn btn-info text-light"
+                              onClick={() =>
+                                NotificationManager.error(
+                                  `Hi ${user._id}`,
+                                  2000
+                                )
+                              }
+                            >
                               Add To Wish List
                             </button>
                           </Link>
@@ -249,6 +240,7 @@ class ItemListComponent extends Component {
 const mapStateToProps = (state) => ({
   item: state.item,
   isAuthenticated: state.cus.isAuthenticated,
+  cus: state.cus,
 });
 
-export default connect(mapStateToProps)(ItemListComponent);
+export default connect(mapStateToProps, null)(ItemListComponent);
