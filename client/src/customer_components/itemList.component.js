@@ -1,14 +1,5 @@
 import React, { Component } from "react";
-import {
-  Container,
-  ListGroup,
-  ListGroupItem,
-  Button,
-  NavItem,
-} from "reactstrap";
-import { CSSTransition, TransitionGroup } from "react-transition-group";
 import { connect } from "react-redux";
-
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import {
@@ -17,6 +8,10 @@ import {
 } from "react-notifications";
 import "react-notifications/lib/notifications.css";
 import disableBrowserBackButton from "disable-browser-back-navigation";
+
+import ItemListFunc from "./itemListFunc.component";
+import ModalPrompt from "../components/UI/ModalPrompt";
+import Cart from "../components/Cart";
 import WishList from "../components/WishList";
 import WishListView from "../components/WishList.view";
 
@@ -60,6 +55,7 @@ class ItemListComponent extends Component {
     const { pager, pageOfItems } = this.state;
     return (
       <div>
+
         {this.props.isAuthenticated ? (
                           //    <Link to={'/'}  className="nav-link"> <button className="btn btn-info text-light" onClick={ () => NotificationManager.error(`Hi ${user._id}`,2000)}>Add To Wish List</button></Link> :
                           <WishListView usr_id = {user._id}                          
@@ -82,8 +78,19 @@ class ItemListComponent extends Component {
                         //   </Link>
                         ""
                         )}
+
         <div className="card text-center m-3">
           <h3 className="card-header font-weight-bold">Clothing List</h3>
+
+          {this.props.isAuthenticated ? (
+            <div>
+              <WishListView />
+              <Cart />
+            </div>
+          ) : (
+            ""
+          )}
+
           <NotificationContainer />
           <div className="card-body ">
             {pageOfItems.map((item) => (
@@ -92,18 +99,12 @@ class ItemListComponent extends Component {
                   <div className="container ">
                     <div className="row">
                       <div className="col-sm">
-                        <br />
-                        <img
-                          height="80%"
-                          width="100%"
-                          src={`/uploads/${item.imageData}`}
-                        />
-                        <br />
+                        <br/>
+                        <img  height="80%"   width="100%" src={`/uploads/${item.imageData}`}  />
+                        <br/>
                       </div>
                       <div className="col-sm">
-                        <br />
-                        <br />
-                        <br />
+                        <br/><br/><br />
                         <h5 className="font-weight-bold text-center">
                           {item.product_name}
                         </h5>
@@ -113,64 +114,52 @@ class ItemListComponent extends Component {
                         <h5 className="font-weight-bold text-center text-danger">
                           Discount : Rs {item.product_discount}.00
                         </h5>
-                        <br />
-                        <br />
+                        <br/><br/>
                       </div>
+
+
                       <div className="col-sm">
-                        <br />
-                        <br />
+                        <br/><br/>
                         <Link to={"/view/" + item._id} className="nav-link">
-                          {" "}
-                          <button className="btn btn-success">
-                            {" "}
-                            View This Item{" "}
-                          </button>
+
+                          <button className="btn btn-success">   View This Item  </button>
                         </Link>
+
+
                         {this.props.isAuthenticated ? (
-                          <Link to={"/"} className="nav-link">
-                            {" "}
-                            <button className="btn btn-warning text-light">
-                              Add To Shopping Cart
-                            </button>
-                          </Link>
+
+                          <ModalPrompt
+                            id={item._id}
+                            name={item.product_name}
+                            price={item.product_price}
+                          ></ModalPrompt>
+
                         ) : (
                           <Link className="nav-link">
-                            {" "}
-                            <button
-                              className="btn btn-danger"
-                              onClick={() =>
-                                NotificationManager.error(
-                                  "Login to Continue",
-                                  "",
-                                  2000
-                                )
-                              }
-                            >
+
+                            <button  className="btn btn-danger"   onClick={() =>  NotificationManager.error( "Login to Continue", "",  2000 ) } >
                               Add To Shopping Cart
                             </button>
                           </Link>
                         )}
+
                         {this.props.isAuthenticated ? (
-                          //    <Link to={'/'}  className="nav-link"> <button className="btn btn-info text-light" onClick={ () => NotificationManager.error(`Hi ${user._id}`,2000)}>Add To Wish List</button></Link> :
+
                           <WishList
                             name={item.product_name}
                             price={item.product_price}
                             id={item._id}
                             usr_id={user._id}
                           />
-                        ) : (
+                        )
+
+                            :
+
+                            (
+
                           <Link className="nav-link">
-                            {" "}
-                            <button
-                              className="btn btn-info text-light"
-                              onClick={() =>
-                                NotificationManager.error(
-                                  "Login to Continue",
-                                  "",
-                                  2000
-                                )
-                              }
-                            >
+
+                            <button  className="btn btn-info text-light"   onClick={() => NotificationManager.error("Login to Continue", "", 2000) }  >
                               Add To Wish List
                             </button>
                           </Link>
@@ -189,65 +178,36 @@ class ItemListComponent extends Component {
           <div className="card-footer pb-0 pt-3">
             {pager.pages && pager.pages.length && (
               <ul className="pagination">
-                <li
-                  className={`page-item first-item ${
-                    pager.currentPage === 1 ? "disabled" : ""
-                  }`}
-                >
+
+                <li  className={`page-item first-item ${pager.currentPage === 1 ? "disabled" : "" }`} >
                   <Link to={{ search: `?page=1` }} className="page-link">
                     First
                   </Link>
                 </li>
-                <li
-                  className={`page-item previous-item ${
-                    pager.currentPage === 1 ? "disabled" : ""
-                  }`}
-                >
-                  <Link
-                    to={{ search: `?page=${pager.currentPage - 1}` }}
-                    className="page-link"
-                  >
+
+                <li className={`page-item previous-item ${pager.currentPage === 1 ? "disabled" : "" }`} >
+                  <Link  to={{ search: `?page=${pager.currentPage - 1}` }}     className="page-link" >
                     Previous
                   </Link>
                 </li>
+
                 {pager.pages.map((page) => (
-                  <li
-                    key={page}
-                    className={`page-item number-item ${
-                      pager.currentPage === page ? "active" : ""
-                    }`}
-                  >
-                    <Link
-                      to={{ search: `?page=${page}` }}
-                      className="page-link"
-                    >
-                      {page}
-                    </Link>
+                  <li  key={page}   className={`page-item number-item ${pager.currentPage === page ? "active" : ""  }`}  >
+                    <Link  to={{ search: `?page=${page}` }}  className="page-link" >  {page}   </Link>
                   </li>
                 ))}
-                <li
-                  className={`page-item next-item ${
-                    pager.currentPage === pager.totalPages ? "disabled" : ""
-                  }`}
-                >
-                  <Link
-                    to={{ search: `?page=${pager.currentPage + 1}` }}
-                    className="page-link"
-                  >
-                    Next
-                  </Link>
+                <li className={`page-item next-item ${pager.currentPage === pager.totalPages ? "disabled" : "" }`} >
+
+                  <Link  to={{ search: `?page=${pager.currentPage + 1}` }} className="page-link"> Next </Link>
+
                 </li>
-                <li
-                  className={`page-item last-item ${
-                    pager.currentPage === pager.totalPages ? "disabled" : ""
-                  }`}
-                >
-                  <Link
-                    to={{ search: `?page=${pager.totalPages}` }}
-                    className="page-link"
-                  >
+
+                <li className={`page-item last-item ${pager.currentPage === pager.totalPages ? "disabled" : "" }`} >
+
+                  <Link to={{ search: `?page=${pager.totalPages}` }}  className="page-link" >
                     Last
                   </Link>
+
                 </li>
               </ul>
             )}
