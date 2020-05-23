@@ -8,7 +8,7 @@ import {
 } from "reactstrap";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import { connect } from "react-redux";
-import { getItems } from "../actions/itemActions";
+
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import {
@@ -16,6 +16,8 @@ import {
   NotificationManager,
 } from "react-notifications";
 import "react-notifications/lib/notifications.css";
+import disableBrowserBackButton from "disable-browser-back-navigation";
+//import ItemListFunc from "./itemListFunc.component";
 
 class ItemListComponent extends Component {
   state = {
@@ -24,8 +26,8 @@ class ItemListComponent extends Component {
   };
 
   componentDidMount() {
-    this.props.getItems();
     this.loadPage();
+    disableBrowserBackButton();
   }
 
   componentDidUpdate() {
@@ -33,8 +35,6 @@ class ItemListComponent extends Component {
   }
 
   static propTypes = {
-    getItems: PropTypes.func.isRequired,
-    item: PropTypes.object.isRequired,
     isAuthenticated: PropTypes.bool,
   };
 
@@ -52,168 +52,186 @@ class ItemListComponent extends Component {
         });
     }
   };
+
   render() {
     const { pager, pageOfItems } = this.state;
-
     return (
-      <div className="card text-center m-3">
-        <h3 className="card-header font-weight-bold">Clothing List</h3>
-        <NotificationContainer />
-        <div className="card-body ">
-          {pageOfItems.map((item) => (
-            <div key={item._id}>
-              <div className="container rounded-0 border border-info ">
-                <div className="container ">
-                  <div className="row">
-                    <div className="col-sm">
-                      <br />
-                      <img height="80%" width="100%" src="/uploads/demo1.jpg" />
-                      <br />
-                    </div>
-                    <div className="col-sm">
-                      <br />
-                      <br />
-                      <br />
-                      <h5 className="font-weight-bold text-center">
-                        {item.product_name}
-                      </h5>
-                      <h4 className="font-weight-bold text-center text-danger">
-                        Price : Rs.{item.product_price}.00
-                      </h4>
-                      <h5 className="font-weight-bold text-center text-danger">
-                        Discount : Rs.{item.product_discount}.00
-                      </h5>
-                      <br />
-                      <br />
-                    </div>
-                    <div className="col-sm">
-                      <br />
-                      <br />
-                      <Link to={"/view/" + item._id} className="nav-link">
-                        {" "}
-                        <button className="btn btn-success">View</button>
-                      </Link>
-                      {this.props.isAuthenticated ? (
-                        <Link to={"/"} className="nav-link">
+      <div>
+        {/*this.props.isAuthenticated ?
+              <ItemListFunc
+              >
+              </ItemListFunc>
+                :
+               */}
+        <div className="card text-center m-3">
+          <h3 className="card-header font-weight-bold">Clothing List</h3>
+          <NotificationContainer />
+          <div className="card-body ">
+            {pageOfItems.map((item) => (
+              <div key={item._id}>
+                <div className="container rounded-0 border border-info ">
+                  <div className="container ">
+                    <div className="row">
+                      <div className="col-sm">
+                        <br />
+                        <img
+                          height="80%"
+                          width="100%"
+                          src={`/uploads/${item.imageData}`}
+                        />
+                        <br />
+                      </div>
+                      <div className="col-sm">
+                        <br />
+                        <br />
+                        <br />
+                        <h5 className="font-weight-bold text-center">
+                          {item.product_name}
+                        </h5>
+                        <h4 className="font-weight-bold text-center text-danger">
+                          Price : Rs {item.product_price}.00
+                        </h4>
+                        <h5 className="font-weight-bold text-center text-danger">
+                          Discount : Rs {item.product_discount}.00
+                        </h5>
+                        <br />
+                        <br />
+                      </div>
+                      <div className="col-sm">
+                        <br />
+                        <br />
+                        <Link to={"/view/" + item._id} className="nav-link">
                           {" "}
-                          <button className="btn btn-warning text-light">
-                            To Cart
+                          <button className="btn btn-success">
+                            {" "}
+                            View This Item{" "}
                           </button>
                         </Link>
-                      ) : (
-                        <Link className="nav-link">
-                          {" "}
-                          <button
-                            className="btn btn-danger"
-                            onClick={() =>
-                              NotificationManager.error(
-                                "Login to Continue",
-                                "",
-                                2000
-                              )
-                            }
-                          >
-                            To Cart
-                          </button>
-                        </Link>
-                      )}
-                      {this.props.isAuthenticated ? (
-                        <Link to={"/"} className="nav-link">
-                          {" "}
-                          <button className="btn btn-info text-light">
-                            To WishList
-                          </button>
-                        </Link>
-                      ) : (
-                        <Link className="nav-link">
-                          {" "}
-                          <button
-                            className="btn btn-info text-light"
-                            onClick={() =>
-                              NotificationManager.error(
-                                "Login to Continue",
-                                "",
-                                2000
-                              )
-                            }
-                          >
-                            To WishList
-                          </button>
-                        </Link>
-                      )}
+                        {this.props.isAuthenticated ? (
+                          <Link to={"/"} className="nav-link">
+                            {" "}
+                            <button className="btn btn-warning text-light">
+                              Add To Shopping Cart
+                            </button>
+                          </Link>
+                        ) : (
+                          <Link className="nav-link">
+                            {" "}
+                            <button
+                              className="btn btn-danger"
+                              onClick={() =>
+                                NotificationManager.error(
+                                  "Login to Continue",
+                                  "",
+                                  2000
+                                )
+                              }
+                            >
+                              Add To Shopping Cart
+                            </button>
+                          </Link>
+                        )}
+                        {this.props.isAuthenticated ? (
+                          <Link to={"/"} className="nav-link">
+                            {" "}
+                            <button className="btn btn-info text-light">
+                              Add To Wish List
+                            </button>
+                          </Link>
+                        ) : (
+                          <Link className="nav-link">
+                            {" "}
+                            <button
+                              className="btn btn-info text-light"
+                              onClick={() =>
+                                NotificationManager.error(
+                                  "Login to Continue",
+                                  "",
+                                  2000
+                                )
+                              }
+                            >
+                              Add To Wish List
+                            </button>
+                          </Link>
+                        )}
 
-                      <br />
-                      <br />
+                        <br />
+                        <br />
+                      </div>
                     </div>
                   </div>
                 </div>
+                <br />
               </div>
-              <br />
-            </div>
-          ))}
-        </div>
-        <div className="card-footer pb-0 pt-3">
-          {pager.pages && pager.pages.length && (
-            <ul className="pagination">
-              <li
-                className={`page-item first-item ${
-                  pager.currentPage === 1 ? "disabled" : ""
-                }`}
-              >
-                <Link to={{ search: `?page=1` }} className="page-link">
-                  First
-                </Link>
-              </li>
-              <li
-                className={`page-item previous-item ${
-                  pager.currentPage === 1 ? "disabled" : ""
-                }`}
-              >
-                <Link
-                  to={{ search: `?page=${pager.currentPage - 1}` }}
-                  className="page-link"
-                >
-                  Previous
-                </Link>
-              </li>
-              {pager.pages.map((page) => (
+            ))}
+          </div>
+          <div className="card-footer pb-0 pt-3">
+            {pager.pages && pager.pages.length && (
+              <ul className="pagination">
                 <li
-                  key={page}
-                  className={`page-item number-item ${
-                    pager.currentPage === page ? "active" : ""
+                  className={`page-item first-item ${
+                    pager.currentPage === 1 ? "disabled" : ""
                   }`}
                 >
-                  <Link to={{ search: `?page=${page}` }} className="page-link">
-                    {page}
+                  <Link to={{ search: `?page=1` }} className="page-link">
+                    First
                   </Link>
                 </li>
-              ))}
-              <li
-                className={`page-item next-item ${
-                  pager.currentPage === pager.totalPages ? "disabled" : ""
-                }`}
-              >
-                <Link
-                  to={{ search: `?page=${pager.currentPage + 1}` }}
-                  className="page-link"
+                <li
+                  className={`page-item previous-item ${
+                    pager.currentPage === 1 ? "disabled" : ""
+                  }`}
                 >
-                  Next
-                </Link>
-              </li>
-              <li
-                className={`page-item last-item ${
-                  pager.currentPage === pager.totalPages ? "disabled" : ""
-                }`}
-              >
-                <Link
-                  to={{ search: `?page=${pager.totalPages}` }}
-                  className="page-link"
+                  <Link
+                    to={{ search: `?page=${pager.currentPage - 1}` }}
+                    className="page-link"
+                  >
+                    Previous
+                  </Link>
+                </li>
+                {pager.pages.map((page) => (
+                  <li
+                    key={page}
+                    className={`page-item number-item ${
+                      pager.currentPage === page ? "active" : ""
+                    }`}
+                  >
+                    <Link
+                      to={{ search: `?page=${page}` }}
+                      className="page-link"
+                    >
+                      {page}
+                    </Link>
+                  </li>
+                ))}
+                <li
+                  className={`page-item next-item ${
+                    pager.currentPage === pager.totalPages ? "disabled" : ""
+                  }`}
                 >
-                  Last
-                </Link>
-              </li>
-            </ul>
-          )}
+                  <Link
+                    to={{ search: `?page=${pager.currentPage + 1}` }}
+                    className="page-link"
+                  >
+                    Next
+                  </Link>
+                </li>
+                <li
+                  className={`page-item last-item ${
+                    pager.currentPage === pager.totalPages ? "disabled" : ""
+                  }`}
+                >
+                  <Link
+                    to={{ search: `?page=${pager.totalPages}` }}
+                    className="page-link"
+                  >
+                    Last
+                  </Link>
+                </li>
+              </ul>
+            )}
+          </div>
         </div>
       </div>
     );
@@ -225,4 +243,4 @@ const mapStateToProps = (state) => ({
   isAuthenticated: state.cus.isAuthenticated,
 });
 
-export default connect(mapStateToProps, { getItems })(ItemListComponent);
+export default connect(mapStateToProps)(ItemListComponent);
