@@ -29,9 +29,16 @@ export default function ModalPrompt({ id, name, price }) {
 
   return (
     <div>
-      <Button color="danger" onClick={toggle}>
+      <button
+        onClick={toggle}
+        type="button"
+        className="btn btn-primary btn-block "
+      >
+        Add Item to Cart
+      </button>
+      {/* <Button className="btn btn-warning text-light" onClick={toggle}>
         {`Add to cart`}
-      </Button>
+      </Button> */}
       <Modal size="sm" isOpen={modal} toggle={toggle}>
         <ModalHeader toggle={toggle}>Add to Cart</ModalHeader>
 

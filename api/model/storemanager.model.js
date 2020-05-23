@@ -14,6 +14,9 @@ let StoreManager = new Schema({
     sm_email : {
         type : String
     },
+    sm_password : {
+        type : String
+    },
     sm_pnumber: {
         type: Number
     }
