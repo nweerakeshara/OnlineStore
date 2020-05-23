@@ -16,7 +16,7 @@ import {
 } from "reactstrap";
 import { Spinner } from 'reactstrap';
 
-export default function WishList({ name, price, id, usr_id }) {
+export default function WishList({ name, price, id, usr_id,img_id }) {
 
   //add wishlist items to DB
   const addToWishList = (e) => {
@@ -24,7 +24,8 @@ export default function WishList({ name, price, id, usr_id }) {
       product_name: name,
       product_price: price,
       product_id: id,
-      user_ID : usr_id
+      user_ID : usr_id,
+      img_ID : img_id
     };
 
     
@@ -104,7 +105,7 @@ export default function WishList({ name, price, id, usr_id }) {
             <Table dark striped bordered hover>
               <thead>
                 <tr>
-                  <th>#</th>
+                  <th>Product</th>
                   <th>Item</th>
                   <th>Price</th>
                   <th>Action</th>
@@ -113,7 +114,11 @@ export default function WishList({ name, price, id, usr_id }) {
               {wishlist.map((item) => (
                 <tbody key={item.product_id}>
                   <tr>
-                    <th scope="row">{item.product_id}</th>
+                    <th scope="row"> <img
+                          height="30%"
+                          width="30%"
+                          src={`${item.img_ID}`}
+                        /></th>
                     <td>{item.product_name}</td>
                     <td>{item.product_price}</td>
                     <td>

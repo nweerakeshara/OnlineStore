@@ -62,7 +62,7 @@ class ItemListComponent extends Component {
       <div>
         {this.props.isAuthenticated ? (
                           //    <Link to={'/'}  className="nav-link"> <button className="btn btn-info text-light" onClick={ () => NotificationManager.error(`Hi ${user._id}`,2000)}>Add To Wish List</button></Link> :
-                          <WishListView usr_id = {user._id}                          
+                          <WishListView usr_id = {user._id}                       
                           />
                         ) : (
                         //   <Link className="nav-link">
@@ -157,6 +157,7 @@ class ItemListComponent extends Component {
                             price={item.product_price}
                             id={item._id}
                             usr_id={user._id}
+                            img_id={item.imageData}
                           />
                         ) : (
                           <Link className="nav-link">
