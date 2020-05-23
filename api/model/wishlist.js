@@ -15,6 +15,9 @@ let Wishlist = new Schema({
     },
     user_ID : {
         type : String
+    },
+    img_ID: {
+        type: String,       
     }
 },{
     collection : 'wishlist'

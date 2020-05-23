@@ -14,15 +14,19 @@ import {
   ModalFooter,
   Table,
 } from "reactstrap";
-import { Spinner } from 'reactstrap';
+import { Spinner } from "reactstrap";
 
-export default function WishListView({usr_id}) {
+export default function WishListView({ usr_id }) {
   const [wishlist, setWishList] = useState([]);
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/wishlist/get/${usr_id}`).then((res) => {
-      setWishList(res.data);
-    });
+    axios
+      .get(`http://localhost:5000/api/wishlist/get/${usr_id}`)
+      .then((res) => {
+        setWishList(res.data);
+        console.log(res.data);
+        
+      });
   });
 
   const [modal, setModal] = useState(false);
@@ -30,9 +34,10 @@ export default function WishListView({usr_id}) {
   const toggle = () => setModal(!modal);
 
   const deleteItem = (e) => {
-   
     axios
-      .delete(`http://localhost:5000/api/wishlist/delete/${e.target.value}/${usr_id}`)
+      .delete(
+        `http://localhost:5000/api/wishlist/delete/${e.target.value}/${usr_id}`
+      )
       .then((res) => {
         NotificationManager.info("Item Successfully deleted", "", 2000);
         console.log(res.data);
@@ -46,8 +51,10 @@ export default function WishListView({usr_id}) {
         type="button"
         onClick={toggle}
         class="btn btn-outline-secondary"
-        style={{marginLeft: '20px'}}
-      >Wish List</button>
+        style={{ marginLeft: "20px" }}
+      >
+        Wish List
+      </button>
       <NotificationContainer />
       <Modal size="lg" isOpen={modal} toggle={toggle}>
         <ModalHeader toggle={toggle}>Your Wish List</ModalHeader>
@@ -61,7 +68,7 @@ export default function WishListView({usr_id}) {
             <Table dark striped bordered hover>
               <thead>
                 <tr>
-                  <th>#</th>
+                  <th>Product</th>
                   <th>Item</th>
                   <th>Price</th>
                   <th>Action</th>
@@ -70,7 +77,15 @@ export default function WishListView({usr_id}) {
               {wishlist.map((item) => (
                 <tbody key={item.product_id}>
                   <tr>
-                    <th scope="row">{item.product_id}</th>
+                    <th scope="row">                     
+                      <img
+                        height="30%"
+                        width="30%"                        
+                        src={`/uploads/${item.img_ID}`}
+                      />
+                      
+                    </th>
+                    
                     <td>{item.product_name}</td>
                     <td>{item.product_price}</td>
 

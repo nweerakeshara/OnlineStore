@@ -21,11 +21,11 @@ export function UserRating({ cusId, id }) {
   const [value, setValue] = React.useState(0);
 
   useEffect(() => {
+    //Get rating
     axios
       .get("http://localhost:5000/api/rating/get_one/" + cusId + "/" + id)
       .then((res) => {
-        console.log(res.data[0].value);
-        setValue(res.data[0].value);
+        if (res.data[0]) setValue(res.data[0].value);
       });
   });
 
@@ -34,21 +34,22 @@ export function UserRating({ cusId, id }) {
       <Box component="fieldset" mb={3} borderColor="transparent">
         <Typography component="legend">Controlled</Typography>
         <Rating
-          //   name="simple-controlled"
           value={value}
           onChange={(event, newValue) => {
             setValue(newValue);
             const rating = {
-              user_id: 3,
+              user_id: cusId,
               product_id: id,
               value: event.target.value,
             };
+            //Set rating
+            console.log(`CID: ${cusId} PID: ${id}`);
+
             axios
               .post("http://localhost:5000/api/rating/add", rating)
               .then((res) => {
                 if (res.data.success) {
                   console.log(res.data);
-                  alert("Rating Successful");
                 }
               });
           }}

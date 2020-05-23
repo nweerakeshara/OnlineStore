@@ -55,6 +55,7 @@ class ItemListComponent extends Component {
     const { pager, pageOfItems } = this.state;
     return (
       <div>
+        {this.props.isAuthenticated ? <WishListView usr_id={user._id} /> : ""}
 
 
         {this.props.isAuthenticated ? (  <WishListView usr_id = {user._id}  />    ) :  null }
@@ -140,6 +141,7 @@ class ItemListComponent extends Component {
                             price={item.product_price}
                             id={item._id}
                             usr_id={user._id}
+                            img_id={item.imageData}
                           />
                         ) : (
                           <Link className="nav-link">

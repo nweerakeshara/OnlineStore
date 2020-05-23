@@ -9,6 +9,7 @@ export default class AddStoreManager extends Component{
         this.onChangeLastName = this.onChangeLastName.bind(this);
         this.onChangeAddress = this.onChangeAddress.bind(this);
         this.onChangeEmail = this.onChangeEmail.bind(this);
+        this.onChangePassword = this.onChangePassword.bind(this);
         this.onChangePhoneNumber = this.onChangePhoneNumber.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
 
@@ -17,6 +18,7 @@ export default class AddStoreManager extends Component{
             sm_lname : '',
             sm_address : '',
             sm_email : '',
+            sm_password : '',
             sm_pnumber : ''
         }
     }
@@ -45,6 +47,12 @@ export default class AddStoreManager extends Component{
         });
     }
 
+    onChangePassword(e){
+        this.setState({
+            sm_password: e.target.value
+        });
+    }
+
     onChangePhoneNumber(e){
         this.setState({
             sm_pnumber: e.target.value
@@ -58,6 +66,7 @@ export default class AddStoreManager extends Component{
             sm_lname : this.state.sm_lname,
             sm_address : this.state.sm_address,
             sm_email : this.state.sm_email,
+            sm_password : this.state.sm_password,
             sm_pnumber : this.state.sm_pnumber
         };
 
@@ -76,6 +85,7 @@ export default class AddStoreManager extends Component{
             sm_lname : '',
             sm_address : '',
             sm_email : '',
+            sm_password : '',
             sm_pnumber : ''
         })
 
@@ -116,6 +126,14 @@ export default class AddStoreManager extends Component{
                         <input type="text" className="form-control"
                                value={this.state.sm_email}
                                onChange={this.onChangeEmail}
+                        />
+                    </div>
+
+                    <div className="form-group">
+                        <label>Password :</label>
+                        <input type="text" className="form-control"
+                               value={this.state.sm_password}
+                               onChange={this.onChangePassword}
                         />
                     </div>
 
