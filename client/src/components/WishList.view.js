@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
 import axios from "axios";
 import "react-notifications/lib/notifications.css";
+import ModalPrompt from "../components/UI/ModalPrompt";
 import {
   NotificationContainer,
   NotificationManager,
@@ -51,9 +52,9 @@ export default function WishListView({ usr_id }) {
         type="button"
         onClick={toggle}
         class="btn btn-success"
-        style={{ marginLeft: "20px", border: "2px solid black" }}
+        style={{  border: "2px solid black" }}
       >
-        Wish List
+        View Wish List
       </button>
       <NotificationContainer />
       <Modal size="lg" isOpen={modal} toggle={toggle}>
@@ -71,6 +72,7 @@ export default function WishListView({ usr_id }) {
                   <th>Product</th>
                   <th>Item</th>
                   <th>Price</th>
+                  <th style={{ textAlign: "center" }}>Add to Cart</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -87,6 +89,13 @@ export default function WishListView({ usr_id }) {
 
                     <td>{item.product_name}</td>
                     <td>{item.product_price}</td>
+                    <td>
+                      <ModalPrompt
+                        id={item._id}
+                        name={item.product_name}
+                        price={item.product_price}
+                      ></ModalPrompt>
+                    </td>
 
                     <td>
                       <button

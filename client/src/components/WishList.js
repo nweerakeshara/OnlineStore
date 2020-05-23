@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "react-notifications/lib/notifications.css";
+import ModalPrompt from "../components/UI/ModalPrompt";
 import {
   NotificationContainer,
   NotificationManager,
@@ -113,6 +114,7 @@ export default function WishList({ name, price, id, usr_id, img_id }) {
                   <th>Product</th>
                   <th>Item</th>
                   <th>Price</th>
+                  <th style={{ textAlign: "center" }}>Add to Cart</th>
                   <th>Action</th>
                 </tr>
               </thead>
@@ -129,6 +131,13 @@ export default function WishList({ name, price, id, usr_id, img_id }) {
 
                     <td>{item.product_name}</td>
                     <td>{item.product_price}</td>
+                    <td>
+                      <ModalPrompt
+                        id={item._id}
+                        name={item.product_name}
+                        price={item.product_price}
+                      ></ModalPrompt>
+                    </td>
                     <td>
                       <button
                         value={item.product_id}
