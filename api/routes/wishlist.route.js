@@ -18,8 +18,8 @@ wishListRoute.route("/add").post(function (req, res) {
 });
 
 //get items from wishlist
-wishListRoute.route("/get").get(function (req, res) {
-  WishList.find(function (err, product) {
+wishListRoute.route("/get/:id").get(function (req, res) {
+  WishList.find({ user_ID: req.params.id},function (err, product) {
     if (err) console.log(err);
     else {
       res.json(product);
@@ -28,8 +28,8 @@ wishListRoute.route("/get").get(function (req, res) {
 });
 
 //delete an item from the wishlist
-wishListRoute.route("/delete/:id").delete(function (req, res) {
-  WishList.remove({ product_id: req.params.id }, function (err, product) {
+wishListRoute.route("/delete/:id/:cus_id").delete(function (req, res) {
+  WishList.remove({ product_id: req.params.id , user_ID: req.params.cus_id}, function (err, product) {
     if (err) res.json(err);
     else res.json("Successfully Removed");
   });
