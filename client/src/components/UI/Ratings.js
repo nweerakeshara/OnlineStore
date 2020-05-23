@@ -43,6 +43,8 @@ export function UserRating({ cusId, id }) {
               value: event.target.value,
             };
             //Set rating
+            console.log(`CID: ${cusId} PID: ${id}`);
+
             axios
               .post("http://localhost:5000/api/rating/add", rating)
               .then((res) => {
