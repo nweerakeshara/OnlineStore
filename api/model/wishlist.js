@@ -15,12 +15,10 @@ let Wishlist = new Schema({
         type : Number
     },
     user_ID : {
-        type : String,
-        unique : true   
+        type : String,          
     },
     img_ID: {
-        type: String,  
-          
+        type: String,            
     }
 },{
     collection : 'wishlist'
