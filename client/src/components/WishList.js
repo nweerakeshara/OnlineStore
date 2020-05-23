@@ -16,7 +16,7 @@ import {
 } from "reactstrap";
 import { Spinner } from 'reactstrap';
 
-export default function WishList({ name, price, id }) {
+export default function WishList({ name, price, id, usr_id }) {
 
   //add wishlist items to DB
   const addToWishList = (e) => {
@@ -24,7 +24,10 @@ export default function WishList({ name, price, id }) {
       product_name: name,
       product_price: price,
       product_id: id,
+      user_ID : usr_id
     };
+
+    
 
     axios
       .post("http://localhost:5000/api/wishlist/add", product)
@@ -62,7 +65,7 @@ export default function WishList({ name, price, id }) {
   const [wishlist, setWishList] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/api/wishlist/get").then((res) => {
+    axios.get(`http://localhost:5000/api/wishlist/get/${usr_id}`).then((res) => {
       setWishList(res.data);
     });
   });
@@ -75,7 +78,7 @@ export default function WishList({ name, price, id }) {
   const deleteItem = (e) => {
 
     axios
-      .delete(`http://localhost:5000/api/wishlist/delete/${e.target.value}`)
+      .delete(`http://localhost:5000/api/wishlist/delete/${e.target.value}/${usr_id}`)
       .then((res) => {
         NotificationManager.info('Item Successfully deleted',"",2000);
         console.log(res.data);

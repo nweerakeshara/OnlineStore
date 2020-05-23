@@ -17,12 +17,12 @@ export default function SimpleRating() {
   );
 }
 
-export function UserRating({ id }) {
+export function UserRating({ cusId, id }) {
   const [value, setValue] = React.useState(0);
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/rating/get_one/3/" + id)
+      .get("http://localhost:5000/api/rating/get_one/" + cusId + "/" + id)
       .then((res) => {
         console.log(res.data[0].value);
         setValue(res.data[0].value);

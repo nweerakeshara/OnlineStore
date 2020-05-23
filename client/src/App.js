@@ -15,7 +15,7 @@ import EditProduct from "./components/StoreManagerPage/editProduct.component";
 import AddStoreManager from "./components/AdminPage/addStoreManager.component";
 import Carousel from "./components/UI/Carousel";
 import NavbarComponent from "./customer_components/navbar.component";
-import ItemListFunc from "./customer_components/itemListFunc.component";
+import ItemList from "./customer_components/itemList.component";
 import {Provider} from 'react-redux';
 import store from './store';
 import {loadUser} from "./actions/cusActions";
@@ -23,7 +23,7 @@ import StoreManager from "./components/StoreManagerPage/storemanager.component";
 import ProductCategory from "./components/AdminPage/addProductCategory.component";
 import disableBrowserBackButton from 'disable-browser-back-navigation';
 import AdminLogin from "./components/AdminPage/adminLogin";
-
+import ItemViewComponent from "./customer_components/itemView.component";
 
 
 class App extends Component {
@@ -46,18 +46,17 @@ class App extends Component {
                              <br/>
 
                              <Switch>
-                                 <Route exact path='/' component={ItemListFunc}/>
+                                 <Route exact path='/' component={ItemList}/>
                                  <Route exact path='/registerCus' component={RegisterCustomer}/>
                                  <Route exact path='/loginCus' component={LoginCustomer}/>
                                  <Route exact path='/editCus' component={EditCustomer}/>
-
                                  <Route exact path="/guest" component={Guest}/>
                                  <Route exact path="/user" component={User}/>
                                  <Route exact path="/storemanager" component={StoreManager}/>
                                  <Route exact path="/admin2" component={Admin2}/>
                                  <Route exact path="/addProduct" component={AddProduct}/>
                                  <Route exact path="/edit/:id" component={EditProduct}/>
-                                 {/*<Route exact path="/view/:id" component={ViewProduct}/>*/}
+                                 <Route exact path="/view/:id" component={ItemViewComponent}/>
                                  <Route exact path="/addDiscount" component={FullTable}/>
                                  <Route exact path="/addStoreManager" component={AddStoreManager}/>
                                  <Route exact path="/addProductCategory" component={ProductCategory}/>
