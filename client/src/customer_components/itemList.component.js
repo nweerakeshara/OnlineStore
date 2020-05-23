@@ -17,7 +17,9 @@ import {
 } from "react-notifications";
 import "react-notifications/lib/notifications.css";
 import disableBrowserBackButton from "disable-browser-back-navigation";
-//import ItemListFunc from "./itemListFunc.component";
+import ItemListFunc from "./itemListFunc.component";
+import ModalPrompt from "../components/UI/ModalPrompt";
+import Cart from "../components/Cart";
 
 class ItemListComponent extends Component {
   state = {
@@ -65,6 +67,7 @@ class ItemListComponent extends Component {
                */}
         <div className="card text-center m-3">
           <h3 className="card-header font-weight-bold">Clothing List</h3>
+          <Cart></Cart>
           <NotificationContainer />
           <div className="card-body ">
             {pageOfItems.map((item) => (
@@ -108,12 +111,17 @@ class ItemListComponent extends Component {
                           </button>
                         </Link>
                         {this.props.isAuthenticated ? (
-                          <Link to={"/"} className="nav-link">
-                            {" "}
-                            <button className="btn btn-warning text-light">
-                              Add To Shopping Cart
-                            </button>
-                          </Link>
+                          // <Link to={"/"} className="nav-link">
+                          //   {" "}
+                          //   <button className="btn btn-warning text-light">
+                          //     Add To Shopping Cart
+                          //   </button>
+                          // </Link>
+                          <ModalPrompt
+                            id={item._id}
+                            name={item.product_name}
+                            price={item.product_price}
+                          ></ModalPrompt>
                         ) : (
                           <Link className="nav-link">
                             {" "}
