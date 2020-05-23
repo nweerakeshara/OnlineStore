@@ -14,12 +14,23 @@ wishListRoute.route("/add").post(function (req, res) {
     })
     .catch((err) => {
       res.json({ success: false });
+      console.log(err);
+      
     });
 });
 
 //get items from wishlist
 wishListRoute.route("/get/:id").get(function (req, res) {
   WishList.find({ user_ID: req.params.id},function (err, product) {
+    if (err) console.log(err);
+    else {
+      res.json(product);
+    }
+  });
+});
+
+wishListRoute.route("/get/:product_id/:cus_id").get(function (req, res) {
+  WishList.find({ product_id: req.params.product_id,user_ID: req.params.cus_id},function (err, product) {
     if (err) console.log(err);
     else {
       res.json(product);

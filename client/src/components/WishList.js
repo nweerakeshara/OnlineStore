@@ -22,9 +22,11 @@ export default function WishList({ name, price, id, usr_id, img_id }) {
     const product = {
       product_name: name,
       product_price: price,
-      product_id: id,
-      user_ID: usr_id,
-      img_ID: img_id,
+
+      product_id: id+usr_id,
+      user_ID : usr_id,
+      img_ID : img_id
+
     };
 
     axios
@@ -123,6 +125,7 @@ export default function WishList({ name, price, id, usr_id, img_id }) {
               {wishlist.map((item) => (
                 <tbody key={item.product_id}>
                   <tr>
+
                     <th scope="row">
                       {" "}
                       <img
@@ -131,6 +134,7 @@ export default function WishList({ name, price, id, usr_id, img_id }) {
                         src={`/uploads/${item.img_ID}`}
                       />
                     </th>
+
                     <td>{item.product_name}</td>
                     <td>{item.product_price}</td>
                     <td>
