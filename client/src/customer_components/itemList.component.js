@@ -33,7 +33,8 @@ class ItemListComponent extends Component {
     static propTypes = {
 
 
-        isAuthenticated : PropTypes.bool
+        isAuthenticated : PropTypes.bool,
+        cus: PropTypes.object.isRequired
     }
 
     loadPage =() => {
@@ -50,6 +51,7 @@ class ItemListComponent extends Component {
     }
 
     render() {
+        const {user} =  this.props.cus;
         const { pager, pageOfItems } = this.state;
         return (
             <div>
@@ -85,7 +87,7 @@ class ItemListComponent extends Component {
                                             <Link className="nav-link"> <button className="btn btn-danger" onClick={ () => NotificationManager.error('Login to Continue',"",2000)}>Add To Shopping Cart</button></Link>
                                         }
                                         {this.props.isAuthenticated ?
-                                            <Link to={'/'}  className="nav-link"> <button className="btn btn-info text-light">Add To Wish List</button></Link> :
+                                            <Link to={'/'}  className="nav-link"> <button className="btn btn-info text-light" onClick={ () => NotificationManager.error(`Hi ${user._id}`,2000)}>Add To Wish List</button></Link> :
                                             <Link className="nav-link"> <button className="btn btn-info text-light" onClick={ () => NotificationManager.error('Login to Continue',"",2000)}>Add To Wish List</button></Link>
                                         }
 
@@ -136,7 +138,8 @@ class ItemListComponent extends Component {
 
 const mapStateToProps = (state) => ({
     item: state.item,
-    isAuthenticated : state.cus.isAuthenticated
+    isAuthenticated : state.cus.isAuthenticated,
+    cus: state.cus
 })
 
-export default connect(mapStateToProps) (ItemListComponent);
+export default connect(mapStateToProps, null) (ItemListComponent);
