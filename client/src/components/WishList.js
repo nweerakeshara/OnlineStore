@@ -37,11 +37,9 @@ export default function WishList({ name, price, id, usr_id, img_id }) {
             "Item Added to the Wish List",
             10000,
             () => {
-
               toggle(); // calling the toggle function
             }
           );
-
         } else {
           NotificationManager.error(
             "Click Here to view the Wish List",
@@ -67,7 +65,6 @@ export default function WishList({ name, price, id, usr_id, img_id }) {
       .get(`http://localhost:5000/api/wishlist/get/${usr_id}`) //get data from userID
       .then((res) => {
         setWishList(res.data); //save retrieved data to the hook
-
       });
   });
 
@@ -82,7 +79,6 @@ export default function WishList({ name, price, id, usr_id, img_id }) {
         `http://localhost:5000/api/wishlist/delete/${e.target.value}/${usr_id}`
       )
       .then((res) => {
-
         NotificationManager.info("Item is Successfully deleted", "", 2000);
 
         console.log(res.data);
@@ -106,7 +102,7 @@ export default function WishList({ name, price, id, usr_id, img_id }) {
         <ModalHeader toggle={toggle}>Your Wish List</ModalHeader>
         {wishlist.length === 0 ? (
           <ModalBody>
-            <p>No Items in Wish List</p>
+            <p>You haven’t added any items to your Wish List yet</p>
             <Spinner color="success" />
           </ModalBody>
         ) : (
@@ -123,9 +119,7 @@ export default function WishList({ name, price, id, usr_id, img_id }) {
               {wishlist.map((item) => (
                 <tbody key={item.product_id}>
                   <tr>
-
                     <th scope="row">
-
                       <img
                         height="110px"
                         width="130px"
@@ -154,7 +148,7 @@ export default function WishList({ name, price, id, usr_id, img_id }) {
 
         <ModalFooter>
           <Button color="warning" onClick={toggle}>
-            Continue Shopping
+            Shop Now
           </Button>
         </ModalFooter>
       </Modal>
