@@ -16,7 +16,7 @@ import {
 } from "reactstrap";
 import { Spinner } from 'reactstrap';
 
-export default function WishListView({ buttonLabel }) {
+export default function WishListView() {
   const [wishlist, setWishList] = useState([]);
 
   useEffect(() => {
@@ -46,7 +46,8 @@ export default function WishListView({ buttonLabel }) {
         type="button"
         onClick={toggle}
         class="btn btn-outline-secondary"
-      >{`${buttonLabel}`}</button>
+        style={{marginLeft: '20px'}}
+      >Wish List</button>
       <NotificationContainer />
       <Modal size="lg" isOpen={modal} toggle={toggle}>
         <ModalHeader toggle={toggle}>Your Wish List</ModalHeader>

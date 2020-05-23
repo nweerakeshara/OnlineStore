@@ -26,6 +26,8 @@ export default function WishList({ name, price, id }) {
       product_id: id,
     };
 
+    
+
     axios
       .post("http://localhost:5000/api/wishlist/add", product)
       .then((res) => {

@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-
 import { connect } from "react-redux";
-
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import {
@@ -10,9 +8,13 @@ import {
 } from "react-notifications";
 import "react-notifications/lib/notifications.css";
 import disableBrowserBackButton from "disable-browser-back-navigation";
+
 import ItemListFunc from "./itemListFunc.component";
 import ModalPrompt from "../components/UI/ModalPrompt";
 import Cart from "../components/Cart";
+import WishList from "../components/WishList";
+import WishListView from "../components/WishList.view";
+
 
 class ItemListComponent extends Component {
   state = {
@@ -54,9 +56,22 @@ class ItemListComponent extends Component {
     const { pager, pageOfItems } = this.state;
     return (
       <div>
+
         <div className="card text-center m-3">
           <h3 className="card-header font-weight-bold">Clothing List</h3>
-          <Cart></Cart>
+          
+
+        {this.props.isAuthenticated ? (
+                          //    <Link to={'/'}  className="nav-link"> <button className="btn btn-info text-light" onClick={ () => NotificationManager.error(`Hi ${user._id}`,2000)}>Add To Wish List</button></Link> :
+                          <WishListView
+                           
+                          />
+      <Cart></Cart>
+                        ) : (   
+                        ""
+                        )}
+        
+
           <NotificationContainer />
           <div className="card-body ">
             {pageOfItems.map((item) => (
@@ -100,11 +115,13 @@ class ItemListComponent extends Component {
                           </button>
                         </Link>
                         {this.props.isAuthenticated ? (
+
                           <ModalPrompt
                             id={item._id}
                             name={item.product_name}
                             price={item.product_price}
                           ></ModalPrompt>
+
                         ) : (
                           <Link className="nav-link">
                             {" "}
@@ -123,20 +140,14 @@ class ItemListComponent extends Component {
                           </Link>
                         )}
                         {this.props.isAuthenticated ? (
-                          <Link to={"/"} className="nav-link">
-                            {" "}
-                            <button
-                              className="btn btn-info text-light"
-                              onClick={() =>
-                                NotificationManager.error(
-                                  `Hi ${user._id}`,
-                                  2000
-                                )
-                              }
-                            >
-                              Add To Wish List
-                            </button>
-                          </Link>
+
+                          //    <Link to={'/'}  className="nav-link"> <button className="btn btn-info text-light" onClick={ () => NotificationManager.error(`Hi ${user._id}`,2000)}>Add To Wish List</button></Link> :
+                          <WishList
+                            name={item.product_name}
+                            price={item.product_price}
+                            id={item._id}
+                          />
+
                         ) : (
                           <Link className="nav-link">
                             {" "}
