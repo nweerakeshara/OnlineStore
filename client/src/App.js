@@ -50,7 +50,6 @@ class App extends Component {
                                  <Route exact path='/registerCus' component={RegisterCustomer}/>
                                  <Route exact path='/loginCus' component={LoginCustomer}/>
                                  <Route exact path='/editCus' component={EditCustomer}/>
-
                                  <Route exact path="/guest" component={Guest}/>
                                  <Route exact path="/user" component={User}/>
                                  <Route exact path="/storemanager" component={StoreManager}/>
