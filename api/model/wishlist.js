@@ -6,6 +6,7 @@ let Wishlist = new Schema({
     product_id : {
         type : String,
         unique : true
+        
     },
     product_name : {
         type : String
@@ -14,13 +15,16 @@ let Wishlist = new Schema({
         type : Number
     },
     user_ID : {
-        type : String
+        type : String,
+        unique : true   
     },
     img_ID: {
-        type: String,       
+        type: String,  
+          
     }
 },{
     collection : 'wishlist'
+    
 });
 
 module.exports = mongoose.model('wishlist', Wishlist);

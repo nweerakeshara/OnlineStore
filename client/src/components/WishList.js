@@ -23,7 +23,7 @@ export default function WishList({ name, price, id, usr_id,img_id }) {
     const product = {
       product_name: name,
       product_price: price,
-      product_id: id,
+      product_id: id+usr_id,
       user_ID : usr_id,
       img_ID : img_id
     };
@@ -117,7 +117,7 @@ export default function WishList({ name, price, id, usr_id,img_id }) {
                     <th scope="row"> <img
                           height="30%"
                           width="30%"
-                          src={`/uploads/${item.img_ID}`}
+                          src={`uploads/${item.img_ID}`}
                         /></th>
                     <td>{item.product_name}</td>
                     <td>{item.product_price}</td>
