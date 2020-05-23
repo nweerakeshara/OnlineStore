@@ -87,7 +87,12 @@ export default function WishList({ name, price, id, usr_id, img_id }) {
     //used a react strap component (modal) in order to have a popup windows to show the data
     //inside a table
     <div>
-      <button onClick={addToWishList} type="button" class="btn btn-secondary">
+      <button
+        onClick={addToWishList}
+        type="button"
+        class="btn btn-secondary"    
+        style={{ marginLeft: "14px" , border : "2px solid black",marginTop: "6px" }}    
+      >
         Add to Wish List
       </button>
       <NotificationContainer />
@@ -96,7 +101,7 @@ export default function WishList({ name, price, id, usr_id, img_id }) {
         {wishlist.length === 0 ? (
           <ModalBody>
             <p>No Items in Wish List</p>
-            <Spinner color="danger" />
+            <Spinner color="success" />
           </ModalBody>
         ) : (
           <ModalBody>
@@ -114,8 +119,8 @@ export default function WishList({ name, price, id, usr_id, img_id }) {
                   <tr>
                     <th scope="row">
                       <img
-                        height="30%"
-                        width="30%"
+                        height="110px"
+                        width="130px"
                         src={`/uploads/${item.img_ID}`}
                       />
                     </th>
@@ -139,7 +144,7 @@ export default function WishList({ name, price, id, usr_id, img_id }) {
         )}
 
         <ModalFooter>
-          <Button color="secondary" onClick={toggle}>
+          <Button color="warning" onClick={toggle}>
             Continue Shopping
           </Button>
         </ModalFooter>

@@ -56,10 +56,8 @@ class ItemListComponent extends Component {
     return (
       <div>
         {this.props.isAuthenticated ? <WishListView usr_id={user._id} /> : ""}
-
         <div className="card text-center m-3">
           <h3 className="card-header font-weight-bold">Clothing List</h3>
-
           {this.props.isAuthenticated ? (
             <div>
               <Cart />

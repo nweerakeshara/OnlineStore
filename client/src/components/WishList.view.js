@@ -26,7 +26,6 @@ export default function WishListView({ usr_id }) {
       .get(`http://localhost:5000/api/wishlist/get/${usr_id}`) //retrieving data from the database
       .then((res) => {
         setWishList(res.data);
-        console.log(res.data);
       });
   });
 
@@ -42,7 +41,6 @@ export default function WishListView({ usr_id }) {
       )
       .then((res) => {
         NotificationManager.info("Item is Successfully deleted", "", 2000);
-        console.log(res.data);
       })
       .catch((err) => console.log("Error"));
   };
@@ -52,8 +50,8 @@ export default function WishListView({ usr_id }) {
       <button
         type="button"
         onClick={toggle}
-        class="btn btn-outline-secondary"
-        style={{ marginLeft: "20px" }}
+        class="btn btn-success"
+        style={{ marginLeft: "20px", border: "2px solid black" }}
       >
         Wish List
       </button>
@@ -63,7 +61,7 @@ export default function WishListView({ usr_id }) {
         {wishlist.length === 0 ? (
           <ModalBody>
             <p>No Items in Wish List</p>
-            <Spinner color="danger" />
+            <Spinner color="success" />
           </ModalBody>
         ) : (
           <ModalBody>
@@ -81,8 +79,8 @@ export default function WishListView({ usr_id }) {
                   <tr>
                     <th scope="row">
                       <img
-                        height="30%"
-                        width="30%"
+                        height="110px"
+                        width="130px"
                         src={`/uploads/${item.img_ID}`}
                       />
                     </th>
@@ -108,7 +106,7 @@ export default function WishListView({ usr_id }) {
         )}
 
         <ModalFooter>
-          <Button color="secondary" onClick={toggle}>
+          <Button color="warning" onClick={toggle}>
             Continue Shopping
           </Button>
         </ModalFooter>

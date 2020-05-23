@@ -13,8 +13,7 @@ wishListRoute.route("/add").post(function (req, res) {
       res.json({ success: true });
     })
     .catch((err) => {
-      res.json({ success: false });
-      console.log(err);
+      res.json({ success: false });      
     });
 });
 
@@ -30,7 +29,7 @@ wishListRoute.route("/get/:id").get(function (req, res) {
 
 //delete an item from the wishlist
 wishListRoute.route("/delete/:id/:cus_id").delete(function (req, res) {
-  WishList.remove(
+  WishList.deleteOne(
     { product_id: req.params.id, user_ID: req.params.cus_id },
     function (err, product) {
       if (err) res.json(err);
