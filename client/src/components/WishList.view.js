@@ -52,9 +52,9 @@ export default function WishListView({ usr_id }) {
         type="button"
         onClick={toggle}
         class="btn btn-success"
-        style={{ marginLeft: "20px", border: "2px solid black" }}
+        style={{  border: "2px solid black" }}
       >
-        Wish List
+        View Wish List
       </button>
       <NotificationContainer />
       <Modal size="lg" isOpen={modal} toggle={toggle}>
