@@ -8,7 +8,7 @@ import {Link} from "react-router-dom";
 import {NotificationContainer, NotificationManager} from "react-notifications";
 import "react-notifications/lib/notifications.css";
 import disableBrowserBackButton from 'disable-browser-back-navigation';
-//import ItemListFunc from "./itemListFunc.component";
+
 
 
 
@@ -54,19 +54,6 @@ class ItemListComponent extends Component {
         return (
             <div>
 
-
-
-            {/*this.props.isAuthenticated ?
-
-              <ItemListFunc
-
-              >
-
-              </ItemListFunc>
-
-                :
-
-               */}
             <div className="card text-center m-3">
                 <h3 className="card-header font-weight-bold">Clothing List</h3>
                 <NotificationContainer />
