@@ -4,10 +4,10 @@ const Schema = mongoose.Schema;
 let Rating = new Schema(
   {
     user_id: {
-      type: Number,
+      type: String,
     },
     product_id: {
-      type: Number,
+      type: String,
     },
     value: {
       type: Number,
