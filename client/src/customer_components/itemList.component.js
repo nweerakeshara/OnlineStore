@@ -55,9 +55,7 @@ class ItemListComponent extends Component {
     const { pager, pageOfItems } = this.state;
     return (
       <div>
-        {this.props.isAuthenticated ? <WishListView usr_id={user._id} /> : ""}
-
-
+        
         {this.props.isAuthenticated ? (  <WishListView usr_id = {user._id}  />    ) :  null }
 
         <div className="card text-center m-3">
