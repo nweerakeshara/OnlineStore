@@ -24,7 +24,7 @@ export default function Cart({ buttonLabel, history }) {
       items: cart,
     };
 
-    axios.post("http://localhost:5000/product/add", order).then((res) => {
+    axios.post("http://localhost:5000/api/order/add", order).then((res) => {
       if (res.data.success) {
         console.log(res.data);
         alert("Order Successful");
@@ -39,7 +39,7 @@ export default function Cart({ buttonLabel, history }) {
   return (
     <div>
       <Button color="danger" onClick={toggle}>
-        {`${buttonLabel} ${cart.length}`}
+        {`Items in Cart ${cart.length}`}
       </Button>
       <Modal size="lg" isOpen={modal} toggle={toggle}>
         <ModalHeader toggle={toggle}>Your Shopping Cart</ModalHeader>
@@ -60,7 +60,7 @@ export default function Cart({ buttonLabel, history }) {
               {cart.map((item) => (
                 <tbody>
                   <tr>
-                    <th scope="row">{item.id}</th>
+                    <th scope="row">{item.id.toUpperCase().substring(0, 4)}</th>
                     <td>{item.name}</td>
                     <td>{item.price}</td>
                   </tr>

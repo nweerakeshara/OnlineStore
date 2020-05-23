@@ -23,7 +23,7 @@ import StoreManager from "./components/StoreManagerPage/storemanager.component";
 import ProductCategory from "./components/AdminPage/addProductCategory.component";
 import disableBrowserBackButton from 'disable-browser-back-navigation';
 import AdminLogin from "./components/AdminPage/adminLogin";
-
+import ItemViewComponent from "./customer_components/itemView.component";
 
 
 class App extends Component {
@@ -56,7 +56,7 @@ class App extends Component {
                                  <Route exact path="/admin2" component={Admin2}/>
                                  <Route exact path="/addProduct" component={AddProduct}/>
                                  <Route exact path="/edit/:id" component={EditProduct}/>
-                                 {/*<Route exact path="/view/:id" component={ViewProduct}/>*/}
+                                 <Route exact path="/view/:id" component={ItemViewComponent}/>
                                  <Route exact path="/addDiscount" component={FullTable}/>
                                  <Route exact path="/addStoreManager" component={AddStoreManager}/>
                                  <Route exact path="/addProductCategory" component={ProductCategory}/>

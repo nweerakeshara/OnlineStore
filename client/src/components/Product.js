@@ -22,7 +22,7 @@ export default function Product(props) {
       <h2>{props.name}</h2>
       <h4>{props.price}</h4>
       <Ratings></Ratings>
-      <UserRating id={props.id}></UserRating>
+      <UserRating cusId="3" id={props.id}></UserRating>
       <button onClick={addToCart}>Add To Cart</button> <br /> <br />
       <WishList
         name={props.name}
