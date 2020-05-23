@@ -14,6 +14,7 @@ import ModalPrompt from "../components/UI/ModalPrompt";
 import Cart from "../components/Cart";
 import WishList from "../components/WishList";
 import WishListView from "../components/WishList.view";
+import Carousel from "../components/UI/Carousel";
 
 class ItemListComponent extends Component {
   state = {
@@ -66,17 +67,7 @@ class ItemListComponent extends Component {
           </div>
         </div>
 
-        <div className="row">
-          <div className="column">
-
-
-          </div>
-          <div className="column">
-
-
-
-          </div>
-        </div>
+        <Carousel/>
 
         <div className="card text-center m-3">
           <h3 className="card-header font-weight-bold">Clothing List</h3>
