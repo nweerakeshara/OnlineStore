@@ -71,7 +71,7 @@ export default function Cart({ buttonLabel, history }) {
                     <td>{item.price}</td>
                     <td>
                       <Button id={item.id} onClick={handleDelete}>
-                        Delete
+                        Remove
                       </Button>
                     </td>
                   </tr>
