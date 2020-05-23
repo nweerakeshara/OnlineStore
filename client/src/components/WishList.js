@@ -14,29 +14,33 @@ import {
   ModalFooter,
   Table,
 } from "reactstrap";
-import { Spinner } from 'reactstrap';
+import { Spinner } from "reactstrap";
 
-export default function WishList({ name, price, id, usr_id,img_id }) {
-
+export default function WishList({ name, price, id, usr_id, img_id }) {
   //add wishlist items to DB
   const addToWishList = (e) => {
     const product = {
       product_name: name,
       product_price: price,
+
       product_id: id+usr_id,
       user_ID : usr_id,
       img_ID : img_id
-    };
 
-    
+    };
 
     axios
       .post("http://localhost:5000/api/wishlist/add", product)
       .then((res) => {
         if (res.data.success == true) {
-          NotificationManager.success("Click Here to view the Wish List", "Item Added to the Wish List",10000,()=>{
-            toggle();
-          });
+          NotificationManager.success(
+            "Click Here to view the Wish List",
+            "Item Added to the Wish List",
+            10000,
+            () => {
+              toggle();
+            }
+          );
           console.log(res.data);
         } else {
           NotificationManager.error(
@@ -44,7 +48,7 @@ export default function WishList({ name, price, id, usr_id,img_id }) {
             "Item is already in the Wish List",
             10000,
             () => {
-              toggle()
+              toggle();
             }
           );
 
@@ -66,9 +70,11 @@ export default function WishList({ name, price, id, usr_id,img_id }) {
   const [wishlist, setWishList] = useState([]);
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/wishlist/get/${usr_id}`).then((res) => {
-      setWishList(res.data);
-    });
+    axios
+      .get(`http://localhost:5000/api/wishlist/get/${usr_id}`)
+      .then((res) => {
+        setWishList(res.data);
+      });
   });
 
   const [modal, setModal] = useState(false);
@@ -77,11 +83,12 @@ export default function WishList({ name, price, id, usr_id,img_id }) {
 
   //deleting an item from the wish list
   const deleteItem = (e) => {
-
     axios
-      .delete(`http://localhost:5000/api/wishlist/delete/${e.target.value}/${usr_id}`)
+      .delete(
+        `http://localhost:5000/api/wishlist/delete/${e.target.value}/${usr_id}`
+      )
       .then((res) => {
-        NotificationManager.info('Item Successfully deleted',"",2000);
+        NotificationManager.info("Item Successfully deleted", "", 2000);
         console.log(res.data);
       })
       .catch((err) => console.log("Error"));
@@ -89,7 +96,11 @@ export default function WishList({ name, price, id, usr_id,img_id }) {
 
   return (
     <div>
-      <button onClick={addToWishList} type="button" className="btn btn-info ">
+      <button
+        onClick={addToWishList}
+        type="button"
+        className="btn btn-info btn-block "
+      >
         Add to Wish List
       </button>
       <NotificationContainer />
@@ -114,11 +125,16 @@ export default function WishList({ name, price, id, usr_id,img_id }) {
               {wishlist.map((item) => (
                 <tbody key={item.product_id}>
                   <tr>
-                    <th scope="row"> <img
-                          height="30%"
-                          width="30%"
-                          src={`uploads/${item.img_ID}`}
-                        /></th>
+
+                    <th scope="row">
+                      {" "}
+                      <img
+                        height="30%"
+                        width="30%"
+                        src={`/uploads/${item.img_ID}`}
+                      />
+                    </th>
+
                     <td>{item.product_name}</td>
                     <td>{item.product_price}</td>
                     <td>
