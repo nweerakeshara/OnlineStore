@@ -14,61 +14,58 @@ import {
   ModalFooter,
   Table,
 } from "reactstrap";
-import { Spinner } from 'reactstrap';
+import { Spinner } from "reactstrap";
 
-export default function WishList({ name, price, id, usr_id,img_id }) {
-
+export default function WishList({ name, price, id, usr_id, img_id }) {
   //add wishlist items to DB
   const addToWishList = (e) => {
     const product = {
       product_name: name,
       product_price: price,
-      product_id: id,
-      user_ID : usr_id,
-      img_ID : img_id
-    };
 
-    
+      product_id: id + usr_id,
+      user_ID: usr_id,
+      img_ID: img_id,
+    };
 
     axios
       .post("http://localhost:5000/api/wishlist/add", product)
       .then((res) => {
         if (res.data.success == true) {
-          NotificationManager.success("Click Here to view the Wish List", "Item Added to the Wish List",10000,()=>{
-            toggle();
-          });
-          console.log(res.data);
+          NotificationManager.success(
+            "Click Here to view the Wish List",
+            "Item Added to the Wish List",
+            10000,
+            () => {
+              toggle(); // calling the toggle function
+            }
+          );
         } else {
           NotificationManager.error(
-            "",
+            "Click Here to view the Wish List",
             "Item is already in the Wish List",
             10000,
             () => {
-              toggle()
+              toggle();
             }
           );
-
-          console.log(res.data);
         }
       })
       .catch((error) => {
-        NotificationManager.error(
-          "Click Here to view the Wish List!",
-          "Item is already in the Wish List",
-          10000,
-          () => {
-            toggle();
-          }
-        );
+        console.log(error);
       });
   };
 
   const [wishlist, setWishList] = useState([]);
 
+  //fires everytime when the component is mounted
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/wishlist/get/${usr_id}`).then((res) => {
-      setWishList(res.data);
-    });
+    axios
+
+      .get(`http://localhost:5000/api/wishlist/get/${usr_id}`) //get data from userID
+      .then((res) => {
+        setWishList(res.data); //save retrieved data to the hook
+      });
   });
 
   const [modal, setModal] = useState(false);
@@ -77,19 +74,27 @@ export default function WishList({ name, price, id, usr_id,img_id }) {
 
   //deleting an item from the wish list
   const deleteItem = (e) => {
-
     axios
-      .delete(`http://localhost:5000/api/wishlist/delete/${e.target.value}/${usr_id}`)
+      .delete(
+        `http://localhost:5000/api/wishlist/delete/${e.target.value}/${usr_id}`
+      )
       .then((res) => {
-        NotificationManager.info('Item Successfully deleted',"",2000);
+        NotificationManager.info("Item is Successfully deleted", "", 2000);
+
         console.log(res.data);
       })
       .catch((err) => console.log("Error"));
   };
 
   return (
+    //used a react strap component (modal) in order to have a popup windows to show the data
+    //inside a table
     <div>
-      <button onClick={addToWishList} type="button" className="btn btn-info ">
+      <button
+        onClick={addToWishList}
+        type="button"
+        className="btn btn-info btn-block "
+      >
         Add to Wish List
       </button>
       <NotificationContainer />
@@ -97,8 +102,8 @@ export default function WishList({ name, price, id, usr_id,img_id }) {
         <ModalHeader toggle={toggle}>Your Wish List</ModalHeader>
         {wishlist.length === 0 ? (
           <ModalBody>
-            <p>No Items in Wish List</p>
-            <Spinner color="danger" />
+            <p>You haven’t added any items to your Wish List yet</p>
+            <Spinner color="success" />
           </ModalBody>
         ) : (
           <ModalBody>
@@ -114,11 +119,14 @@ export default function WishList({ name, price, id, usr_id,img_id }) {
               {wishlist.map((item) => (
                 <tbody key={item.product_id}>
                   <tr>
-                    <th scope="row"> <img
-                          height="30%"
-                          width="30%"
-                          src={`/uploads/${item.img_ID}`}
-                        /></th>
+                    <th scope="row">
+                      <img
+                        height="110px"
+                        width="130px"
+                        src={`/uploads/${item.img_ID}`}
+                      />
+                    </th>
+
                     <td>{item.product_name}</td>
                     <td>{item.product_price}</td>
                     <td>
@@ -139,8 +147,8 @@ export default function WishList({ name, price, id, usr_id,img_id }) {
         )}
 
         <ModalFooter>
-          <Button color="secondary" onClick={toggle}>
-            Continue Shopping
+          <Button color="warning" onClick={toggle}>
+            Shop Now
           </Button>
         </ModalFooter>
       </Modal>

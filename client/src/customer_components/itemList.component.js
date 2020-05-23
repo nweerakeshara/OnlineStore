@@ -56,20 +56,10 @@ class ItemListComponent extends Component {
     return (
       <div>
         {this.props.isAuthenticated ? <WishListView usr_id={user._id} /> : ""}
-
-
-        {this.props.isAuthenticated ? (  <WishListView usr_id = {user._id}  />    ) :  null }
+        {this.props.isAuthenticated ? <Cart /> : ""}
 
         <div className="card text-center m-3">
           <h3 className="card-header font-weight-bold">Clothing List</h3>
-
-          {this.props.isAuthenticated ? (
-            <div>
-              <Cart />
-            </div>
-          ) : (
-            ""
-          )}
 
           <NotificationContainer />
           <div className="card-body ">
@@ -80,7 +70,11 @@ class ItemListComponent extends Component {
                     <div className="row">
                       <div className="col-sm">
                         <br />
-                        <img height="80%"  width="100%"  src={`/uploads/${item.imageData}`} />
+                        <img
+                          height="80%"
+                          width="100%"
+                          src={`/uploads/${item.imageData}`}
+                        />
                         <br />
                       </div>
                       <div className="col-sm">
@@ -103,23 +97,32 @@ class ItemListComponent extends Component {
                       <div className="col-sm">
                         <br />
                         <br />
-                        <Link to={"/view/" + item._id} className="nav-link">
+                        <Link
+                          style={{ margin: "0", padding: "0" }}
+                          to={"/view/" + item._id}
+                          className="nav-link"
+                        >
                           <button className="btn btn-success btn-block">
-
-                            View This Item
+                            {" "}
+                            View This Item{" "}
                           </button>
+                          <br></br>
                         </Link>
 
                         {this.props.isAuthenticated ? (
-
-
-                          <ModalPrompt
-                            id={item._id}
-                            name={item.product_name}
-                            price={item.product_price}
-                          ></ModalPrompt>
+                          <div>
+                            <ModalPrompt
+                              id={item._id}
+                              name={item.product_name}
+                              price={item.product_price}
+                            ></ModalPrompt>
+                            <br></br>
+                          </div>
                         ) : (
-                          <Link className="nav-link">
+                          <Link
+                            style={{ margin: "0", padding: "0" }}
+                            className="nav-link"
+                          >
                             <button
                               className="btn btn-danger btn-block"
                               onClick={() =>
@@ -132,6 +135,7 @@ class ItemListComponent extends Component {
                             >
                               Add To Shopping Cart
                             </button>
+                            <br></br>
                           </Link>
                         )}
 
@@ -144,7 +148,10 @@ class ItemListComponent extends Component {
                             img_id={item.imageData}
                           />
                         ) : (
-                          <Link className="nav-link">
+                          <Link
+                            className="nav-link"
+                            style={{ margin: "0", padding: "0" }}
+                          >
                             <button
                               className="btn btn-info text-light btn-block"
                               onClick={() =>
