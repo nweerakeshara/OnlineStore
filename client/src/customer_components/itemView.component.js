@@ -86,13 +86,13 @@ class ItemViewComponent extends Component {
       .then((res) => {
         if (res.data.success == true) {
           NotificationManager.success(
-            "Click Here to view the Wish List",
+            "",
             "Comment Submitted",
             10000
           );
         } else {
           NotificationManager.error(
-            "Click Here to view the Wish List",
+            "",
             "Comment Failed",
             10000
           );
