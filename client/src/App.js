@@ -3,7 +3,7 @@ import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
 import RegisterCustomer from "./customer_components/register.component";
-import EditCustomer from "./customer_components/edit.component";
+
 import LoginCustomer from "./customer_components/login.component";
 import { CartProvider } from "./components/CartContext";
 import Guest from "./components/GuestPage/guest.component";
@@ -51,7 +51,6 @@ class App extends Component {
                                  <Route exact path='/' component={ItemList}/>
                                  <Route exact path='/registerCus' component={RegisterCustomer}/>
                                  <Route exact path='/loginCus' component={LoginCustomer}/>
-                                 <Route exact path='/editCus' component={EditCustomer}/>
                                  <Route exact path="/guest" component={Guest}/>
                                  <Route exact path="/user" component={User}/>
                                  <Route exact path="/storemanager" component={StoreManagerLogin}/>
