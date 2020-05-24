@@ -140,8 +140,7 @@ export default function WishList({ name, price, id, usr_id, img_id }) {
                         to={"/view/" + id}
                         className="nav-link"
                       >
-                        <button className="btn btn-success btn-block">
-                          {" "}
+                        <button className="btn btn-success btn-block">                         
                           View This Item{" "}
                         </button>
                         <br></br>
@@ -159,9 +158,9 @@ export default function WishList({ name, price, id, usr_id, img_id }) {
                         value={item.product_id}
                         onClick={deleteItem}
                         type="button"
-                        class="btn btn-danger"
+                        className="btn btn-primary btn-block"
                       >
-                        Delete
+                        Delete this Item
                       </button>
                     </td>
                   </tr>
