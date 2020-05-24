@@ -49,11 +49,7 @@ export default function WishListView({ usr_id }) {
 
   return (
     <div>
-      <button
-        type="button"
-        onClick={toggle}
-        class="btn btn-success"        
-      >
+      <button type="button" onClick={toggle} class="btn btn-success">
         View Wish List
       </button>
       <NotificationContainer />
@@ -102,6 +98,7 @@ export default function WishListView({ usr_id }) {
                         <br></br>
                       </Link>
                     </td>
+
                     <td>
                       <ModalPrompt
                         id={item._id}
