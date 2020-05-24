@@ -57,11 +57,13 @@ class ItemListComponent extends Component {
     return (
       <div>
         <div className="row mx-md-n5">
+
           <div className="col px-md-5">
             <div className="text-center">
               {this.props.isAuthenticated ? <Cart /> : ""}
             </div>
           </div>
+
           <div className="col px-md-5">
             <div className="text-center">
               {this.props.isAuthenticated ? (
@@ -74,12 +76,13 @@ class ItemListComponent extends Component {
 
           <div className="col px-md-5">
             <div className="text-center">
-              <Link to={'/search'}  className="nav-link"> <button className="btn btn-primary">Advanced Search</button></Link>
+            <Link to={'/search'}> <button className="btn btn-primary">Advanced Search</button></Link>
             </div>
           </div>
+
         </div>
 
-        <Carousel />
+        <Carousel/>
 
         <div className="card text-center m-3">
           <h3 className="card-header font-weight-bold">Clothing List</h3>
