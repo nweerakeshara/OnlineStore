@@ -51,7 +51,6 @@ export default function ModalPrompt({ id, name, price }) {
 
         <ModalBody>
           <p>Are you sure you want add item to cart?</p>
-          <p>{`${id} ${name} ${price}`}</p>
         </ModalBody>
 
         <ModalFooter>
