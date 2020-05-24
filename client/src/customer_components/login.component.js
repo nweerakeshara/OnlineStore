@@ -113,6 +113,7 @@ class  LoginCustomer  extends  Component{
 
                     </div>
                 </form>
+                <br/><br/><br/>
             </div>
         );
     }

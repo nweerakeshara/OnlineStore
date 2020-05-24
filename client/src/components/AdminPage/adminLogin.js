@@ -67,6 +67,7 @@ export default class AdminLogin extends Component{
                         <input type="submit" value="Login" className= "btn btn-primary"/>
                     </div>
                 </form>
+                <br/><br/><br/>
             </div>
         )
     }

@@ -199,7 +199,7 @@ class ItemViewComponent extends Component {
                 />
               </div>
             ) : (
-              <Link className="nav-link" style={{ margin: "0", padding: "0" }}>
+              <Link className="nav-link text-center" >
                 <button
                   className="btn btn-info text-light btn-block"
                   onClick={() =>
