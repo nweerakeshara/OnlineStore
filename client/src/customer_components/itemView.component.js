@@ -86,13 +86,13 @@ class ItemViewComponent extends Component {
       .then((res) => {
         if (res.data.success == true) {
           NotificationManager.success(
-            "Click Here to view the Wish List",
+            "",
             "Comment Submitted",
             10000
           );
         } else {
           NotificationManager.error(
-            "Click Here to view the Wish List",
+            "",
             "Comment Failed",
             10000
           );
@@ -114,10 +114,10 @@ class ItemViewComponent extends Component {
 
     return (
       <div>
-        <Cart />
-
-        <div className="col px-md-5">
-          <div className="text-center">
+        
+        <div className="container" style={{ margin:"0px 70px",width:"50%",display: "flex", justifyContent: "space-between" }}>
+          <Cart />
+          <div>
             {this.props.isAuthenticated ? (
               <WishListView usr_id={user._id} />
             ) : (
@@ -125,6 +125,8 @@ class ItemViewComponent extends Component {
             )}
           </div>
         </div>
+
+       
 
         <br></br>
         <NotificationContainer />
@@ -189,7 +191,7 @@ class ItemViewComponent extends Component {
                 />
               </div>
             ) : (
-              <Link className="nav-link" style={{ margin: "0", padding: "0" }}>
+              <Link className="nav-link text-center" >
                 <button
                   className="btn btn-info text-light btn-block"
                   onClick={() =>
