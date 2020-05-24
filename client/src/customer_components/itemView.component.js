@@ -114,10 +114,10 @@ class ItemViewComponent extends Component {
 
     return (
       <div>
-        <Cart />
-
-        <div className="col px-md-5">
-          <div className="text-center">
+        {/* <Cart /> */}
+        <div className="container" style={{ display: "flex", justifyContent: "flex-start" }}>
+          <Cart />
+          <div style={{marginLeft:"440px"}}>
             {this.props.isAuthenticated ? (
               <WishListView usr_id={user._id} />
             ) : (
@@ -125,6 +125,16 @@ class ItemViewComponent extends Component {
             )}
           </div>
         </div>
+
+        {/* <div className="col px-md-5">
+          <div className="text-center">
+            {this.props.isAuthenticated ? (
+              <WishListView usr_id={user._id} />
+            ) : (
+              ""
+            )}
+          </div>
+        </div> */}
 
         <br></br>
         <NotificationContainer />
