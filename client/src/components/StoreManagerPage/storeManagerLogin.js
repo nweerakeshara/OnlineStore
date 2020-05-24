@@ -6,6 +6,7 @@ import axios from "axios";
 import {logout} from '../../actions/cusActions';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
+import {Link} from "react-router-dom";
 
 
 class StoreManagerLogin extends Component{
@@ -84,6 +85,8 @@ class StoreManagerLogin extends Component{
     render() {
         return(
             <div style={{marginTop: 10}}>
+                <Link to={"/admin"} className="nav-link"><button className="btn btn-danger float-right">Admin Login</button></Link>
+                <br/><br/>
                 <h3>Sign In</h3>
                 <form onSubmit={this.onSubmit}>
                     <div className="form-group">

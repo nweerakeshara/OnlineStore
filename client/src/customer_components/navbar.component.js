@@ -69,27 +69,23 @@ class NavbarComponent extends Component {
                 <Navbar color="dark" dark expand="sm" className="mb-5">
                     <Container>
                         <Link to={'/'}  className="nav-link"><NavbarBrand >HINT Fashion</NavbarBrand></Link>
-                        <NavbarToggler onClick={this.toggle}/>
-                        <Collapse isExtend={this.state.isExtend} navbar>
+
 
                             <Nav className="ml-auto" navbar>
-                                <ul className="navbar-nav mr-auto">
-
-                                    <li className="nav-item">
-                                        <Link to={"/storemanager"} className="nav-link">Store Manager</Link>
-                                    </li>
-                                    <li className="nav-item">
-                                        <Link to={"/admin"} className="nav-link">Admin</Link>
-                                    </li>
+                                <ul className="navbar-nav ">
 
 
                                     <li className="nav-item">
                                         {isAuthenticated ? cusLinks : guestLinks}
                                     </li>
 
+                                    <li className="nav-item">
+                                        <Link to={"/storemanager"} className="nav-link"><button  className="btn btn-secondary ">Employee</button></Link>
+                                    </li>
+
                                 </ul>
                             </Nav>
-                        </Collapse>
+
                     </Container>
                 </Navbar>
             </div>
