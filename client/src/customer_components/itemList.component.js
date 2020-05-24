@@ -8,8 +8,6 @@ import {
 } from "react-notifications";
 import "react-notifications/lib/notifications.css";
 import disableBrowserBackButton from "disable-browser-back-navigation";
-
-import ItemListFunc from "./itemListFunc.component";
 import ModalPrompt from "../components/UI/ModalPrompt";
 import Cart from "../components/Cart";
 import WishList from "../components/WishList";
