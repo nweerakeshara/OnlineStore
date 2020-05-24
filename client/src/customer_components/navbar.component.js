@@ -74,7 +74,7 @@ class NavbarComponent extends Component {
 
                             <Nav className="ml-auto" navbar>
                                 <ul className="navbar-nav mr-auto">
-                                    
+
                                     <li className="nav-item">
                                         <Link to={"/storemanager"} className="nav-link">Store Manager</Link>
                                     </li>

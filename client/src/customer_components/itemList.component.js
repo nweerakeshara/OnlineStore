@@ -71,6 +71,12 @@ class ItemListComponent extends Component {
               )}
             </div>
           </div>
+
+          <div className="col px-md-5">
+            <div className="text-center">
+              <Link to={'/search'}  className="nav-link"> <button className="btn btn-primary">Advanced Search</button></Link>
+            </div>
+          </div>
         </div>
 
         <Carousel />
