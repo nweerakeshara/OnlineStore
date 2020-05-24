@@ -38,7 +38,7 @@ export default function WishList({ name, price, id, usr_id, img_id }) {
           NotificationManager.success(
             "Click Here to view the Wish List",
             "Item Added to the Wish List",
-            10000,
+            3000,
             () => {
               toggle(); // calling the toggle function
             }
@@ -47,7 +47,7 @@ export default function WishList({ name, price, id, usr_id, img_id }) {
           NotificationManager.error(
             "Click Here to view the Wish List",
             "Item is already in the Wish List",
-            10000,
+            3000,
             () => {
               toggle();
             }
@@ -82,7 +82,7 @@ export default function WishList({ name, price, id, usr_id, img_id }) {
         `http://localhost:5000/api/wishlist/delete/${e.target.value}/${usr_id}`
       )
       .then((res) => {
-        NotificationManager.info("Item is Successfully deleted", "", 2000);
+        NotificationManager.info("Item is Successfully deleted", "", 3000);
 
         console.log(res.data);
       })
