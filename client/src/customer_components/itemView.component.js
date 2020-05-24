@@ -115,25 +115,30 @@ class ItemViewComponent extends Component {
     return (
       <div>
         
-        <div className="container" style={{ margin:"0px 70px",width:"50%",display: "flex", justifyContent: "space-between" }}>
+        {/*<div className="container" style={{ margin:"0px 70px",width:"50%",display: "flex", justifyContent: "space-between" }}>*/}
+          <div className="row mx-md-n5">
 
+            <div style={{width:"50px", display:"inline-block"}} />
 
-          <div>
-            {this.props.isAuthenticated ? (
-                <Cart />
-            ) : (
+            <div>
+              {this.props.isAuthenticated ? (
+                  <Cart />
+              ) : (
+                  ""
+              )}
+            </div>
+
+            <div style={{width:"25px", display:"inline-block"}} />
+
+            <div>
+              {this.props.isAuthenticated ? (
+                <WishListView usr_id={user._id} />
+              ) : (
                 ""
-            )}
+              )}
+            </div>
+        {/*</div>*/}
           </div>
-
-          <div>
-            {this.props.isAuthenticated ? (
-              <WishListView usr_id={user._id} />
-            ) : (
-              ""
-            )}
-          </div>
-        </div>
 
        
 
