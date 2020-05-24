@@ -38,8 +38,9 @@ class SearchItemListComponent extends Component {
         });
     }
 
-    loadPage = () => {
+    loadPage = (e) => {
         // get page details and items from api
+        e.preventDefault();
         const params = new URLSearchParams(window.location.search);
         const page = parseInt(params.get("page")) || 1;
         if (page !== this.state.pager.currentPage) {
