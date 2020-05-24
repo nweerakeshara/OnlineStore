@@ -42,7 +42,7 @@ export default function WishListView({ usr_id }) {
         `http://localhost:5000/api/wishlist/delete/${e.target.value}/${usr_id}`
       )
       .then((res) => {
-        NotificationManager.info("Item is Successfully deleted", "", 2000);
+        NotificationManager.info("Item is Successfully deleted", "", 3000);
       })
       .catch((err) => console.log("Error"));
   };
