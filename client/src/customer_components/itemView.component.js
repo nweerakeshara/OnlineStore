@@ -12,6 +12,7 @@ import axios from "axios";
 import Ratings, { UserRating } from "../components/UI/Ratings";
 import CommentsView from "./commentsView.component";
 import WishList from "../components/WishList";
+import WishListView from "../components/WishList.view";
 import ModalPrompt from "../components/UI/ModalPrompt";
 import Cart from "../components/Cart";
 class ItemViewComponent extends Component {
@@ -113,7 +114,18 @@ class ItemViewComponent extends Component {
 
     return (
       <div>
-        <Cart></Cart>
+        <Cart />
+
+        <div className="col px-md-5">
+          <div className="text-center">
+            {this.props.isAuthenticated ? (
+              <WishListView usr_id={user._id} />
+            ) : (
+              ""
+            )}
+          </div>
+        </div>
+
         <br></br>
         <NotificationContainer />
         <div className="row">
