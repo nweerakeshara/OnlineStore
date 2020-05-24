@@ -11,6 +11,7 @@ import disableBrowserBackButton from "disable-browser-back-navigation";
 import axios from "axios";
 import Ratings, { UserRating } from "../components/UI/Ratings";
 import CommentsView from "./commentsView.component";
+import WishList from "../components/WishList";
 
 class ItemViewComponent extends Component {
   state = {
@@ -20,10 +21,9 @@ class ItemViewComponent extends Component {
     itemDiscount: "",
     item_id: "",
     imageData: "",
-    commBody : "",
-    cusUn : "",
-    product_id : ""
-
+    commBody: "",
+    cusUn: "",
+    product_id: "",
   };
 
   componentDidMount() {
@@ -51,64 +51,61 @@ class ItemViewComponent extends Component {
     cus: PropTypes.object.isRequired,
   };
 
-
   onChangeComment = (e) => {
     this.setState({
-      commBody: e.target.value
+      commBody: e.target.value,
     });
-  }
+  };
 
   onChangeItemId = (e) => {
     this.setState({
-      product_id: e.target.value
+      product_id: e.target.value,
     });
-  }
+  };
 
   onChangeCusUsername = (e) => {
     this.setState({
-      cusUn: e.target.value
+      cusUn: e.target.value,
     });
-  }
+  };
 
   onSubmitComment = (e) => {
     e.preventDefault();
 
-    const { commBody, product_id, cusUn  } = this.state;
+    const { commBody, product_id, cusUn } = this.state;
     const comment = {
       cusUn,
       product_id,
-      commBody
-    }
+      commBody,
+    };
 
     axios
-        .post("http://localhost:5000/api/comments/add", comment)
-        .then((res) => {
-          if (res.data.success == true) {
-            NotificationManager.success(
-                "Click Here to view the Wish List",
-                "Comment Submitted",
-                10000
-            );
-          } else {
-            NotificationManager.error(
-                "Click Here to view the Wish List",
-                "Comment Failed",
-                10000
-            );
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+      .post("http://localhost:5000/api/comments/add", comment)
+      .then((res) => {
+        if (res.data.success == true) {
+          NotificationManager.success(
+            "Click Here to view the Wish List",
+            "Comment Submitted",
+            10000
+          );
+        } else {
+          NotificationManager.error(
+            "Click Here to view the Wish List",
+            "Comment Failed",
+            10000
+          );
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
 
     this.setState({
       commBody: "",
-      cusUn : "",
-      product_id : ""
-
+      cusUn: "",
+      product_id: "",
     });
-  }
-
+  };
 
   render() {
     const { isAuthenticated, user } = this.props.cus;
@@ -165,20 +162,17 @@ class ItemViewComponent extends Component {
               </Link>
             )}
             {this.props.isAuthenticated ? (
-              <Link to={"/"} className="nav-link text-center">
-                {" "}
-                <button
-                  className="btn btn-info text-light btn-block"
-                  onClick={() =>
-                    NotificationManager.error(`Hi ${user._id}`, "", 2000)
-                  }
-                >
-                  Add To Wish List
-                </button>
-              </Link>
+              <div className="btn-block">
+                <WishList
+                  name={this.state.itemName}
+                  price={this.state.itemPrice}
+                  id={this.state.item_id}
+                  usr_id={user._id}
+                  img_id={this.state.imageData}
+                />
+              </div>
             ) : (
-              <Link className="nav-link text-center">
-                {" "}
+              <Link className="nav-link" style={{ margin: "0", padding: "0" }}>
                 <button
                   className="btn btn-info text-light btn-block"
                   onClick={() =>
@@ -193,59 +187,64 @@ class ItemViewComponent extends Component {
             <br />
             <div className="text-center">
               {!this.props.isAuthenticated ? (
-
-                      <div><Ratings pid={this.state.item_id}> </Ratings>
-
-                      </div>
-
+                <div>
+                  <Ratings pid={this.state.item_id}> </Ratings>
+                </div>
               ) : (
                 <div>
                   <Ratings pid={this.state.item_id} />
                   <UserRating cusId={user._id} id={this.state.item_id}>
                     {" "}
                   </UserRating>
-
                 </div>
               )}
-
             </div>
           </div>
         </div>
 
         <div className="row">
           <div className="col-sm">
-
             <br />
             <br />
 
             <CommentsView productid={this.state.item_id}></CommentsView>
 
-
             {this.props.isAuthenticated ? (
-            <div>
-              <h5>Add Comment :</h5>
-              <form onSubmit={this.onSubmitComment}>
+              <div>
+                <h5>Add Comment :</h5>
+                <form onSubmit={this.onSubmitComment}>
+                  <div className="form-group">
+                    <input
+                      type="text"
+                      className="form-control"
+                      value={this.state.item_id}
+                      onMouseMove={this.onChangeItemId}
+                    />
+                    <input
+                      type="text"
+                      className="form-control"
+                      value={user.cusUn}
+                      onMouseMove={this.onChangeCusUsername}
+                    />
 
+                    <input
+                      type="text"
+                      className="form-control"
+                      value={this.state.commBody}
+                      onChange={this.onChangeComment}
+                    />
+                  </div>
 
-
-                <div className="form-group">
-                  <input type="text" className="form-control" value={this.state.item_id} onMouseMove={this.onChangeItemId} />
-                  <input type="text" className="form-control" value={user.cusUn} onMouseMove={this.onChangeCusUsername} />
-
-                  <input type="text" className="form-control"  value={this.state.commBody} onChange={this.onChangeComment}/>
-
-                </div>
-
-                <div className="form-group">
-
-                  <input type="submit" value="Submit" className="btn btn-primary"/>
-
-                </div>
-              </form>
-            </div>
-
-                ): null}
-
+                  <div className="form-group">
+                    <input
+                      type="submit"
+                      value="Submit"
+                      className="btn btn-primary"
+                    />
+                  </div>
+                </form>
+              </div>
+            ) : null}
           </div>
         </div>
       </div>
