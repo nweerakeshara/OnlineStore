@@ -3,6 +3,8 @@ import axios from "axios";
 import { logout } from "../actions/cusActions";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import CartReset from "../components/CartReset";
+
 
 class LogoutCustomer extends Component {
   static propTypes = {
@@ -26,7 +28,11 @@ class LogoutCustomer extends Component {
   render() {
     return (
       <div>
-        <button className="btn btn-primary" onClick={this.onClick}>
+
+        <button
+          className="btn btn-primary"
+          onClick={(this.onClick, (<CartReset />))}
+        >
           Logout
         </button>
       </div>
