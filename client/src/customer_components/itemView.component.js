@@ -12,7 +12,8 @@ import axios from "axios";
 import Ratings, { UserRating } from "../components/UI/Ratings";
 import CommentsView from "./commentsView.component";
 import WishList from "../components/WishList";
-
+import ModalPrompt from "../components/UI/ModalPrompt";
+import Cart from "../components/Cart";
 class ItemViewComponent extends Component {
   state = {
     itemId: "",
@@ -112,6 +113,8 @@ class ItemViewComponent extends Component {
 
     return (
       <div>
+        <Cart></Cart>
+        <br></br>
         <NotificationContainer />
         <div className="row">
           <div className="col-sm-8">
@@ -142,12 +145,14 @@ class ItemViewComponent extends Component {
             <br />
 
             {this.props.isAuthenticated ? (
-              <Link to={"/"} className="nav-link text-center">
-                {" "}
-                <button className="btn btn-warning text-light btn-block">
-                  Add To Shopping Cart
-                </button>
-              </Link>
+              <div>
+                <ModalPrompt
+                  id={this.state.item_id}
+                  name={this.state.itemName}
+                  price={this.state.itemPrice}
+                ></ModalPrompt>
+                <br />
+              </div>
             ) : (
               <Link className="nav-link text-center">
                 {" "}
