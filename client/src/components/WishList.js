@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import "react-notifications/lib/notifications.css";
 import ModalPrompt from "../components/UI/ModalPrompt";
+import { Link } from "react-router-dom";
 import {
   NotificationContainer,
   NotificationManager,
@@ -27,6 +28,7 @@ export default function WishList({ name, price, id, usr_id, img_id }) {
       product_id: id + usr_id,
       user_ID: usr_id,
       img_ID: img_id,
+      item_ID: id,
     };
 
     axios
@@ -114,6 +116,7 @@ export default function WishList({ name, price, id, usr_id, img_id }) {
                   <th>Product</th>
                   <th>Item</th>
                   <th>Price</th>
+                  <th style={{ textAlign: "center" }}>View The Item</th>
                   <th style={{ textAlign: "center" }}>Add to Cart</th>
                   <th>Action</th>
                 </tr>
@@ -131,6 +134,19 @@ export default function WishList({ name, price, id, usr_id, img_id }) {
 
                     <td>{item.product_name}</td>
                     <td>{item.product_price}</td>
+                    <td>
+                      <Link
+                        style={{ margin: "0", padding: "0" }}
+                        to={"/view/" + id}
+                        className="nav-link"
+                      >
+                        <button className="btn btn-success btn-block">
+                          {" "}
+                          View This Item{" "}
+                        </button>
+                        <br></br>
+                      </Link>
+                    </td>
                     <td>
                       <ModalPrompt
                         id={item._id}

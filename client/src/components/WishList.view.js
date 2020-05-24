@@ -2,6 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import axios from "axios";
 import "react-notifications/lib/notifications.css";
 import ModalPrompt from "../components/UI/ModalPrompt";
+import { Link } from "react-router-dom";
 import {
   NotificationContainer,
   NotificationManager,
@@ -52,7 +53,7 @@ export default function WishListView({ usr_id }) {
         type="button"
         onClick={toggle}
         class="btn btn-success"
-        style={{  border: "2px solid black" }}
+        style={{ border: "2px solid black" }}
       >
         View Wish List
       </button>
@@ -72,6 +73,7 @@ export default function WishListView({ usr_id }) {
                   <th>Product</th>
                   <th>Item</th>
                   <th>Price</th>
+                  <th style={{ textAlign: "center" }}>View The Item</th>
                   <th style={{ textAlign: "center" }}>Add to Cart</th>
                   <th>Action</th>
                 </tr>
@@ -89,6 +91,18 @@ export default function WishListView({ usr_id }) {
 
                     <td>{item.product_name}</td>
                     <td>{item.product_price}</td>
+                    <td>
+                      <Link
+                        style={{ margin: "0", padding: "0" }}
+                        to={"/view/" + item.item_ID}
+                        className="nav-link"
+                      >
+                        <button className="btn btn-success btn-block">
+                          View This Item{" "}
+                        </button>
+                        <br></br>
+                      </Link>
+                    </td>
                     <td>
                       <ModalPrompt
                         id={item._id}
