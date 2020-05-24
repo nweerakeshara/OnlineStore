@@ -39,7 +39,7 @@ export default function ModalPrompt({ id, name, price }) {
       <button
         onClick={toggle}
         type="button"
-        className="btn btn-primary btn-block "
+        className="btn btn-danger btn-block "
       >
         Add Item to Cart
       </button>
@@ -51,7 +51,6 @@ export default function ModalPrompt({ id, name, price }) {
 
         <ModalBody>
           <p>Are you sure you want add item to cart?</p>
-          <p>{`${id} ${name} ${price}`}</p>
         </ModalBody>
 
         <ModalFooter>

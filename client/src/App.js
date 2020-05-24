@@ -25,6 +25,7 @@ import disableBrowserBackButton from 'disable-browser-back-navigation';
 import AdminLogin from "./components/AdminPage/adminLogin";
 import ItemViewComponent from "./customer_components/itemView.component";
 import StoreManagerLogin from "./components/StoreManagerPage/storeManagerLogin";
+import SearchItemListComponent from "./customer_components/searchItemList.component";
 
 
 class App extends Component {
@@ -63,6 +64,7 @@ class App extends Component {
                                  <Route exact path="/addProductCategory" component={ProductCategory}/>
                                  <Route exact path="/admin" component={AdminLogin}/>
                                  <Route exact path="/storemanager2" component={StoreManager}/>
+                                 <Route exact path='/search' component={SearchItemListComponent}/>
 
                              </Switch>
                          </div>

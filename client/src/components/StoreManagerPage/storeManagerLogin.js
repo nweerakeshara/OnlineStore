@@ -2,7 +2,13 @@ import React, {Component} from "react";
 import swal from "sweetalert";
 import axios from "axios";
 
-export default class StoreManagerLogin extends Component{
+
+import {logout} from '../../actions/cusActions';
+import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
+
+
+class StoreManagerLogin extends Component{
     constructor(props) {
         super(props);
         this.onChangeUsername = this.onChangeUsername.bind(this);
@@ -53,6 +59,28 @@ export default class StoreManagerLogin extends Component{
         })
     }
 
+    /////////////////////////////////////////////////////////////////
+
+    static propTypes = {
+        logout : PropTypes.func.isRequired
+    }
+
+
+    componentDidMount() {
+        this.props.logout();
+        console.log(axios.get('http://localhost:5000/api/cus/logout').then(response => {
+            if (response.status === 200) {
+                //
+            } else {
+
+            }
+        }));
+
+    }
+
+    //////////////////////////////////////////////////////////////////////
+
+
     render() {
         return(
             <div style={{marginTop: 10}}>
@@ -82,3 +110,5 @@ export default class StoreManagerLogin extends Component{
         )
     }
 }
+
+export default connect(null, {logout})(StoreManagerLogin);
