@@ -6,6 +6,7 @@ export default class StoreManager extends Component{
         return(
             <div>
                 <ButtonRow></ButtonRow>
+                <div style={{height:"102px"}} />
             </div>
         )
     }

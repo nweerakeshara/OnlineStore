@@ -58,28 +58,27 @@ class ItemListComponent extends Component {
       <div>
         <div className="row mx-md-n5">
 
-          <div className="col px-md-5">
-            <div className="text-center">
-              {this.props.isAuthenticated ? <Cart /> : ""}
-            </div>
+          <div style={{width:"70px", display:"inline-block"}} />
+          
+          <div>
+              <Link to={'/search'}> <button className="btn btn-primary">Advanced Search</button></Link>
           </div>
 
-          <div className="col px-md-5">
-            <div className="text-center">
+          <div style={{width:"25px", display:"inline-block"}} />
+
+          <div>
+              {this.props.isAuthenticated ? <Cart /> : ""}
+          </div>
+
+          <div style={{width:"25px", display:"inline-block"}} />
+
+          <div>
               {this.props.isAuthenticated ? (
                 <WishListView usr_id={user._id} />
               ) : (
                 ""
               )}
-            </div>
           </div>
-
-          <div className="col px-md-5">
-            <div className="text-center">
-            <Link to={'/search'}> <button className="btn btn-primary">Advanced Search</button></Link>
-            </div>
-          </div>
-
         </div>
 
         <Carousel/>
