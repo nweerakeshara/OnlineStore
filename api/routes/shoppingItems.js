@@ -31,7 +31,7 @@ router.get('/get/all/paginate', (req,res) => {
 
 
 router.get('/get/all/paginate/search', (req,res) => {
-   shoppingItem.find({ product_category: new RegExp(req.query.sitem, 'i')   }).then(items => {
+   shoppingItem.find({ product_name: new RegExp(req.query.sitem, 'i')   }).then(items => {
 
       const page = parseInt(req.query.page) || 1;
 
