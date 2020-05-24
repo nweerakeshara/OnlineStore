@@ -116,7 +116,16 @@ class ItemViewComponent extends Component {
       <div>
         
         <div className="container" style={{ margin:"0px 70px",width:"50%",display: "flex", justifyContent: "space-between" }}>
-          <Cart />
+
+
+          <div>
+            {this.props.isAuthenticated ? (
+                <Cart />
+            ) : (
+                ""
+            )}
+          </div>
+
           <div>
             {this.props.isAuthenticated ? (
               <WishListView usr_id={user._id} />
