@@ -63,22 +63,24 @@ class SearchItemListComponent extends Component {
         return (
             <div>
                 <div className="row mx-md-n5">
-                    <div className="col px-md-5">
-                        <div className="text-center">
+                    <div style={{width:"50px", display:"inline-block"}} />
+
+                    <div>
                             {this.props.isAuthenticated ? <Cart /> : ""}
-                        </div>
                     </div>
-                    <div className="col px-md-5">
-                        <div className="text-center">
+
+                    <div style={{width:"25px", display:"inline-block"}} />
+
+                    <div>
                             {this.props.isAuthenticated ? (
                                 <WishListView usr_id={user._id} />
                             ) : (
                                 ""
                             )}
-                        </div>
                     </div>
                 </div>
 
+                <div style={{height:"50px"}} />
                 {/*--------------------------------------------------------------------------------------------------*/}
 
                 <form onSubmit={this.loadPage}>
