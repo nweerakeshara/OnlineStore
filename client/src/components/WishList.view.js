@@ -52,8 +52,7 @@ export default function WishListView({ usr_id }) {
       <button
         type="button"
         onClick={toggle}
-        class="btn btn-success"
-        style={{ border: "2px solid black" }}
+        class="btn btn-success"        
       >
         View Wish List
       </button>
